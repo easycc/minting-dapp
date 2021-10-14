@@ -27,31 +27,15 @@
 					<FadeDown>
 						<ul v-if="showNavigation" class="navigation-list">
 							<li class="navigation-item">
-								<Button
+								<!-- <Button
 									:link="localePath('/digital-framework')"
 									class="navigation-link"
 									:prefetch="false"
 									@click.native="toggleNavigation"
 								>
 									{{ $t('components.header.links.digitalFramework') }}
-								</Button>
+								</Button> -->
 							</li>
-
-							<li class="navigation-item">
-								<Button
-									:link="localePath('/paper-notebook')"
-									class="navigation-link"
-									:prefetch="false"
-									@click.native="toggleNavigation"
-								>
-									{{ $t('components.header.links.paperNotebook') }}
-								</Button>
-							</li>
-
-							<SwitchLanguageButton
-								class="switch-language-button"
-								:activeLocale="activeLocale"
-							/>
 						</ul>
 					</FadeDown>
 				</nav>

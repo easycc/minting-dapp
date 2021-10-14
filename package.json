@@ -11,7 +11,6 @@
 		"storybook": "nuxt storybook",
 		"use-prod": "firebase use mylife-platform",
 		"use-dev": "firebase use mylife-dev-env",
-
 		"functions-deploy-prod": "firebase use mylife-platform && firebase deploy --only functions",
 		"firebase-deploy-dev": "firebase use mylife-dev-env && firebase deploy --only functions",
 		"transfer-firestore-from-dev-to-prod": ""
