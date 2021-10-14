@@ -16,8 +16,9 @@ export default {
 		this.$fireAuthStore.subscribe();
 	},
 
-	mounted () {
-		this.$store.dispatch('getProducts');
+	async mounted () {
+		await this.$store.dispatch('ethereum/connect');
+		this.$store.dispatch('ethereum/fetchCollectionData');
 	}
 };
 </script>

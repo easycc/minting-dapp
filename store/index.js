@@ -1,13 +1,14 @@
 export const state = () => ({
+	account: {
+
+	}
 });
 
 export const actions = {
-	async getProducts ({ commit, getters, dispatch }) {
-	}
 };
 
 export const mutations = {
-	SET_USER (state, value) {
+	SET_STATE (state, value) {
 		state.user = value;
 	}
 };

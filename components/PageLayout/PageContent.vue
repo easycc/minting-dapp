@@ -21,7 +21,7 @@ export default {
 	--page-content-padding: 1.5em;
 
 	display: block;
-	max-width: 70rem;
+	max-width: 60rem;
 	margin: 0 auto 6rem;
 	padding: 0 var(--page-content-padding, 1.5em);
 }

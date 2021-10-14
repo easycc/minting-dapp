@@ -65,7 +65,7 @@ export default {
 	font-size: 1em;
 	display: inline-block;
 	vertical-align: baseline;
-	background: #3B99FC;
+	background: var(--color-background-secondary);
 	border-radius: 1em;
 	text-align: left;
 	padding: 0.5em 1em;

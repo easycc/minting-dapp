@@ -28,7 +28,9 @@
 		"vue-awesome-swiper": "^4.1.1",
 		"vue-fragment": "^1.5.1",
 		"vue-observe-visibility": "^1.0.0",
-		"vue-scrollto": "^2.20.0"
+		"vue-scrollto": "^2.20.0",
+		"web3": "^1.5.1",
+		"web3-eth-contract": "^1.5.2"
 	},
 	"devDependencies": {
 		"emoji-mart-vue-fast": "^9.1.2",

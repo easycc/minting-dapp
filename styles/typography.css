@@ -22,7 +22,7 @@ body {
 }
 
 h1 {
-  font-size: 3.5em;
+  font-size: calc(2em + 0.25vw);
   margin: 0 0 0.5em;
 	font-weight: 600;
 }
@@ -34,25 +34,25 @@ h2 {
 }
 
 h3 {
-  font-size: 1.375em;
+  font-size: calc(1.5em + 0.25vw);
   margin: 0 0 0.5em;
 	font-weight: 500;
 }
 
 h4 {
-  font-size: 1.125em;
+  font-size: calc(1.25em + 0.25vw);
   margin: 0 0 0.5em;
 	font-weight: 500;
 }
 
 h5 {
-  font-size: 1rem;
+  font-size: calc(1em + 0.25vw);
   margin: 0 0 0.5em;
 	font-weight: 500;
 }
 
 h6 {
-  font-size: 0.875em;
+  font-size: 1em;
   margin: 0 0 0.5em;
 	font-weight: 500;
 }

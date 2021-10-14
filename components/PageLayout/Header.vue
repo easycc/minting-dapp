@@ -6,47 +6,38 @@
 		>
 			<PageContent class="header-navigation-wrapper">
 				<nav class="header-navigation">
-					<nuxt-link :to="localePath('/')" class="logo" :prefetch="false">
+					<!-- <nuxt-link :to="localePath('/')" class="logo" :prefetch="false">
 						<img
 							:src="light ? '/logo-dark.png' : '/logo.png'"
-							:alt="$t('components.header.logoAlt')"
+							alt="Logo"
 							width="auto"
 							height="36"
 							class="logo-image"
 						/>
-					</nuxt-link>
+					</nuxt-link> -->
 
 					<Button
 						class="open-nav-button"
 						:iconName="showNavigation ? 'cross' : 'menu'"
 						collapsed
-						:title="$t('components.header.navButtonTitle')"
+						title="Open navigation"
 						@click="toggleNavigation"
 					/>
 
 					<FadeDown>
 						<ul v-if="showNavigation" class="navigation-list">
 							<li class="navigation-item">
-								<!-- <Button
-									:link="localePath('/digital-framework')"
-									class="navigation-link"
-									:prefetch="false"
-									@click.native="toggleNavigation"
-								>
-									{{ $t('components.header.links.digitalFramework') }}
-								</Button> -->
+								<WalletBadge v-if="account" />
+
+								<ConnectWalletButton
+									v-else
+									class="connect-wallet-button navigation-button"
+								/>
 							</li>
 						</ul>
 					</FadeDown>
 				</nav>
 			</PageContent>
-
-			<LanguageModal
-				:locales="locales"
-				:activeLocale="activeLocale"
-				:link="switchLocalePath"
-				@set-locale="toggleNavigation"
-			/>
 		</header>
 	</ThemeContextConsumer>
 </template>
@@ -54,17 +45,18 @@
 <script>
 import PageContent from './PageContent';
 
-import { Button, SwitchLanguageButton } from '~/components/buttons';
-import { LanguageModal } from '~/components/modals';
+import { WalletBadge } from '~/components/badges';
+import { Button } from '~/components/buttons';
 import { FadeDown } from '~/components/animation';
+import { ConnectWalletButton } from '~/components/Payment';
 
 export default {
 	components: {
 		Button,
-		LanguageModal,
+		WalletBadge,
+		ConnectWalletButton,
 		FadeDown,
-		PageContent,
-		SwitchLanguageButton
+		PageContent
 	},
 
 	props: {
@@ -84,12 +76,8 @@ export default {
 	},
 
 	computed: {
-		activeLocale () {
-			return this.$i18n.locale;
-		},
-
-		locales () {
-			return this.$i18n.locales;
+		account () {
+			return this.$store.getters['ethereum/account'];
 		}
 	},
 
@@ -240,6 +228,10 @@ export default {
 	font-size: inherit;
 }
 
+.navigation-button {
+	padding: 0.666em;
+}
+
 /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 .navigation-link.nuxt-link-exact-active {
 	color: var(--color-text-secondary);
@@ -308,6 +300,11 @@ export default {
 	.navigation-link {
 		padding: 0.75em 0;
 		text-align: left;
+	}
+
+	.navigation-button {
+		display: block;
+		width: 100%;
 	}
 }
 

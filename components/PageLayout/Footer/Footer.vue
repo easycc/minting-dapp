@@ -10,7 +10,7 @@
 
 				<li class="link-item">
 					<nuxt-link :to="localePath('/legal')" :prefetch="false">
-						Terms &nbsp; Conditions
+						Terms and conditions
 					</nuxt-link>
 				</li>
 			</ul>

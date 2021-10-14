@@ -1,13 +1,3 @@
-import DefaultBadge from './DefaultBadge';
-import AnswerLocationBadge from './AnswerLocationBadge';
-import AnswerTypeBadge from './AnswerTypeBadge';
-import ProductTypeBadge from './ProductTypeBadge';
-import OrderStatus from './OrderStatus';
-
-export {
-	DefaultBadge,
-	AnswerLocationBadge,
-	ProductTypeBadge,
-	OrderStatus,
-	AnswerTypeBadge
-};
+export { default as WalletBadge } from './WalletBadge';
+export { default as DafaultBadge } from './DefaultBadge';
+export { default as AssetsLastBadge } from './AssetsLastBadge';
