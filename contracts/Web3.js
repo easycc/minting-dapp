@@ -12,16 +12,17 @@ if (process.client) {
 		Web3EthContract.setProvider(ethereum);
 		web3 = new Web3(ethereum);
 
-		// try {
-		// // Request account access if needed
-		// 	ethereum.enable();
-		// }
-		// catch {
-		// 	console.log('User denied account access...');
-		// }
-		// else if (window.web3) {
-		// Legacy dapp browsers...
-		// web3 = new Web3(window.web3.currentProvider);
+		try {
+		// Request account access if needed
+			ethereum.enable();
+		}
+		catch {
+			console.log('User denied account access...');
+		}
+	}
+	else if (window.web3) {
+	// Legacy dapp browsers...
+		web3 = new Web3(window.web3.currentProvider);
 	}
 	else {
 	// Non-dapp browsers...

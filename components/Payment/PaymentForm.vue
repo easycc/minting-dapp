@@ -17,11 +17,11 @@
 
 				<div class="actions">
 					<Select
+						v-if="collection.maxMintAmount"
 						v-model.number="amount"
 						name="amount"
 						labelText="Amount"
 						class="amount-select"
-						v-if="collection.maxMintAmount"
 					>
 						<Option
 							v-for="amountOption in collection.maxMintAmount + 1"
