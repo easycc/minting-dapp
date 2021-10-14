@@ -2,6 +2,8 @@ import CONFIG from '../contracts/config.json';
 import Web3 from '../contracts/Web3';
 import SmartContract from '../contracts/SmartContract';
 
+import LocaleStorage from '~/services/locale-storage';
+
 export const state = () => ({
 	collection: {
 		maxMintAmount: 0,
@@ -28,6 +30,7 @@ export const actions = {
 			return Web3.eth.getAccounts()
 			.then(async foundAccounts => {
 				account = foundAccounts[0];
+				LocaleStorage.setItem('account', account);
 
 				return ethereum.request({
 					method: 'net_version'

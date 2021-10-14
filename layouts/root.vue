@@ -6,6 +6,7 @@
 
 <script>
 import { Maintenance } from '~/components/router';
+import LocaleStorage from '~/services/locale-storage';
 
 export default {
 	components: {
@@ -17,7 +18,12 @@ export default {
 	},
 
 	async mounted () {
-		await this.$store.dispatch('ethereum/connect');
+		const storedAccount = LocaleStorage.getItem('account');
+
+		if (storedAccount) {
+			await this.$store.dispatch('ethereum/connect');
+		}
+
 		this.$store.dispatch('ethereum/fetchCollectionData');
 	}
 };
