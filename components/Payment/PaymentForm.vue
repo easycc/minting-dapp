@@ -21,6 +21,7 @@
 						name="amount"
 						labelText="Amount"
 						class="amount-select"
+						v-if="collection.maxMintAmount"
 					>
 						<Option
 							v-for="amountOption in collection.maxMintAmount + 1"

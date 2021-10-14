@@ -4,20 +4,27 @@ import SmartContract from '../contracts/SmartContract';
 
 export const state = () => ({
 	collection: {
-		maxMintAmount: 1,
+		maxMintAmount: 0,
 		totalSupply: 0
 	},
 	account: null
 });
 
 export const actions = {
-	async connect ({ commit }) {
+	async connect ({ commit, dispatch }) {
 		const { ethereum } = window;
 
 		const metamaskIsInstalled = ethereum && ethereum.isMetaMask;
 		let account = null;
 
 		if (metamaskIsInstalled) {
+			ethereum.on('accountsChanged', () => {
+				dispatch('connect');
+			});
+			ethereum.on('chainChanged', () => {
+				dispatch('connect');
+			});
+
 			return Web3.eth.getAccounts()
 			.then(async foundAccounts => {
 				account = foundAccounts[0];
