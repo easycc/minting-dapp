@@ -1,6 +1,6 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 export default {
-	ssr: true,
+	ssr: false,
 
 	env: {
 		FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
