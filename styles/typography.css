@@ -1,0 +1,253 @@
+html {
+	font-size: 100%; /* 16px */
+}
+
+body {
+	font-family:
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		"Helvetica Neue",
+		Helvetica, Arial,
+		sans-serif,
+		"Segoe UI Emoji",
+		"Segoe UI Symbol";
+  font-size: 1em; /* 16px */
+  line-height: 1.2;
+  color: #111;
+  background: #fff;
+  cursor: default;
+	letter-spacing: 0.01em;
+	overflow: overlay;
+}
+
+h1 {
+  font-size: 3.5em;
+  margin: 0 0 0.5em;
+	font-weight: 600;
+}
+
+h2 {
+  font-size: calc(1.75em + 0.25vw);
+  margin: 0 0 1em;
+	font-weight: 600;
+}
+
+h3 {
+  font-size: 1.375em;
+  margin: 0 0 0.5em;
+	font-weight: 500;
+}
+
+h4 {
+  font-size: 1.125em;
+  margin: 0 0 0.5em;
+	font-weight: 500;
+}
+
+h5 {
+  font-size: 1rem;
+  margin: 0 0 0.5em;
+	font-weight: 500;
+}
+
+h6 {
+  font-size: 0.875em;
+  margin: 0 0 0.5em;
+	font-weight: 500;
+}
+
+a {
+  font-size: 1em;
+  cursor: pointer;
+  touch-action: manipulation;
+  text-decoration: none;
+	box-shadow: none;
+	background: transparent;
+  color: #007AFE;
+  transition: opacity var(--smooth-animation), color var(--smooth-animation);
+}
+
+button {
+	box-shadow: none;
+	font-weight: 500;
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 0.5em;
+	font-size: 1em;
+  border: none;
+	background: #444;
+  color: #fff;
+  padding: 0.5em 1em;
+  touch-action: manipulation;
+  transition: opacity var(--smooth-animation), color var(--smooth-animation);
+}
+
+a:hover {
+	color: #3880D1;
+}
+
+button:hover {
+	background-color: #232323;
+}
+
+q {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	font-weight: 500;
+	font-size: 1.125em;
+	line-height: 1.5;
+	padding: 0.5em;
+	background: 0em 0.125em / 1.75em 1.75em no-repeat url('~/components/Icon/Icon/images/quote.svg');
+}
+
+@media screen and (max-width: 576px) {
+	q {
+		font-size: 1em;
+	}
+}
+
+.quote-author {
+	display: block;
+	font-style: italic;
+	opacity: 0.7;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+*:focus {
+  outline: 3px solid rgba(131,192,253,.5);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+*:focus:hover {
+  box-shadow: none;
+}
+
+strong, b {
+  font-weight: 600;
+}
+
+img {
+  border: none;
+  max-width: 100%;
+}
+
+p {
+	margin-block-start: 0;
+	color: var(--color-text-default);
+	font-size: 1.125em;
+	letter-spacing: 0.01rem;
+	line-height: 1.5;
+	font-weight: 400;
+}
+
+@media screen and (max-width: 576px) {
+	p {
+		font-size: 1em;
+	}
+}
+
+ul,
+ol,
+article p {
+  margin: 0 0 1em;
+}
+
+ul,
+ol {
+	padding: 0;
+	font-size: 1em;
+}
+
+ul li, ol li {
+	padding: 0;
+	margin: 0 0 0.25em 0;
+	list-style: none;
+	position: relative;
+}
+
+hr {
+  height: 1px;
+  margin: 0 0 1em;
+	display: block;
+	width: 100%;
+  background: var(--color-background-primary, rgba(255, 255, 255, 0.15));
+  border: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(0px 0px 99.9% 99.9%);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  border: 0;
+}
+
+strike {
+	position: relative;
+	opacity: 0.8;
+}
+
+/* for Chrome, Opera, Android, Safari */
+
+::-webkit-scrollbar {
+  width: 20px;
+  height: 20px;
+  background: none;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 7px solid transparent;
+  background: rgba(212, 214, 219, 0.5);
+  background-clip: padding-box;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-button ::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-corner,
+::-webkit-resizer {
+  display: none;
+}
+
+/* for firefox */
+
+* {
+  scrollbar-color: rgba(212, 214, 219, 0.5) transparent;
+  scrollbar-width: thin;
+}
+
+
+svg {
+  overflow: visible;
+}
+
+/* eslint-disable vue-scoped-css/no-unused-selector */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s var(--smooth-animation);
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity 0.3s var(--smooth-animation);
+}
+.layout-enter,
+.layout-leave-active {
+  opacity: 0;
+}
