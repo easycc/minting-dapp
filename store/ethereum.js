@@ -3,6 +3,7 @@ import Web3 from '../contracts/Web3';
 import SmartContract from '../contracts/SmartContract';
 
 import LocaleStorage from '~/services/locale-storage';
+import ethNetworkById from '~/utils/eth-network-by-id';
 
 export const state = () => ({
 	collection: {
@@ -49,7 +50,7 @@ export const actions = {
 					});
 				}
 				else {
-					let message = `Change network to ${CONFIG.NETWORK.NAME}.`;
+					let message = `Switch to the Ethereum ${ethNetworkById(CONFIG.NETWORK.ID)} network`;
 
 					throw message;
 				}

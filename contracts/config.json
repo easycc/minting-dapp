@@ -2,7 +2,6 @@
 	"CONTRACT_ADDRESS": "0xd13Ac61403321D317B049B89c2d0b6487fffe9b5",
 	"SCAN_LINK": "https://rinkeby.etherscan.io/address/0xECCAbbd0b19d54dccB9D61095abeec6893feB020",
 	"NETWORK": {
-		"NAME": "Etherium",
 		"SYMBOL": "ETH",
 		"ID": 4
 	},
