@@ -26,6 +26,7 @@ export const actions = {
 			});
 			ethereum.on('chainChanged', () => {
 				dispatch('connect');
+				dispatch('fetchCollectionData');
 			});
 
 			return Web3.eth.getAccounts()
@@ -42,14 +43,6 @@ export const actions = {
 
 				if (networkId === CONFIG.NETWORK.ID) {
 					commit('SET_STATE', ['account', account]);
-
-					ethereum.on('accountsChanged', accounts => {
-						commit('SET_STATE', ['account', accounts[0]]);
-					});
-
-					ethereum.on('chainChanged', () => {
-						window.location.reload();
-					});
 				}
 				else {
 					let message = {
