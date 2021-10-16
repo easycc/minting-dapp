@@ -4,7 +4,7 @@
 			group="all"
 			position="top center"
 			class="notification"
-			:duration="3000"
+			:duration="5000"
 		/>
 	</ClientOnly>
 </template>
@@ -54,5 +54,7 @@
 .notification ::v-deep .notification-content {
 	font-size: 1em;
 	padding-top: 0.25em;
+	position: relative;
+	z-index: 1;
 }
 </style>

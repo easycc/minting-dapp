@@ -37,8 +37,10 @@ export const actions = {
 					method: 'net_version'
 				});
 			})
-			.then(networkId => {
-				if (networkId === String(CONFIG.NETWORK.ID)) {
+			.then(networkIdStr => {
+				let networkId = parseInt(networkIdStr, 10);
+
+				if (networkId === CONFIG.NETWORK.ID) {
 					commit('SET_STATE', ['account', account]);
 
 					ethereum.on('accountsChanged', accounts => {
@@ -50,17 +52,21 @@ export const actions = {
 					});
 				}
 				else {
-					let message = `Switch to the Ethereum ${ethNetworkById(CONFIG.NETWORK.ID)} network`;
+					let message = {
+						title: `Switch to the Ethereum ${ethNetworkById(CONFIG.NETWORK.ID)} network`,
+						text: `Your network is ${ethNetworkById(networkId)}`
+					};
 
 					throw message;
 				}
 				return null;
 			})
 			.catch(error => {
+				console.log(error);
 				this.$notify({
 					group: 'all',
 					type: 'warning',
-					title: error
+					...error
 				});
 			});
 		}
