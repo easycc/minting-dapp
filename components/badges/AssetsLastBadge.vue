@@ -1,6 +1,6 @@
 <template>
 	<DefaultBadge v-if="collection" class="assets-last-badge">
-		{{ collection.totalSupply }} / {{ CONFIG.MAX_SUPPLY }}
+		{{ collection.totalSupply }} / {{ collection.maxSupply }}
 		<span class="title">Items already minted</span>
 	</DefaultBadge>
 </template>

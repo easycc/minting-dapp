@@ -8,7 +8,11 @@ import ethNetworkById from '~/utils/eth-network-by-id';
 export const state = () => ({
 	collection: {
 		maxMintAmount: 0,
-		totalSupply: 0
+		totalSupply: 0,
+		maxSupply: 0,
+		symbol: null,
+		name: null,
+		cost: null
 	},
 	account: null
 });
@@ -76,12 +80,20 @@ export const actions = {
 	async fetchCollectionData ({ commit }) {
 		let totalSupply = SmartContract.methods.totalSupply().call();
 		let maxMintAmount = SmartContract.methods.maxMintAmount().call();
+		let maxSupply = SmartContract.methods.maxSupply().call();
+		let cost = SmartContract.methods.cost().call();
+		let symbol = SmartContract.methods.symbol().call();
+		let name = SmartContract.methods.name().call();
 
-		return Promise.all([totalSupply, maxMintAmount])
+		return Promise.all([totalSupply, maxMintAmount, maxSupply, cost, symbol, name])
 		.then(values => {
 			commit('SET_STATE', ['collection', {
 				totalSupply: values[0],
-				maxMintAmount: values[1]
+				maxMintAmount: values[1],
+				maxSupply: values[2],
+				cost: parseFloat(Web3.utils.fromWei(values[3], CONFIG.NETWORK.CURRENCY)),
+				symbol: values[4],
+				name: values[5]
 			}]);
 
 			return values;
@@ -95,11 +107,13 @@ export const actions = {
 		});
 	},
 
-	async claimNft ({ commit, state, dispatch }, mintAmount) {
-		let account = this.getters['ethereum/account'];
+	async claimNft ({ dispatch, getters }, mintAmount) {
+		let { collection, account } = getters;
+		const SAFE_GAS_LIMIT = 285000;
 
-		let gasLimit = CONFIG.GAS_LIMIT;
-		let totalCostWei = String(CONFIG.WEI_COST * mintAmount);
+		let gasLimit = SAFE_GAS_LIMIT;
+		let costInEth = collection.cost;
+		let totalCostWei = Web3.utils.toWei(String(costInEth), CONFIG.NETWORK.CURRENCY);
 		let totalGasLimit = String(gasLimit * mintAmount);
 
 		return SmartContract.methods
@@ -108,7 +122,7 @@ export const actions = {
 				gasLimit: String(totalGasLimit),
 				to: CONFIG.CONTRACT_ADDRESS,
 				from: account,
-				value: totalCostWei
+				value: String(totalCostWei)
 			})
 			.once('error', err => {
 				throw err;
@@ -124,7 +138,8 @@ export const actions = {
 				this.$notify({
 					group: 'all',
 					type: 'error',
-					title: 'Sorry, something went wrong.'
+					title: 'Sorry, something went wrong.',
+					text: err.message ? err.message : err
 				});
 			});
 	}

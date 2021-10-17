@@ -8,8 +8,9 @@
 					</h2>
 
 					<CryptoPrice
+						v-if="collection.cost"
 						:name="CONFIG.NETWORK.SYMBOL"
-						:value="CONFIG.DISPLAY_COST"
+						:value="collection.cost"
 						:amount="amount"
 						class="price-amount"
 					/>
