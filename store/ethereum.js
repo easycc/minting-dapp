@@ -35,7 +35,7 @@ export const actions = {
 			});
 			ethereum.on('chainChanged', () => {
 				dispatch('connect');
-				dispatch('fetchCollectionData');
+				dispatch('fetchCollectionContractData');
 			});
 
 			return Web3.eth.getAccounts()
@@ -89,29 +89,27 @@ export const actions = {
 		});
 	},
 
-	async subscribeOnCollectionUpdate ({ commit }) {
-		return this.$fire.firestore
-		.collection('collections')
-		.doc('crypto-savanna')
-		.onSnapshot(collectionSnap => commit('SET_STATE', ['collection', collectionSnap.data()]));
-	},
-
-	async fetchDatabaseCollectionData ({ commit }) {
-		return this.$fire.firestore
-		.collection('collections')
-		.doc('crypto-savanna')
-		.get()
-		.then(collectionSnap => commit('SET_STATE', ['collection', collectionSnap.data()]));
-	},
-
-	async fetchCollectionData ({ commit, getters, dispatch }) {
+	async fetchCollection ({ dispatch }) {
 		const { ethereum } = window;
 		const metamaskIsInstalled = ethereum;
 
 		if (!metamaskIsInstalled) return;
 
-		await dispatch('fetchDatabaseCollectionData');
+		await dispatch('fetchCollectionConfig');
+		await dispatch('fetchCollectionContractData');
+	},
 
+	async fetchCollectionConfig ({ commit }) {
+		let { id } = this.$router.app.$route.params;
+
+		return this.$fire.firestore
+		.collection('collections')
+		.doc(id)
+		.get()
+		.then(collectionSnap => commit('SET_STATE', ['collection', collectionSnap.data()]));
+	},
+
+	async fetchCollectionContractData ({ commit, getters }) {
 		let { SmartContract, network } = getters;
 		let totalSupply = SmartContract.methods.totalSupply().call();
 		let maxMintAmount = SmartContract.methods.maxMintAmount().call();
@@ -163,7 +161,7 @@ export const actions = {
 				throw err;
 			})
 			.then(() => {
-				dispatch('fetchCollectionData');
+				dispatch('fetchCollectionContractData');
 
 				return null;
 			})

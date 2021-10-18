@@ -4,8 +4,6 @@
 			<Header />
 		</template>
 
-		<Spotlight />
-
 		<template v-slot:footer>
 			<Footer />
 		</template>
@@ -13,10 +11,7 @@
 </template>
 
 <script>
-import {
-	Spotlight
-} from '~/containers/index/index';
-import { Page, Header, Footer, PageContent } from '~/components/PageLayout';
+import { Page, Header, Footer } from '~/components/PageLayout';
 
 export default {
 	layout: 'light-theme',
@@ -24,12 +19,11 @@ export default {
 	components: {
 		Page,
 		Header,
-		Footer,
-		PageContent,
-		Spotlight
+		Footer
+	},
+
+	mounted () {
+		this.$router.push(this.localePath({ path: '/collection/crypto-savanna' }));
 	}
 };
 </script>
-
-<style scoped>
-</style>

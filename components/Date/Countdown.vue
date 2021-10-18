@@ -7,19 +7,19 @@
 		<ul class="time-parts-list">
 			<li v-if="days" class="time-part-item">
 				<span class="time-part-value">{{ days }}</span>
-				<span class="time-part-title">{{ $t('components.countdown.days') }}</span>
+				<span class="time-part-title">days</span>
 			</li>
 			<li class="time-part-item">
 				<span class="time-part-value">{{ hours }}</span>
-				<span class="time-part-title">{{ $t('components.countdown.hours') }}</span>
+				<span class="time-part-title">hours</span>
 			</li>
 			<li class="time-part-item">
 				<span class="time-part-value">{{ minutes }}</span>
-				<span class="time-part-title">{{ $t('components.countdown.minutes') }}</span>
+				<span class="time-part-title">minutes</span>
 			</li>
 			<li v-if="!days" class="time-part-item">
 				<span class="time-part-value">{{ seconds }}</span>
-				<span class="time-part-title">{{ $t('components.countdown.seconds') }}</span>
+				<span class="time-part-title">seconds</span>
 			</li>
 		</ul>
 
