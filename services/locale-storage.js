@@ -3,7 +3,9 @@ let LocaleStorage;
 if (process.client) {
 	LocaleStorage = {
 		getItem (name) {
-			return JSON.parse(window.localStorage.getItem(name));
+			let item = window.localStorage.getItem(name);
+
+			return item ? JSON.parse(item) : null;
 		},
 
 		setItem (name, value) {

@@ -8,17 +8,9 @@
 <script>
 import DefaultBadge from './DefaultBadge';
 
-import CONFIG from '~/contracts/config.json';
-
 export default {
 	components: {
 		DefaultBadge
-	},
-
-	data () {
-		return {
-			CONFIG
-		};
 	},
 
 	computed: {

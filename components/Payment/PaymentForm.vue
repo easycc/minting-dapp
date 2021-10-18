@@ -9,7 +9,8 @@
 
 					<CryptoPrice
 						v-if="collection.cost"
-						:name="CONFIG.NETWORK.SYMBOL"
+						:name="network.currency.symbol"
+						:network="network.name"
 						:value="collection.cost"
 						:amount="amount"
 						class="price-amount"
@@ -56,9 +57,9 @@ import {
 	Select,
 	Option
 } from '~/components/BaseForm';
-import CONFIG from '~/contracts/config.json';
 import { CryptoPrice } from '~/components/Currency';
 import { DefaultCard } from '~/components/cards';
+import NETWORKS from '~/constants/networks';
 
 export default {
 	components: {
@@ -74,14 +75,17 @@ export default {
 
 	data () {
 		return {
-			CONFIG,
-			amount: 1
+			amount: 1,
+			NETWORKS
 		};
 	},
 
 	computed: {
 		account () {
 			return this.$store.getters['ethereum/account'];
+		},
+		network () {
+			return this.$store.getters['ethereum/network'];
 		},
 		collection () {
 			return this.$store.getters['ethereum/collection'];

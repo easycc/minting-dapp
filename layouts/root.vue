@@ -18,13 +18,13 @@ export default {
 	},
 
 	async mounted () {
+		await this.$store.dispatch('ethereum/fetchCollectionData');
+
 		const storedAccount = LocaleStorage.getItem('account');
 
 		if (storedAccount) {
 			await this.$store.dispatch('ethereum/connect');
 		}
-
-		this.$store.dispatch('ethereum/fetchCollectionData');
 	}
 };
 </script>
