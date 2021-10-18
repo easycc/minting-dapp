@@ -89,6 +89,10 @@ export const actions = {
 		});
 	},
 
+	async subscribeOnCollectionUpdate ({ commit }) {
+		
+	},
+
 	async fetchDatabaseCollectionData ({ commit }) {
 		return this.$fire.firestore
 		.collection('collections')
