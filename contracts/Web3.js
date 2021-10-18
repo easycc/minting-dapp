@@ -15,12 +15,7 @@ if (process.client) {
 		web3 = new Web3(window.web3.currentProvider);
 	}
 	else {
-		// Non-dapp browsers...
-		let message = {
-			title: 'Non-Ethereum browser detected.'
-		};
-
-		throw message;
+		console.log('Non-Ethereum browser detected.');
 	}
 }
 

@@ -80,7 +80,7 @@ export const actions = {
 			});
 		}
 
-		let message = 'Install Metamask';
+		let message = 'Please install Metamask';
 
 		this.$notify({
 			group: 'all',
@@ -90,7 +90,10 @@ export const actions = {
 	},
 
 	async subscribeOnCollectionUpdate ({ commit }) {
-		
+		return this.$fire.firestore
+		.collection('collections')
+		.doc('crypto-savanna')
+		.onSnapshot(collectionSnap => commit('SET_STATE', ['collection', collectionSnap.data()]));
 	},
 
 	async fetchDatabaseCollectionData ({ commit }) {
@@ -102,6 +105,11 @@ export const actions = {
 	},
 
 	async fetchCollectionData ({ commit, getters, dispatch }) {
+		const { ethereum } = window;
+		const metamaskIsInstalled = ethereum;
+
+		if (!metamaskIsInstalled) return;
+
 		await dispatch('fetchDatabaseCollectionData');
 
 		let { SmartContract, network } = getters;
