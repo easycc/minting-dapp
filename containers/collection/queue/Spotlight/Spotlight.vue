@@ -2,7 +2,7 @@
 	<PageContent tag="section" class="spotlight-section">
 		<div class="heading">
 			<h1 class="page-title">
-				Minting depp
+				Minting dapp
 			</h1>
 
 			<AssetsLastBadge />
@@ -51,7 +51,7 @@ export default {
 	.heading {
 		display: block;
 	}
-	
+
 	.page-title {
 		display: block;
 	}

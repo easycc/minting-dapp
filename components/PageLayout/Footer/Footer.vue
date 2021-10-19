@@ -15,44 +15,7 @@
 				</li>
 			</ul>
 
-			<ul class="social-links">
-				<li class="social-link-item facebook-link">
-					<a
-						href="https://www.facebook.com/MyLife-109119884750373/"
-						rel="noopener noreferrer nofollow"
-						target="_blank"
-					>
-						Facebook
-					</a>
-				</li>
-				<li class="social-link-item twitter-link">
-					<a
-						href="https://twitter.com/mylife_tech"
-						rel="noopener noreferrer nofollow"
-						target="_blank"
-					>
-						Twitter
-					</a>
-				</li>
-				<li class="social-link-item instagram-link">
-					<a
-						href="https://www.instagram.com/mylife.tech/"
-						rel="noopener noreferrer nofollow"
-						target="_blank"
-					>
-						Instagram
-					</a>
-				</li>
-				<li class="social-link-item youtube-link">
-					<a
-						href="https://www.youtube.com/channel/UCX0n84LkNbublTCgSNfETIQ"
-						rel="noopener noreferrer nofollow"
-						target="_blank"
-					>
-						YouTube
-					</a>
-				</li>
-			</ul>
+			<SocialLinks class="social-links" />
 		</PageContent>
 	</footer>
 </template>
@@ -60,9 +23,12 @@
 <script>
 import PageContent from '../PageContent';
 
+import SocialLinks from '~/containers/collection/SocialLinks/SocialLinks';
+
 export default {
 	components: {
-		PageContent
+		PageContent,
+		SocialLinks
 	}
 };
 </script>
@@ -87,6 +53,22 @@ export default {
 	align-content: center;
 	align-items: flex-start;
 	margin-bottom: 0;
+}
+
+.social-links {
+	text-align: right;
+  padding-top: 0.75em;
+  margin: 0 0 0 1.5em;
+}
+
+@media screen and (max-width: 1080px) {
+	.social-links {
+		text-align: center;
+		margin-left: 0;
+		display: block;
+		width: 100%;
+		padding-top: 0.5em;
+	}
 }
 
 .links-list {
@@ -148,52 +130,11 @@ export default {
 	padding-right: 0.25em;
 }
 
-.social-links {
-	text-align: right;
-  padding-top: 0.75em;
-  margin: 0 0 0 1.5em;
-}
-
-.social-link-item {
-	display: inline-block;
-	vertical-align: top;
-  font-size: 1.5em;
-  width: 1em;
-  height: 1em;
-  overflow: hidden;
-  border-radius: 0.188em;
-  margin: 0 0.25em;
-  background: center / 100% none no-repeat;
-}
-
-.social-link-item a {
-  color: transparent;
-  display: block;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-}
-
 .link-item:hover {
   opacity: 0.6;
   transition: opacity var(--smooth-animation);
 }
 
-.instagram-link {
-  background-image: url("./images/instagram.svg");
-}
-
-.twitter-link {
-  background-image: url("./images/twitter.svg");
-}
-
-.facebook-link {
-  background-image: url("./images/facebook.svg");
-}
-
-.youtube-link {
-  background-image: url("./images/youtube.svg");
-}
 
 @media screen and (max-width: 1080px) {
   .page-footer {
@@ -210,14 +151,6 @@ export default {
 	.links-list {
 		padding-top: 0;
 		padding-bottom: 1em;
-	}
-
-	.social-links {
-		text-align: center;
-		margin-left: 0;
-		display: block;
-		width: 100%;
-		padding-top: 0.5em;
 	}
 }
 

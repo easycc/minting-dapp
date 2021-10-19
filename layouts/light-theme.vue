@@ -19,7 +19,7 @@ export default {
 
 	mounted () {
 		if (document) {
-			document.querySelector('body').setAttribute('style', 'background-color:#faf6f6; color: #111;');
+			document.querySelector('body').setAttribute('style', 'background-color:#f3f3f3; color: #111;');
 		}
 	}
 };

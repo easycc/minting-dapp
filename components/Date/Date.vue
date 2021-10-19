@@ -24,7 +24,7 @@ export default {
 
 			date = this.$moment(date);
 
-			return `${date.local().format('DD MMM YYYY HH:MM')} ${String(date.local()._d).split(' ')[5]}`;
+			return `${date.local().format('DD MMM YYYY HH:mm')} ${String(date.local()._d).split(' ')[5]}`;
 		}
 	}
 };

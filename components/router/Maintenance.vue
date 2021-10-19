@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { Maintenance } from '~/containers';
+import Maintenance from '~/containers/maintenance/Maintenance';
 import { Fragment } from '~/components/ControlFlow';
 
 export default {

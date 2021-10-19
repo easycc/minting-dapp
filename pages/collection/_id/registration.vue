@@ -1,42 +1,90 @@
 <template>
-	<Page>
-		<template v-slot:header>
-			<Header />
-		</template>
+	<CollectionContextConsumer v-slot="{ registrationConfirmed }">
+		<Page>
+			<template v-slot:header>
+				<Header />
+			</template>
 
-		<Spotlight />
+			<PageContent class="registration-page">
+				<Fade>
+					<RaffleRegistrationForm v-if="raffleRegistrationIsActive && registrationConfirmed === false" />
+					<SuccessfulRegistrationScreen v-else-if="raffleRegistrationIsStarted && registrationConfirmed" />
+				</Fade>
+			</PageContent>
 
-		<template v-slot:footer>
-			<Footer />
-		</template>
-	</Page>
+			<template v-slot:footer>
+				<Footer />
+			</template>
+		</Page>
+	</CollectionContextConsumer>
 </template>
 
 <script>
-import {
-	Spotlight
-} from '~/containers/collection/registration';
-import { Page, Header, Footer } from '~/components/PageLayout';
-import LocaleStorage from '~/services/locale-storage';
+import { Fade } from '~/components/animation';
+import { RaffleRegistrationForm, SuccessfulRegistrationScreen } from '~/containers/collection/registration';
+import { Page, Header, Footer, PageContent } from '~/components/PageLayout';
+import CollectionContext from '~/containers/collection/context/CollectionContext';
 
 export default {
-	layout: 'light-theme',
+	layout: 'collection',
 
 	components: {
+		Fade,
 		Page,
 		Header,
-		Footer,
-		Spotlight
+		PageContent,
+		RaffleRegistrationForm,
+		SuccessfulRegistrationScreen,
+		CollectionContextConsumer: CollectionContext.Consumer,
+		Footer
+	},
+	inject: ['collectionId'],
+
+	computed: {
+		collection () {
+			return this.$store.getters['ethereum/collection'];
+		},
+
+		raffleRegistrationStartDate () {
+			return this.collection.raffleRegistrationStartDate;
+		},
+
+		raffleRegistrationEndDate () {
+			return this.collection.raffleRegistrationEndDate;
+		},
+
+		raffleRegistrationIsStarted () {
+			return this.raffleRegistrationStartDate < new Date();
+		},
+
+		raffleRegistrationIsActive () {
+			return this.raffleRegistrationStartDate < new Date()
+				&& this.raffleRegistrationEndDate > new Date();
+		}
 	},
 
-	async mounted () {
-		await this.$store.dispatch('ethereum/fetchCollection');
+	watch: {
+		raffleRegistrationStartDate () {
+			this.checkRegistrationAvailability();
+		}
+	},
 
-		const storedAccount = LocaleStorage.getItem('account');
+	mounted () {
+		this.checkRegistrationAvailability();
+	},
 
-		if (storedAccount) {
-			await this.$store.dispatch('ethereum/connect');
+	methods: {
+		checkRegistrationAvailability () {
+			if (!this.raffleRegistrationIsActive) {
+				this.$router.push(this.localePath(`/collection/${this.collectionId}`));
+			}
 		}
 	}
 };
 </script>
+
+<style scoped>
+.registration-page {
+	padding-top: 2em;
+}
+</style>

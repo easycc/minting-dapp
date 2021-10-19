@@ -1,7 +1,5 @@
 <template>
 	<div id="start-page-anchor" class="root" :class="{ 'freezed-height-on-mobile': pageHeightFreezed }">
-		<Notifications />
-
 		<Fade>
 			<div
 				v-if="sidebarOpened && isMobile"
@@ -51,14 +49,11 @@
 <script>
 import '~/styles/fonts.css';
 
-import Notifications from './Notifications';
-
 import { Fade } from '~/components/animation';
 import { Props } from '~/components/ControlFlow';
 
 export default {
 	components: {
-		Notifications,
 		Props,
 		Fade
 	},

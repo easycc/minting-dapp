@@ -1,6 +1,6 @@
 <template>
 	<section class="edit-collection-section">
-		<FormSubmit successMessage="Colelction was saved!">
+		<FormSubmit successMessage="Colection was saved!">
 			<BaseForm @submit="formSubmit">
 				<Input
 					v-if="createNewCollection"
@@ -31,6 +31,37 @@
 					required
 				/>
 
+				<DateTimePicker
+					labelText="Raffle registration start date"
+					:min="new Date()"
+					:max="editedCollection.raffleRegistrationStartDate"
+					name="raffleRegistrationStartDate"
+					:value.sync="editedCollection.raffleRegistrationStartDate"
+				/>
+
+				<DateTimePicker
+					labelText="Raffle registration end date"
+					:min="editedCollection.raffleRegistrationStartDate"
+					:max="editedCollection.raffleStartDate"
+					name="raffleRegistrationEndDate"
+					:value.sync="editedCollection.raffleRegistrationEndDate"
+				/>
+
+				<DateTimePicker
+					labelText="Raffle start date"
+					:min="editedCollection.raffleRegistrationEndDate"
+					:max="editedCollection.raffleStartDate"
+					name="raffleStartDate"
+					:value.sync="editedCollection.raffleStartDate"
+				/>
+
+				<DateTimePicker
+					labelText="Raffle end date"
+					:min="editedCollection.raffleEndDate"
+					name="raffleEndDate"
+					:value.sync="editedCollection.raffleEndDate"
+				/>
+
 				<SubmitButton title="Save collection" />
 			</BaseForm>
 		</FormSubmit>
@@ -42,6 +73,7 @@ import {
 	FormSubmit,
 	BaseForm,
 	Input,
+	DateTimePicker,
 	Textarea,
 	SubmitButton
 } from '~/components/BaseForm';
@@ -49,6 +81,7 @@ import {
 export default {
 	components: {
 		FormSubmit,
+		DateTimePicker,
 		Textarea,
 		BaseForm,
 

@@ -1,5 +1,5 @@
 <template>
-	<section class="countdown-section">
+	<div class="calendar-countdown">
 		<h2 v-if="title" class="title">
 			{{ title }}
 		</h2>
@@ -24,7 +24,7 @@
 		</ul>
 
 		<span class="event-date">* <BaseDate :date="eventDate" /> </span>
-	</section>
+	</div>
 </template>
 
 <script>
@@ -94,19 +94,19 @@ export default {
 </script>
 
 <style scoped>
-.countdown-section {
+.calendar-countdown {
 	display: block;
 }
 
 .title {
-	text-transform: uppercase;
 	font-size: 1em;
 	color: var(--color-text-default);
-	letter-spacing: 0.05em;
-	margin-bottom: 1em;
+	margin-bottom: 0.75em;
+	font-weight: 400;
 }
 
 .time-parts-list {
+	display: block;
 	list-style: none;
 	margin: 0;
 	text-align: center;
@@ -121,12 +121,6 @@ export default {
 	border-radius: 1em;
 	background-color: var(--color-background-default);
 	box-shadow: var(--volumetric-shadow);
-}
-
-@media screen and (max-width: 576px) {
-	.time-part-item {
-		min-width: 5em;
-	}
 }
 
 .time-part-item + .time-part-item {
@@ -148,8 +142,57 @@ export default {
 }
 
 .event-date {
-	padding: 0.25em;
+	display: block;
+	padding: 0.5em 0.25em 0.25em;
 	color: var(--color-text-default);
 	font-size: 0.875em;
+}
+
+@media screen and (max-width: 576px) {
+	.time-parts-list {
+		border-radius: 1em;
+		background-color: var(--color-background-default);
+		box-shadow: var(--volumetric-shadow);
+		display: inline-flex;
+		width: auto;
+		max-width: 100%;
+	}
+
+	.time-part-item {
+		width: 6em;
+		max-width: 100%;
+		min-width: initial;
+		border-radius: initial;
+		background-color: initial;
+		box-shadow: none;
+		position: relative;
+	}
+
+
+	.time-part-item:first-child:before {
+		display: none;
+	}
+
+	.time-part-item:before {
+		content: '';
+		display: inline-block;
+		background: var(--color-background-primary);
+		opacity: 1;
+		width: 1px;
+		height: 80%;
+		transform: translate(0, -50%);
+		top: 50%;
+		left: 0;
+		position: absolute;
+		z-index: 1;
+	}
+
+	.time-part-item + .time-part-item {
+		margin-left: 0;
+	}
+
+	.time-part-title {
+		font-size: 1em;
+	}
 }
 </style>

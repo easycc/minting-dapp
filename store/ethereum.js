@@ -106,7 +106,16 @@ export const actions = {
 		.collection('collections')
 		.doc(id)
 		.get()
-		.then(collectionSnap => commit('SET_STATE', ['collection', collectionSnap.data()]));
+		.then(collectionSnap => {
+			let data = collectionSnap.data();
+
+			for (let key of Object.keys(data)) {
+				if (data[key].toDate) {
+					data[key] = new Date(data[key].toDate());
+				}
+			}
+			return commit('SET_STATE', ['collection', data]);
+		});
 	},
 
 	async fetchCollectionContractData ({ commit, getters }) {
@@ -121,9 +130,9 @@ export const actions = {
 		return Promise.all([totalSupply, maxMintAmount, maxSupply, cost, symbol, name])
 		.then(values => {
 			commit('UPDATE_STATE', ['collection', {
-				totalSupply: values[0],
-				maxMintAmount: values[1],
-				maxSupply: values[2],
+				totalSupply: parseInt(values[0], 10),
+				maxMintAmount: parseInt(values[1], 10),
+				maxSupply: parseInt(values[2], 10),
 				cost: parseFloat(Web3.utils.fromWei(values[3], network.currency.name)),
 				symbol: values[4],
 				name: values[5]

@@ -4,7 +4,88 @@
 			<Header />
 		</template>
 
-		<Spotlight />
+		<PageContent class="collection-index-page">
+			<Spotlight />
+
+			<CollectionContextConsumer v-slot="{ registrationConfirmed }">
+				<Fade v-if="registrationConfirmed !== null">
+					<SuccessfulRegistrationMessage
+						v-if="raffleIsNotStarted && registrationConfirmed"
+						@start-raffle="fetchCollection"
+					/>
+
+					<DefaultCard
+						v-else-if="raffleRegistrationIsActive && registrationConfirmed === false"
+						class="action-card"
+					>
+						<h2 class="action-card-title">
+							Raffle registration is started!
+						</h2>
+						<div>
+							<Button
+								:link="`/collection/${collectionId}/registration`"
+								toLocalePath
+								title="Register in raffle"
+								kind="primary"
+								class="action-button"
+							/>
+						</div>
+						<InlineMessage>
+							<InlineCountdown
+								:eventDate="raffleRegistrationEndDate"
+								@finish="fetchCollection"
+							>
+								Time left:
+							</InlineCountdown>
+						</InlineMessage>
+					</DefaultCard>
+
+					<InlineMessage v-else-if="raffleRegistrationIsEnded && registrationConfirmed === false && !raffleIsActive">
+						We're sorry, but the registration period has ended
+					</InlineMessage>
+
+					<DefaultCard v-else-if="raffleIsActive && registrationConfirmed === true" class="action-card">
+						<h2 class="action-card-title">
+							Raffle is started!
+						</h2>
+						<p class="action-card-subtitle">
+							Join the raffle and check if you won the opportunity to mint {{ collection.name }} NFT
+						</p>
+						<div>
+							<Button
+								:link="`/collection/${collectionId}/raffle`"
+								toLocalePath
+								title="Join the raffle"
+								kind="primary"
+								class="action-button"
+							/>
+						</div>
+						<InlineMessage>
+							<InlineCountdown
+								:eventDate="raffleEndDate"
+								@finish="fetchCollection"
+							>
+								Time left:
+							</InlineCountdown>
+						</InlineMessage>
+					</DefaultCard>
+
+					<CalendarCountdown
+						v-else-if="registrationConfirmed === false && raffleRegistrationIsActive === false && !raffleIsActive"
+						title="Raffle registration starts in:"
+						:eventDate="raffleRegistrationStartDate"
+						@finish="fetchCollection"
+					/>
+
+					<Button
+						v-else-if="(raffleIsEnded || (raffleIsActive && raffleRegistrationIsActive === false)) && collection.socialLinks"
+						:href="collection.socialLinks.openSea"
+						title="View on OpenSea"
+						kind="primary"
+					/>
+				</Fade>
+			</CollectionContextConsumer>
+		</PageContent>
 
 		<template v-slot:footer>
 			<Footer />
@@ -16,27 +97,112 @@
 import {
 	Spotlight
 } from '~/containers/collection/index/index';
-import { Page, Header, Footer } from '~/components/PageLayout';
-import LocaleStorage from '~/services/locale-storage';
+import { Page, Header, Footer, PageContent } from '~/components/PageLayout';
+import { Fade } from '~/components/animation';
+import { DefaultCard } from '~/components/cards';
+import { Button } from '~/components/buttons';
+import { InlineMessage } from '~/components/InlineMessage';
+import { CalendarCountdown, InlineCountdown } from '~/components/Date';
+import CollectionContext from '~/containers/collection/context/CollectionContext';
+import { SuccessfulRegistrationMessage } from '~/containers/collection/registration';
 
 export default {
-	layout: 'light-theme',
+	layout: 'collection',
 
 	components: {
 		Page,
+		PageContent,
 		Header,
 		Footer,
-		Spotlight
+		DefaultCard,
+		Spotlight,
+
+		InlineMessage,
+		InlineCountdown,
+		CalendarCountdown,
+		Fade,
+		SuccessfulRegistrationMessage,
+		CollectionContextConsumer: CollectionContext.Consumer,
+		Button
 	},
 
-	async mounted () {
-		await this.$store.dispatch('ethereum/fetchCollection');
+	inject: ['collectionId'],
 
-		const storedAccount = LocaleStorage.getItem('account');
+	computed: {
+		collection () {
+			return this.$store.getters['ethereum/collection'];
+		},
 
-		if (storedAccount) {
-			await this.$store.dispatch('ethereum/connect');
+		raffleRegistrationStartDate () {
+			return this.collection.raffleRegistrationStartDate;
+		},
+
+		raffleRegistrationEndDate () {
+			return this.collection.raffleRegistrationEndDate;
+		},
+
+		raffleRegistrationIsActive () {
+			return this.raffleRegistrationStartDate < new Date() && this.raffleRegistrationEndDate > new Date();
+		},
+
+		raffleRegistrationIsEnded () {
+			return this.raffleRegistrationEndDate < new Date();
+		},
+
+
+		raffleIsActive () {
+			return this.raffleStartDate < new Date() && this.raffleEndDate > new Date();
+		},
+
+		raffleStartDate () {
+			return this.collection.raffleStartDate;
+		},
+
+		raffleEndDate () {
+			return this.collection.raffleEndDate;
+		},
+
+		raffleIsNotStarted () {
+			return this.raffleStartDate > new Date();
+		},
+
+		raffleIsEnded () {
+			return this.raffleEndDate < new Date();
+		}
+	},
+
+	methods: {
+		fetchCollection () {
+			return this.$store.dispatch('ethereum/fetchCollection');
 		}
 	}
 };
 </script>
+
+<style scoped>
+.collection-index-page {
+	text-align: center;
+}
+
+.action-card {
+	display: inline-block;
+	padding-top: 2em;
+	padding-bottom: 0em;
+	max-width: 32em;
+}
+
+.action-button {
+	margin-bottom: 2em;
+}
+
+.action-card-title {
+	margin-bottom: 0.5em;
+}
+
+.action-card-subtitle {
+	max-width: 20em;
+	display: block;
+	width: 100%;
+	margin: 0 auto 2em;
+}
+</style>

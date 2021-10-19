@@ -23,16 +23,16 @@ export default {
 .message {
 	--color-accent: var(--color-compliment-primary);
 
-	display: flex;
+	display: inline-flex;
 	align-items: flex-start;
 	flex-direction: row;
-	width: 100%;
-	padding: 1em 0.75em;
+	padding: 1em 1em 1em 0.75em;
 	border-radius: 0.5em;
 	color: var(--color-accent);
 	position: relative;
 	margin-bottom: 1.333em;
 	text-align: left;
+	line-height: 1.5;
 }
 
 .message:after {
@@ -51,21 +51,20 @@ export default {
 
 .message-icon {
 	font-size: 1.25em;
+	margin-top: 0.1em;
 	border-radius: 50%;
 	padding: 0.25em;
 	background-color: var(--color-accent);
 	color: #fff;
 	margin-right: 0.5em;
 	display: inline-block;
-	vertical-align: top;
+	vertical-align: text-top;
 }
 
 .message-text {
 	color: var(--color-text-primary);
-	line-height: 1.333;
 	display: inline-block;
 	vertical-align: top;
-	max-width: calc(100% - 2.5em);
 	z-index: 1;
 }
 </style>

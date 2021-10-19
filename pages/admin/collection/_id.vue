@@ -91,7 +91,15 @@ export default {
 				.doc(this.collectionId)
 				.get();
 
-			this.collection = collectionSnap.data();
+			let data = collectionSnap.data();
+
+			for (let key of Object.keys(data)) {
+				if (data[key].toDate) {
+					data[key] = new Date(data[key].toDate());
+				}
+			}
+
+			this.collection = data;
 		}
 	}
 };
