@@ -27,12 +27,6 @@ h1 {
 	font-weight: 600;
 }
 
-@media screen and (max-width: 576px) {
-	h1 {
-  	font-size: calc(2.25em + 0.25vw);
-	}
-}
-
 h2 {
   font-size: calc(1.75em + 0.25vw);
   margin: 0 0 1em;
@@ -61,6 +55,16 @@ h6 {
   font-size: 1em;
   margin: 0 0 0.5em;
 	font-weight: 500;
+}
+
+@media screen and (max-width: 576px) {
+	h1 {
+  	font-size: calc(2.25em + 0.25vw);
+	}
+
+	h2 {
+		font-size: calc(1.5em + 0.25vw);
+	}
 }
 
 a {

@@ -1,9 +1,12 @@
 import Web3EthContract from 'web3-eth-contract';
 
-import Web3 from '../contracts/Web3';
+import Web3 from '../services/Web3';
 
+import getSignatureParameters from '~/utils/get-signature-parameters';
 import LocaleStorage from '~/services/locale-storage';
 import NETWORKS from '~/constants/networks';
+
+let sigUtil = require('eth-sig-util');
 
 export const state = () => ({
 	collection: {
@@ -149,41 +152,174 @@ export const actions = {
 		});
 	},
 
-	async claimNft ({ dispatch, getters }, mintAmount) {
+	async mintNft ({ getters, dispatch }, { mintAmount, collectionId }) {
 		let { collection, account, SmartContract, network } = getters;
+		let { chainId } = collection.network;
+
+		let from = account;
+		let data = SmartContract.methods.mint(mintAmount).encodeABI();
 		const SAFE_GAS_LIMIT = 285000;
+		let value = Web3.utils.toWei(String(collection.cost), network.currency.name);
+		let gasLimit = String(SAFE_GAS_LIMIT * mintAmount);
 
-		let gasLimit = SAFE_GAS_LIMIT;
-		let costInEth = collection.cost;
-		let totalCostWei = Web3.utils.toWei(String(costInEth), network.currency.name);
-		let totalGasLimit = String(gasLimit * mintAmount);
+		// const domainType = [
+		// 	{ name: 'name', type: 'string' },
+		// 	{ name: 'version', type: 'string' },
+		// 	{ name: 'chainId', type: 'uint256' },
+		// 	{ name: 'verifyingContract', type: 'address' }
+		// ];
 
-		return SmartContract.methods
-			.mint(mintAmount)
-			.send({
-				gasLimit: String(totalGasLimit),
-				to: collection.contractAddress,
-				from: account,
-				value: String(totalCostWei)
-			})
-			.once('error', err => {
-				throw err;
-			})
-			.then(() => {
-				dispatch('fetchCollectionContractData');
+		// let domainData = {
+		// 	name: 'TestContract',
+		// 	version: '1',
+		// 	chainId,
+		// 	verifyingContract: collection.contractAddress
+		// };
 
-				return null;
-			})
-			.catch(err => {
-				console.log(err);
+		// let message = {
+		// 	to: collection.contractAddress,
+		// 	from,
+		// 	value,
+		// 	data
+		// };
 
-				this.$notify({
-					group: 'all',
-					type: 'error',
-					title: 'Sorry, something went wrong.',
-					text: err.message ? err.message : err
+		// const metaTransactionType = [
+		// 	{ name: 'to', type: 'address' },
+		// 	{ name: 'from', type: 'address' },
+		// 	{ name: 'value', type: 'uint256' },
+		// 	{ name: 'data', type: 'bytes' }
+		// ];
+
+		// const dataToSign = JSON.stringify({
+		// 	types: {
+		// 		EIP712Domain: domainType,
+		// 		MetaTransaction: metaTransactionType
+		// 	},
+		// 	domain: domainData,
+		// 	primaryType: 'MetaTransaction',
+		// 	message
+		// });
+
+
+		let domain = [
+			{ name: 'name', type: 'string' },
+			{ name: 'version', type: 'string' },
+			{ name: 'chainId', type: 'uint256' },
+			{ name: 'verifyingContract', type: 'address' }
+		];
+		let sellOrders = [
+			{ name: 'to', type: 'address' },
+			{ name: 'from', type: 'address' },
+			{ name: 'value', type: 'uint256' },
+			{ name: 'data', type: 'bytes' }
+		];
+		const domainData = {
+			name: 'NFT',
+			version: '1',
+			chainId,
+			verifyingContract: collection.contractAddress
+		};
+		let message = {
+			to: collection.contractAddress,
+			from: account,
+			value,
+			data
+		};
+		let dataS = JSON.stringify({
+			types: {
+				EIP712Domain: domain,
+				SellOrders: sellOrders
+			},
+			domain: domainData,
+			primaryType: 'SellOrders',
+			message
+		});
+
+		window.web3.currentProvider.sendAsync({
+			method: 'eth_signTypedData_v4',
+			params: [from, dataS],
+			from
+		}, async function (error, result) {
+			if (error) {
+				console.log(error);
+			}
+			else {
+				const signature = result.result.substring(2);
+				const r = `0x${signature.substring(0, 64)}`;
+				const s = `0x${signature.substring(64, 128)}`;
+				const v = parseInt(signature.substring(128, 130), 16);
+
+
+				let tx = await SmartContract.methods.recover(
+					message.to, message.from, message.value, message.data, v, r, s
+				).call();
+
+				console.log(tx);
+
+				// tx.on('transactionHash', function (hash) {
+				// 	console.log(`Transaction sent by relayer with hash ${hash}`);
+				// }).once('confirmation', function (confirmationNumber, receipt) {
+				// 	console.log('Transaction confirmed on chain');
+				// 	console.log(receipt);
+				// });
+			}
+		});
+	},
+
+	async sendTransaction ({ getters, dispatch }, {
+		to, from, value, data, r, s, v
+	}) {
+		let { collection, account, SmartContract, network } = getters;
+		let { chainId } = collection.network;
+
+
+		return;
+
+		console.log('to');
+		console.log(to);
+		console.log('from');
+		console.log(from);
+		console.log('value');
+		console.log(value);
+		console.log('data');
+		console.log(data);
+		console.log('r');
+		console.log(r);
+		console.log('s');
+		console.log(s);
+		console.log('v');
+		console.log(v);
+
+		try {
+			let gasLimit = await SmartContract.methods
+				.recover(to, from, value, data, r, s, v);
+
+			console.log('gasLimit');
+			console.log(gasLimit);
+
+			let gasPrice = await Web3.eth.getGasPrice();
+
+			let tx = SmartContract.methods
+				.recover(to, from, value, data, r, s, v)
+				.send({
+					to,
+					from,
+					value,
+					data,
+					gasPrice: Web3.utils.toHex(gasPrice),
+					gasLimit: Web3.utils.toHex(gasLimit)
 				});
+
+			tx.on('transactionHash', function (hash) {
+				console.log(`Transaction sent by relayer with hash ${hash}`);
+			}).once('confirmation', function (confirmationNumber, receipt) {
+				console.log('Transaction confirmed on chain');
+				console.log(receipt);
 			});
+		}
+		catch (error) {
+			console.log(error);
+		}
 	}
 };
 

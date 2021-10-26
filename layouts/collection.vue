@@ -3,6 +3,7 @@
 		:value="{
 			registrationConfirmed,
 			setRegistrationConfirmed,
+			mintAmount,
 			collectionId
 		}"
 	>
@@ -31,6 +32,7 @@ export default {
 	provide () {
 		return {
 			registrationConfirmed: this.registrationConfirmed,
+			mintAmount: this.mintAmount,
 			setRegistrationConfirmed: this.setRegistrationConfirmed,
 			collectionId: this.collectionId
 		};
@@ -38,7 +40,8 @@ export default {
 
 	data () {
 		return {
-			registrationConfirmed: null
+			registrationConfirmed: null,
+			mintAmount: null
 		};
 	},
 
@@ -73,6 +76,10 @@ export default {
 					.get();
 
 				this.registrationConfirmed = registrationDocSnap.exists;
+
+				if (registrationDocSnap.exists) {
+					this.mintAmount = registrationDocSnap.data().amount;
+				}
 			}
 			catch (error) {
 				console.log(error);

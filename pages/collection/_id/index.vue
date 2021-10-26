@@ -21,6 +21,14 @@
 						<h2 class="action-card-title">
 							Raffle registration is started!
 						</h2>
+						<p class="action-card-subtitle">
+							<InlineCountdown
+								:eventDate="raffleRegistrationEndDate"
+								@finish="fetchCollection"
+							>
+								Time left:
+							</InlineCountdown>
+						</p>
 						<div>
 							<Button
 								:link="`/collection/${collectionId}/registration`"
@@ -30,14 +38,6 @@
 								class="action-button"
 							/>
 						</div>
-						<InlineMessage>
-							<InlineCountdown
-								:eventDate="raffleRegistrationEndDate"
-								@finish="fetchCollection"
-							>
-								Time left:
-							</InlineCountdown>
-						</InlineMessage>
 					</DefaultCard>
 
 					<InlineMessage v-else-if="raffleRegistrationIsEnded && registrationConfirmed === false && !raffleIsActive">
@@ -51,6 +51,14 @@
 						<p class="action-card-subtitle">
 							Join the raffle and check if you won the opportunity to mint {{ collection.name }} NFT
 						</p>
+						<p class="action-card-subtitle">
+							<InlineCountdown
+								:eventDate="raffleEndDate"
+								@finish="fetchCollection"
+							>
+								Time left:
+							</InlineCountdown>
+						</p>
 						<div>
 							<Button
 								:link="`/collection/${collectionId}/raffle`"
@@ -60,14 +68,6 @@
 								class="action-button"
 							/>
 						</div>
-						<InlineMessage>
-							<InlineCountdown
-								:eventDate="raffleEndDate"
-								@finish="fetchCollection"
-							>
-								Time left:
-							</InlineCountdown>
-						</InlineMessage>
 					</DefaultCard>
 
 					<CalendarCountdown
@@ -196,11 +196,12 @@ export default {
 }
 
 .action-card-title {
+	font-size: 1.5em;
 	margin-bottom: 0.5em;
 }
 
 .action-card-subtitle {
-	max-width: 20em;
+	max-width: 23em;
 	display: block;
 	width: 100%;
 	margin: 0 auto 2em;

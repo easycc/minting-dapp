@@ -120,7 +120,6 @@ export default {
 
 			let participator = {
 				...this.participator,
-				createdAt: new Date(),
 				accountId: this.account
 			};
 

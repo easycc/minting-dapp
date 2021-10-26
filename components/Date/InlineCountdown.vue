@@ -40,8 +40,11 @@ export default {
 
 		const EVENT_HAS_STARTED = currentDate > eventDate;
 
-		if (EVENT_HAS_STARTED) {
+		if (EVENT_HAS_STARTED) {	
 			this.$emit('finish');
+			this.hours = 0;
+			this.minutes = 0;
+			this.seconds = 0;
 		}
 		else {
 			this.interval = setInterval(() => {

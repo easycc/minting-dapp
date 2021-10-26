@@ -1,81 +1,60 @@
 <template>
-	<DefaultCard class="payment-card">
-		<FormSubmit successMessage="Congratulations! Visit OpenSea to sea your asset." class="payment-form">
-			<BaseForm @submit="submitOrder">
-				<div class="price">
-					<h2 class="price-title">
-						Buy now price
-					</h2>
-
-					<CryptoPrice
-						v-if="collection.cost"
-						:name="network.currency.symbol"
-						:network="network.name"
-						:value="collection.cost"
-						:amount="amount"
-						class="price-amount"
-					/>
-				</div>
-
-				<div class="actions">
-					<Select
-						v-if="collection.maxMintAmount"
-						v-model.number="amount"
-						name="amount"
-						labelText="Amount"
-						class="amount-select"
-					>
-						<Option
-							v-for="amountOption in collection.maxMintAmount + 1"
-							:key="amountOption"
-							:value="amountOption"
-							:title="amountOption"
-							:amount="amountOption"
-						/>
-					</Select>
-
+	<FormSubmit successMessage="Congratulations! Visit OpenSea to sea your asset." class="payment-form">
+		<CollectionContextConsumer v-slot="{ mintAmount, collectionId }">
+			<BaseForm @submit="mintNft(mintAmount, collectionId)">
+				<template v-if="account">
 					<SubmitButton
-						v-if="account"
 						class="submit-button"
 						kind="primary"
-						title="Buy with ETH"
-					/>
-					<ConnectWalletButton v-else class="submit-button" />
-				</div>
+					>
+						Mint my {{ mintAmount }} NFT -
+						<span class="text-secondary">
+							<CryptoPrice
+								:name="network.currency.symbol"
+								:network="network.name"
+								:value="collection.cost"
+								:amount="mintAmount"
+							/>
+							+ gas
+						</span>
+					</SubmitButton>
+					<div>
+						<AssetsLastBadge />
+					</div>
+				</template>
+
+				<ConnectWalletButton v-else class="submit-button" />
 			</BaseForm>
-		</FormSubmit>
-	</DefaultCard>
+		</CollectionContextConsumer>
+	</FormSubmit>
 </template>
 
 <script>
 import ConnectWalletButton from './ConnectWalletButton';
 
+import CollectionContext from '~/containers/collection/context/CollectionContext';
 import {
 	SubmitButton,
 	BaseForm,
-	FormSubmit,
-	Select,
-	Option
+	FormSubmit
 } from '~/components/BaseForm';
 import { CryptoPrice } from '~/components/Currency';
-import { DefaultCard } from '~/components/cards';
 import NETWORKS from '~/constants/networks';
+import { AssetsLastBadge } from '~/components/badges';
 
 export default {
 	components: {
 		ConnectWalletButton,
 		CryptoPrice,
-		DefaultCard,
-		Select,
-		Option,
 		FormSubmit,
 		BaseForm,
-		SubmitButton
+		CollectionContextConsumer: CollectionContext.Consumer,
+		SubmitButton,
+		AssetsLastBadge
 	},
 
 	data () {
 		return {
-			amount: 1,
 			NETWORKS
 		};
 	},
@@ -93,56 +72,28 @@ export default {
 	},
 
 	methods: {
-		async submitOrder () {
-			await this.$store.dispatch('ethereum/claimNft', this.amount);
+		async mintNft (mintAmount, collectionId) {
+			return this.$store.dispatch('ethereum/mintNft', { mintAmount, collectionId });
 		}
 	}
 };
 </script>
 
 <style scoped>
-.payment-card {
-	margin: 0 auto;
-	display: block;
-	padding: 1.5em 1.5em 2em;
-}
-
 .payment-form {
 	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.price {
-	display: inline-block;
-	vertical-align: top;
-}
-
-.price-title {
-	font-size: 1em;
-	color: var(--color-text-default);
-	font-weight: 500;
-	margin-bottom: 0.333em;
-}
-
-.price-amount {
-	font-size: 1.25em;
-	font-weight: 600;
-}
-
-.amount-select {
-	margin-right: 0.5em;
-	margin-bottom: 0;
-	width: 6em;
-	display: inline-block;
-	vertical-align: bottom;
 }
 
 .submit-button {
 	width: auto;
 	display: inline-block;
 	vertical-align: bottom;
+	margin-bottom: 1em;
+}
+
+.submit-button .text-secondary {
+	opacity: 0.8;
+	font-weight: 400;
 }
 
 @media screen and (max-width: 576px) {
@@ -150,16 +101,7 @@ export default {
 		display: block;
 	}
 
-	.price {
-		display: block;
-		margin-bottom: 2em;
-	}
-
-	.amount-select {
-		margin-bottom: 1em;
-	}
-
-	.amount-select, .submit-button {
+	.submit-button {
 		display: block;
 		width: 100%;
 	}

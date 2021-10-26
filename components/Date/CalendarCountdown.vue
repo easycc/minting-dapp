@@ -72,6 +72,9 @@ export default {
 
 		if (EVENT_HAS_STARTED) {
 			this.$emit('finish');
+			this.hours = 0;
+			this.minutes = 0;
+			this.seconds = 0;
 		}
 		else {
 			this.interval = setInterval(() => {

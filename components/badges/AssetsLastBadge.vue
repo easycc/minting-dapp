@@ -28,23 +28,9 @@ export default {
 	text-align: center;
 	font-size: 1rem;
 	font-weight: 500;
-	background-color: transparent;
-	color: var(--color-accent);
+	background-color: var(--color-background-default);
+	color: var(--color-text-primary);
 	margin-bottom: 1em;
 	position: relative;
-}
-
-.assets-last-badge:after {
-	background-color: var(--color-accent-secondary);
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	display: block;
-	content: '';
-	z-index: -1;
-	border-radius: inherit;
-	opacity: 0.3;
 }
 </style>

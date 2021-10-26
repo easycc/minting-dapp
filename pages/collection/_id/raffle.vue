@@ -5,7 +5,8 @@
 		</template>
 
 		<PageContent v-if="raffleIsActive">
-			<h1>Raffle</h1>
+			<Spotlight />
+			<PaymentForm />
 		</PageContent>
 
 		<template v-slot:footer>
@@ -16,9 +17,10 @@
 
 <script>
 import {
-	// Spotlight
-} from '~/containers/collection/registration';
+	Spotlight
+} from '~/containers/collection/raffle';
 import { Page, Header, Footer, PageContent } from '~/components/PageLayout';
+import { PaymentForm } from '~/components/Payment';
 
 export default {
 	layout: 'collection',
@@ -27,9 +29,9 @@ export default {
 		Page,
 		Header,
 		Footer,
-		PageContent
-
-		// Spotlight
+		PageContent,
+		PaymentForm,
+		Spotlight
 	},
 
 	inject: ['collectionId'],
