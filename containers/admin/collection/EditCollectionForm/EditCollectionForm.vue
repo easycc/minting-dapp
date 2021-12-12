@@ -34,32 +34,32 @@
 				<DateTimePicker
 					labelText="Raffle registration start date"
 					:min="new Date()"
-					:max="editedCollection.raffleRegistrationStartDate"
-					name="raffleRegistrationStartDate"
-					:value.sync="editedCollection.raffleRegistrationStartDate"
+					:max="editedCollection.raffle.registration.startAt"
+					name="raffle.registration.startAt"
+					:value.sync="editedCollection.raffle.registration.startAt"
 				/>
 
 				<DateTimePicker
 					labelText="Raffle registration end date"
-					:min="editedCollection.raffleRegistrationStartDate"
-					:max="editedCollection.raffleStartDate"
-					name="raffleRegistrationEndDate"
-					:value.sync="editedCollection.raffleRegistrationEndDate"
+					:min="editedCollection.raffle.registration.startAt"
+					:max="editedCollection.raffle.startAt"
+					name="raffle.registration.endAt"
+					:value.sync="editedCollection.raffle.registration.endAt"
 				/>
 
 				<DateTimePicker
 					labelText="Raffle start date"
-					:min="editedCollection.raffleRegistrationEndDate"
-					:max="editedCollection.raffleStartDate"
-					name="raffleStartDate"
-					:value.sync="editedCollection.raffleStartDate"
+					:min="editedCollection.raffle.registration.endAt"
+					:max="editedCollection.raffle.startAt"
+					name="raffle.startAt"
+					:value.sync="editedCollection.raffle.startAt"
 				/>
 
 				<DateTimePicker
 					labelText="Raffle end date"
-					:min="editedCollection.raffleEndDate"
-					name="raffleEndDate"
-					:value.sync="editedCollection.raffleEndDate"
+					:min="editedCollection.raffle.endAt"
+					name="raffle.endAt"
+					:value.sync="editedCollection.raffle.endAt"
 				/>
 
 				<SubmitButton title="Save collection" />

@@ -7,14 +7,14 @@
 
 			<p class="registration-subtitle">
 				Check back later on
-				<Date :date="raffleStartDate" class="raffle-start-date" />
+				<Date :date="raffle.startAt" class="raffle-start-date" />
 				to see if you won the opportunity to mint an {{ collection.name }} NFT.
 			</p>
 		</div>
 		<CalendarCountdown
 			class="countdown"
 			title="The event will start in"
-			:eventDate="raffleStartDate"
+			:eventDate="raffle.startAt"
 			@finish="startRaffle"
 		/>
 	</DefaultCard>
@@ -36,8 +36,8 @@ export default {
 			return this.$store.getters['ethereum/collection'];
 		},
 
-		raffleStartDate () {
-			return this.collection.raffleStartDate;
+		raffle.startAt () {
+			return this.collection.raffle.startAt;
 		}
 	},
 

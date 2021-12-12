@@ -7,14 +7,14 @@
 		<div class="page-subtitle">
 			<p>
 				Check back later on
-				<Date :date="collection.raffleStartDate" class="raffle-start-date" />
+				<Date :date="collection.raffle.startAt" class="raffle-start-date" />
 				to see if you won the opportunity to mint {{ collection.name }} NFT.
 			</p>
 		</div>
 		<p>
 			The raffle starts in
 			<InlineCountdown
-				:eventDate="raffleStartDate"
+				:eventDate="raffle.startAt"
 				@finish="startRaffle"
 			/>
 		</p>
@@ -52,8 +52,8 @@ export default {
 			return this.$store.getters['ethereum/network'];
 		},
 
-		raffleStartDate () {
-			return this.collection.raffleStartDate;
+		raffle.startAt () {
+			return this.collection.raffle.startAt;
 		}
 	},
 

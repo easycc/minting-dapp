@@ -42,28 +42,28 @@ export default {
 		},
 
 		raffleIsActive () {
-			return this.raffleStartDate < new Date() && this.raffleEndDate > new Date();
+			return this.raffle.startAt < new Date() && this.raffle.endAt > new Date();
 		},
 
-		raffleStartDate () {
-			return this.collection.raffleStartDate;
+		raffle.startAt () {
+			return this.collection.raffle.startAt;
 		},
 
-		raffleEndDate () {
-			return this.collection.raffleEndDate;
+		raffle.endAt () {
+			return this.collection.raffle.endAt;
 		},
 
 		raffleIsNotStarted () {
-			return this.raffleStartDate > new Date();
+			return this.raffle.startAt > new Date();
 		},
 
 		raffleIsEnded () {
-			return this.raffleEndDate < new Date();
+			return this.raffle.endAt < new Date();
 		}
 	},
 
 	watch: {
-		raffleStartDate () {
+		raffle.startAt () {
 			this.checkRaffleAvailability();
 		}
 	},

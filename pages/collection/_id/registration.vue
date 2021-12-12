@@ -45,26 +45,26 @@ export default {
 			return this.$store.getters['ethereum/collection'];
 		},
 
-		raffleRegistrationStartDate () {
-			return this.collection.raffleRegistrationStartDate;
+		raffle.registration.startAt () {
+			return this.collection.raffle.registration.startAt;
 		},
 
-		raffleRegistrationEndDate () {
-			return this.collection.raffleRegistrationEndDate;
+		raffle.registration.endAt () {
+			return this.collection.raffle.registration.endAt;
 		},
 
 		raffleRegistrationIsStarted () {
-			return this.raffleRegistrationStartDate < new Date();
+			return this.raffle.registration.startAt < new Date();
 		},
 
 		raffleRegistrationIsActive () {
-			return this.raffleRegistrationStartDate < new Date()
-				&& this.raffleRegistrationEndDate > new Date();
+			return this.raffle.registration.startAt < new Date()
+				&& this.raffle.registration.endAt > new Date();
 		}
 	},
 
 	watch: {
-		raffleRegistrationStartDate () {
+		raffle.registration.startAt () {
 			this.checkRegistrationAvailability();
 		}
 	},

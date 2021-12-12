@@ -33,9 +33,9 @@ module.exports.takeParticipation = functions
 
 	let collection = collectionSnap.data();
 
-	let raffleRegistrationStartDate = new Date(collection.raffleRegistrationStartDate.toDate());
-	let raffleRegistrationEndDate = new Date(collection.raffleRegistrationEndDate.toDate());
-	let raffleRegistrationIsActive = raffleRegistrationStartDate < new Date() && raffleRegistrationEndDate > new Date();
+	let raffle.registration.startAt = new Date(collection.raffle.registration.startAt.toDate());
+	let raffle.registration.endAt = new Date(collection.raffle.registration.endAt.toDate());
+	let raffleRegistrationIsActive = raffle.registration.startAt < new Date() && raffle.registration.endAt > new Date();
 
 	if (!raffleRegistrationIsActive) {
 		throw new functions.https.HttpsError(

@@ -23,7 +23,7 @@
 						</h2>
 						<p class="action-card-subtitle">
 							<InlineCountdown
-								:eventDate="raffleRegistrationEndDate"
+								:eventDate="raffle.registration.endAt"
 								@finish="fetchCollection"
 							>
 								Time left:
@@ -53,7 +53,7 @@
 						</p>
 						<p class="action-card-subtitle">
 							<InlineCountdown
-								:eventDate="raffleEndDate"
+								:eventDate="raffle.endAt"
 								@finish="fetchCollection"
 							>
 								Time left:
@@ -73,7 +73,7 @@
 					<CalendarCountdown
 						v-else-if="registrationConfirmed === false && raffleRegistrationIsActive === false && !raffleIsActive"
 						title="Raffle registration starts in:"
-						:eventDate="raffleRegistrationStartDate"
+						:eventDate="raffle.registration.startAt"
 						@finish="fetchCollection"
 					/>
 
@@ -133,41 +133,41 @@ export default {
 			return this.$store.getters['ethereum/collection'];
 		},
 
-		raffleRegistrationStartDate () {
-			return this.collection.raffleRegistrationStartDate;
+		raffle.registration.startAt () {
+			return this.collection.raffle.registration.startAt;
 		},
 
-		raffleRegistrationEndDate () {
-			return this.collection.raffleRegistrationEndDate;
+		raffle.registration.endAt () {
+			return this.collection.raffle.registration.endAt;
 		},
 
 		raffleRegistrationIsActive () {
-			return this.raffleRegistrationStartDate < new Date() && this.raffleRegistrationEndDate > new Date();
+			return this.raffle.registration.startAt < new Date() && this.raffle.registration.endAt > new Date();
 		},
 
 		raffleRegistrationIsEnded () {
-			return this.raffleRegistrationEndDate < new Date();
+			return this.raffle.registration.endAt < new Date();
 		},
 
 
 		raffleIsActive () {
-			return this.raffleStartDate < new Date() && this.raffleEndDate > new Date();
+			return this.raffle.startAt < new Date() && this.raffle.endAt > new Date();
 		},
 
-		raffleStartDate () {
-			return this.collection.raffleStartDate;
+		raffle.startAt () {
+			return this.collection.raffle.startAt;
 		},
 
-		raffleEndDate () {
-			return this.collection.raffleEndDate;
+		raffle.endAt () {
+			return this.collection.raffle.endAt;
 		},
 
 		raffleIsNotStarted () {
-			return this.raffleStartDate > new Date();
+			return this.raffle.startAt > new Date();
 		},
 
 		raffleIsEnded () {
-			return this.raffleEndDate < new Date();
+			return this.raffle.endAt < new Date();
 		}
 	},
 
