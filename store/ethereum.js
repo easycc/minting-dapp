@@ -157,7 +157,7 @@ export const actions = {
 		let { chainId } = collection.network;
 
 		let from = account;
-		let data = SmartContract.methods.mint(mintAmount).encodeABI();
+		let data = SmartContract.methods.mint(mintAmount, account).encodeABI();
 		const SAFE_GAS_LIMIT = 285000;
 		let value = Web3.utils.toWei(String(collection.cost), network.currency.name);
 		let gasLimit = String(SAFE_GAS_LIMIT * mintAmount);
@@ -228,10 +228,10 @@ export const actions = {
 		let dataS = JSON.stringify({
 			types: {
 				EIP712Domain: domain,
-				SellOrders: sellOrders
+				MetaTransaction: sellOrders
 			},
 			domain: domainData,
-			primaryType: 'SellOrders',
+			primaryType: 'MetaTransaction',
 			message
 		});
 
