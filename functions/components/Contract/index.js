@@ -6,12 +6,8 @@ const Web3 = require('../Web3');
 const get = async function (abi, contractAddress, chainId) {
 	let web3 = await Web3.provider(chainId);
 
-	functions.logger.log('abi', abi);
-	functions.logger.log('contractAddress', contractAddress);
-	functions.logger.log('chainId', chainId);
-
 	return new web3.eth.Contract(
-		abi,
+		JSON.parse(abi),
 		contractAddress
 	);
 };
