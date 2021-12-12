@@ -1,53 +1,15 @@
 const functions = require('firebase-functions');
+const Web3 = require('web3');
 
-const METAMASK_PRIVATE_KEY = functions.config().metamask.private_key;
-const Web3 = require('.');
+const INFURA_PROJECT_ID = functions.config().infura.project_id;
 
-const get = async function (abi, contractAddress, chainId) {
-	let web3 = await Web3.provider(chainId);
 
-	functions.logger.log('abi', abi);
-	functions.logger.log('contractAddress', contractAddress);
-	functions.logger.log('chainId', chainId);
+const { INFURA_ENTRYPOINT_BY_CHAIN_ID } = require('../../constants/infura-entrypoint-by-chain-id');
 
-	return new web3.eth.Contract(
-		abi,
-		contractAddress
-	);
-};
-
-const getWhitelistedUsers = async function (abi, contractAddress, chainId) {
-	let contract = await get(
-		abi,
-		contractAddress,
-		chainId
-	);
-
-	return contract.methods.whitelistedAddresses().call();
-};
-
-const getMaxSupply = async function (abi, contractAddress, chainId) {
-	let contract = await get(
-		abi,
-		contractAddress,
-		chainId
-	);
-
-	return contract.methods.maxSupply().call();
-};
-
-const setWhitelistedUsers = async function (abi, contractAddress, chainId, currentQueueParticipators) {
-	let contract = await get(
-		abi,
-		contractAddress,
-		chainId
-	);
-
-	return contract.methods.whitelistUsers(currentQueueParticipators).call();
+const provider = async function (abi, contractAddress, chainId) {
+	return new Web3(new Web3.providers.HttpProvider(`${INFURA_ENTRYPOINT_BY_CHAIN_ID[chainId]}${INFURA_PROJECT_ID}`));
 };
 
 module.exports = {
-	getMaxSupply,
-	getWhitelistedUsers,
-	setWhitelistedUsers
+	provider
 };
