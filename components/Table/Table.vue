@@ -154,7 +154,7 @@
 
 												<Button
 													v-if="action.type === ACTION_TYPE.ROUTER_LINK"
-													:link="localePath(action.link(rowData))"
+													:link="action.link(rowData)"
 													iconName="arrow-top-right"
 													iconPosition="after"
 													class="action"

@@ -23,7 +23,7 @@ export default {
 	props: {
 		checked: {
 			type: Boolean,
-			required: true
+			default: false
 		}
 	},
 
@@ -47,16 +47,14 @@ export default {
 
 <style scoped>
 .radio-card {
-	display: inline-block;
-	vertical-align: middle;
-	width: auto;
+	display: block;
 	position: relative;
-	margin: 0 0.5em 1em;
-	padding: 1.5em 1em;
-	font-size: 1em;
-	border-radius: 0.8em;
+	margin: 0 0 1em;
+	padding: 0.875em 2em;
+	border-radius: 0.5em;
+	line-height: 1.333;
 
-	background-color: var(--color-background-secondary);
+	background-color: var(--color-background-default);
 	box-shadow: var(--volumetric-shadow);
 	transition: box-shadow var(--lazy-animation);
 }
@@ -66,9 +64,11 @@ export default {
 }
 
 .radio-card ::v-deep .input-type-radio {
-	font-size: 1.125em;
-	vertical-align: text-bottom;
-	margin-right: 0.5em;
+	position: absolute;
+	border-radius: 50%;
+	font-size: 1.25em;
+	top: 0.33em;
+	left: 0.33em;
 }
 
 .radio-card.checked {

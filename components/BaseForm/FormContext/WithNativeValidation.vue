@@ -30,6 +30,7 @@ import {
 	email,
 	max,
 	min,
+	alpha,
 	min_value,
 	max_value,
 	regex
@@ -55,7 +56,11 @@ extend('type=email', {
 });
 extend('minLength', {
 	...min,
-	message: 'min length invalid'
+	message: 'Min length invalid'
+});
+extend('alpha', {
+	...alpha,
+	message: 'Inserted value language invalid'
 });
 extend('maxLength', {
 	...max,
@@ -99,6 +104,10 @@ export default {
 			type: [Number, String],
 			default: undefined
 		},
+		alpha: {
+			type: String,
+			default: undefined
+		},
 		minLength: {
 			type: [Number, String],
 			default: undefined
@@ -137,6 +146,7 @@ export default {
 					.filter(node => node.componentOptions)
 					.map(node => node.componentOptions.children)
 					.reduce((nodes, children) => nodes.concat(children), [])
+					.filter(node => node && node.text)
 					.map(node => node.text)
 					.filter(Boolean)
 					.join('')
@@ -178,6 +188,7 @@ export default {
 				min,
 				max,
 				minLength,
+				alpha,
 				maxLength,
 				toContextValidationRules
 			} = this;
@@ -186,14 +197,16 @@ export default {
 			let typeRule = ['email'].includes(type) && `type=${type}`;
 			let minRule = min !== undefined && `min:${min}`;
 			let maxRule = max !== undefined && `max:${max}`;
+			let alphaRule = alpha !== undefined && `alpha:${alpha}`;
 			let minLengthRule = minLength !== undefined && `minLength:${minLength}`;
 			let maxLengthRule = maxLength !== undefined && `maxLength:${maxLength}`;
-			let patternRule = pattern && `pattern:${maxLength}`;
+			let patternRule = pattern && `pattern:${pattern}`;
 			let rules = [
 				requiredRule,
 				typeRule,
 				minRule,
 				maxRule,
+				alphaRule,
 				minLengthRule,
 				maxLengthRule,
 				patternRule

@@ -1,24 +1,26 @@
 import Web3EthContract from 'web3-eth-contract';
 
 import Web3 from '../services/Web3';
+import abi from '../collection/abi.json';
 
-import getSignatureParameters from '~/utils/get-signature-parameters';
-import LocaleStorage from '~/services/locale-storage';
 import NETWORKS from '~/constants/networks';
+import LocaleStorage from '~/services/locale-storage';
 
-let sigUtil = require('eth-sig-util');
 
 export const state = () => ({
 	collection: {
+		contractAddress: '0xC79dA057F66b0BA893ce1AB5b8817083E3adeFdE',
+		abi,
+		cost: 0.05,
+
 		maxMintAmount: 0,
 		totalSupply: 0,
 		maxSupply: 0,
 		symbol: null,
 		name: null,
-		cost: null,
 		network: {
-			id: null,
-			chainId: null
+			id: 'ETHEREUM',
+			chainId: 4
 		}
 	},
 	account: null
@@ -98,27 +100,7 @@ export const actions = {
 
 		if (!metamaskIsInstalled) return;
 
-		await dispatch('fetchCollectionConfig');
 		await dispatch('fetchCollectionContractData');
-	},
-
-	async fetchCollectionConfig ({ commit }) {
-		let { id } = this.$router.app.$route.params;
-
-		return this.$fire.firestore
-		.collection('collections')
-		.doc(id)
-		.get()
-		.then(collectionSnap => {
-			let data = collectionSnap.data();
-
-			for (let key of Object.keys(data)) {
-				if (data[key].toDate) {
-					data[key] = new Date(data[key].toDate());
-				}
-			}
-			return commit('SET_STATE', ['collection', data]);
-		});
 	},
 
 	async fetchCollectionContractData ({ commit, getters }) {
@@ -255,13 +237,6 @@ export const actions = {
 				).call();
 
 				console.log(tx);
-
-				// tx.on('transactionHash', function (hash) {
-				// 	console.log(`Transaction sent by relayer with hash ${hash}`);
-				// }).once('confirmation', function (confirmationNumber, receipt) {
-				// 	console.log('Transaction confirmed on chain');
-				// 	console.log(receipt);
-				// });
 			}
 		});
 	},
@@ -375,6 +350,7 @@ export const getters = {
 		let { collection } = state;
 
 		if (collection.contractAddress) {
+			console.log(collection.abi);
 			let abi = JSON.parse(collection.abi);
 
 			return new Web3EthContract(

@@ -5,7 +5,7 @@
 		:href="href"
 		:type="computedType"
 
-		:to="toLocalePath ? localePath(link) : link"
+		:to="link"
 		:disabled="disabled || showSpinner"
 		:prefetch="prefetch"
 		@click="onClick"
@@ -90,10 +90,6 @@ export default {
 		prefetch: {
 			type: Boolean,
 			default: undefined
-		},
-		toLocalePath: {
-			type: Boolean,
-			default: false
 		},
 
 		// <a>

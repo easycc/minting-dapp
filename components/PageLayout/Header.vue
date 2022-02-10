@@ -6,7 +6,7 @@
 		>
 			<PageContent class="header-navigation-wrapper">
 				<nav class="header-navigation">
-					<!-- <nuxt-link :to="localePath('/')" class="logo" :prefetch="false">
+					<!-- <nuxt-link to="/" class="logo" :prefetch="false">
 						<img
 							:src="light ? '/logo-dark.png' : '/logo.png'"
 							alt="Logo"

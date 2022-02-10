@@ -1,4 +1,4 @@
-/* eslint-disable sonarjs/no-duplicate-string */
+
 export default {
 	ssr: true,
 
@@ -57,7 +57,6 @@ export default {
 
 	plugins: [
 		{ src: '~plugins/theme-context' },
-		'~/plugins/moment',
 		{ ssr: false, src: '~/plugins/notifications' }
 	],
 
@@ -77,42 +76,10 @@ export default {
 	},
 
 	modules: [
-		['nuxt-i18n', {
-			vueI18nLoader: true
-		}],
 		'@nuxtjs/axios',
-		'@nuxtjs/firebase',
 		'@nuxtjs/google-analytics',
 		['vue-scrollto/nuxt', { duration: 0 }]
 	],
-
-	firebase: {
-		config: {
-			apiKey: process.env.FIREBASE_API_KEY,
-			authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-			projectId: process.env.FIREBASE_PROJECT_ID,
-			storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-			messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-			appId: process.env.FIREBASE_APP_ID
-		},
-		services: {
-			auth: {
-				initialize: {
-					onAuthStateChangedAction: 'onAuthStateChangedAction',
-					subscribeManually: true
-				}
-			},
-		  firestore: {
-				settings: {
-					ignoreUndefinedProperties: true
-				}
-			},
-			functions: {
-				location: 'us-central1'
-			},
-			storage: true
-		}
-	},
 
 	render: {
 		bundleRenderer: {
@@ -163,32 +130,5 @@ export default {
 			});
 		}
 	},
-
-	i18n: {
-		strategy: 'prefix',
-		locales: [
-			{
-				code: 'en',
-				iso: 'en',
-				name: 'English',
-				file: 'en.json'
-			}
-		],
-		defaultLocale: 'en',
-		seo: true,
-		lazy: true,
-		loadLanguagesAsync: true,
-		langDir: 'locales/',
-		detectBrowserLanguage: {
-			useCookie: true
-		},
-		vuex: {
-			syncLocale: true
-		},
-		vueI18n: {
-			fallbackLocale: 'en'
-		}
-	},
 	layoutTransition: 'layout'
 };
-/* eslint-enable sonarjs/no-duplicate-string */

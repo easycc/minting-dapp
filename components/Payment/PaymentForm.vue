@@ -1,38 +1,37 @@
 <template>
 	<FormSubmit successMessage="Congratulations! Visit OpenSea to sea your asset." class="payment-form">
-		<CollectionContextConsumer v-slot="{ mintAmount, collectionId }">
-			<BaseForm @submit="mintNft(mintAmount, collectionId)">
-				<template v-if="account">
-					<SubmitButton
-						class="submit-button"
-						kind="primary"
-					>
-						Mint my {{ mintAmount }} NFT -
-						<span class="text-secondary">
-							<CryptoPrice
-								:name="network.currency.symbol"
-								:network="network.name"
-								:value="collection.cost"
-								:amount="mintAmount"
-							/>
-							+ gas
-						</span>
-					</SubmitButton>
-					<div>
-						<AssetsLastBadge />
-					</div>
-				</template>
+		<!-- <CollectionContextConsumer v-slot="{ mintAmount: 1 }"> -->
+		<BaseForm @submit="mintNft(999)">
+			<template v-if="account">
+				<SubmitButton
+					class="submit-button"
+					kind="primary"
+				>
+					Mint my {{ 999 }} NFT -
+					<span class="text-secondary">
+						<CryptoPrice
+							:name="network.currency.symbol"
+							:network="network.name"
+							:value="collection.cost"
+							:amount="999"
+						/>
+						+ gas
+					</span>
+				</SubmitButton>
+				<div>
+					<AssetsLastBadge />
+				</div>
+			</template>
 
-				<ConnectWalletButton v-else class="submit-button" />
-			</BaseForm>
-		</CollectionContextConsumer>
+			<ConnectWalletButton v-else class="submit-button" />
+		</BaseForm>
+		<!-- </CollectionContextConsumer> -->
 	</FormSubmit>
 </template>
 
 <script>
 import ConnectWalletButton from './ConnectWalletButton';
 
-import CollectionContext from '~/containers/collection/context/CollectionContext';
 import {
 	SubmitButton,
 	BaseForm,
@@ -48,7 +47,6 @@ export default {
 		CryptoPrice,
 		FormSubmit,
 		BaseForm,
-		CollectionContextConsumer: CollectionContext.Consumer,
 		SubmitButton,
 		AssetsLastBadge
 	},
@@ -72,8 +70,8 @@ export default {
 	},
 
 	methods: {
-		async mintNft (mintAmount, collectionId) {
-			return this.$store.dispatch('ethereum/mintNft', { mintAmount, collectionId });
+		async mintNft (mintAmount) {
+			return this.$store.dispatch('ethereum/mintNft', { mintAmount });
 		}
 	}
 };

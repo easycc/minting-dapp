@@ -4,6 +4,8 @@
 			<Header />
 		</template>
 
+
+
 		<template v-slot:footer>
 			<Footer />
 		</template>
@@ -12,6 +14,7 @@
 
 <script>
 import { Page, Header, Footer } from '~/components/PageLayout';
+import { AboutUs } from '~/containers/index';
 
 export default {
 	layout: 'light-theme',
@@ -20,10 +23,6 @@ export default {
 		Page,
 		Header,
 		Footer
-	},
-
-	mounted () {
-		this.$router.push(this.localePath({ path: '/collection/crypto-savanna' }));
 	}
 };
 </script>

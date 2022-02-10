@@ -6,7 +6,9 @@
 		autocomplete="off"
 		v-on="$listeners"
 	>
-		<InputComponent><slot /></InputComponent>
+		<InputComponent>
+			<slot />
+		</InputComponent>
 	</WithNativeValidation>
 </template>
 

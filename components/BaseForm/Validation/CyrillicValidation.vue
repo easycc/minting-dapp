@@ -5,17 +5,17 @@
 </template>
 
 <script>
-
 import { extend } from 'vee-validate';
-import { digits } from 'vee-validate/dist/rules';
 
 import { FormValidation } from '../FormContext';
 
+extend('cyrillic', {
+	validate: value => {
+		let regex = /^['_А-Щьюяёєіїґ‘-\s’]*$/i;
 
-extend('phone', {
-	...digits,
-	params: [{ name: 'length', default: 9 }],
-	message: 'Максимальная довжина - 9 цифр'
+		return regex.test(value);
+	},
+	message: 'Введіть значення на українській чи російській мові'
 });
 
 export default {
@@ -23,7 +23,7 @@ export default {
 	data () {
 		return {
 			validation: {},
-			rule: 'phone'
+			rule: 'cyrillic'
 		};
 	},
 	methods: {

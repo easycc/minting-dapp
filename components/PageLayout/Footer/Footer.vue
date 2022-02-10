@@ -3,19 +3,17 @@
 		<PageContent class="footer-navigation" tag="nav">
 			<ul class="links-list">
 				<li class="link-item">
-					<nuxt-link :to="localePath('/')" :prefetch="false">
-						Home
+					<nuxt-link to="/" :prefetch="false">
+						link
 					</nuxt-link>
 				</li>
 
 				<li class="link-item">
-					<nuxt-link :to="localePath('/legal')" :prefetch="false">
-						Terms and conditions
+					<nuxt-link to="/legal" :prefetch="false">
+						link
 					</nuxt-link>
 				</li>
 			</ul>
-
-			<SocialLinks class="social-links" />
 		</PageContent>
 	</footer>
 </template>
@@ -23,12 +21,9 @@
 <script>
 import PageContent from '../PageContent';
 
-import SocialLinks from '~/containers/collection/SocialLinks/SocialLinks';
-
 export default {
 	components: {
-		PageContent,
-		SocialLinks
+		PageContent
 	}
 };
 </script>

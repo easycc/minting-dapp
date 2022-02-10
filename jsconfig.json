@@ -7,6 +7,6 @@
 			"~/*": ["./*"]
 		}
 	},
-	"include": ["**/*", "plugins/.js"],
+	"include": ["**/*", "plugins/.js", ".vscode/helpers"],
 	"exclude": ["node_modules", "build"]
 }
