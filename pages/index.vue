@@ -1,13 +1,13 @@
 <template>
 	<Page>
 		<template v-slot:header>
-			<Header />
+			<!-- <Header /> -->
 		</template>
 
-
+		<AboutUs />
 
 		<template v-slot:footer>
-			<Footer />
+			<!-- <Footer /> -->
 		</template>
 	</Page>
 </template>
@@ -21,6 +21,7 @@ export default {
 
 	components: {
 		Page,
+		AboutUs,
 		Header,
 		Footer
 	}

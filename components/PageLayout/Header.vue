@@ -1,60 +1,63 @@
 <template>
-	<ThemeContextConsumer v-slot="{ light }">
-		<header
-			class="page-header"
-			:class="{ light, 'opened': showNavigation, 'navigation-hidden-on-desktop': hideNavigationOnDesktop }"
-		>
-			<PageContent class="header-navigation-wrapper">
-				<nav class="header-navigation">
-					<!-- <nuxt-link to="/" class="logo" :prefetch="false">
-						<img
-							:src="light ? '/logo-dark.png' : '/logo.png'"
-							alt="Logo"
-							width="auto"
-							height="36"
-							class="logo-image"
-						/>
-					</nuxt-link> -->
+	<header
+		class="page-header"
+		:class="{ 'opened': headerOpened, 'navigation-hidden-on-desktop': hideNavigationOnDesktop }"
+	>
+		<PageContent class="header-navigation-wrapper">
+			<nav class="header-navigation">
+				<Logo to="/" class="logo" />
 
-					<Button
-						class="open-nav-button"
-						:iconName="showNavigation ? 'cross' : 'menu'"
-						collapsed
-						title="Open navigation"
-						@click="toggleNavigation"
-					/>
+				<Button
+					class="open-nav-button"
+					:iconName="headerOpened ? 'cross' : 'menu'"
+					collapsed
+					title="Open navigation"
+					@click="toggleHeader"
+				/>
 
-					<FadeDown>
-						<ul v-if="showNavigation" class="navigation-list">
-							<li class="navigation-item">
-								<WalletBadge v-if="account" />
+				<FadeDown>
+					<ul v-if="headerOpened" class="navigation-list">
+						<li class="navigation-item">
+							<Button
+								link="/digital-framework"
+								class="navigation-link"
+								:prefetch="false"
+								@click.native="toggleHeader"
+							>
+								link
+							</Button>
+						</li>
 
-								<ConnectWalletButton
-									v-else
-									class="connect-wallet-button navigation-button"
-								/>
-							</li>
-						</ul>
-					</FadeDown>
-				</nav>
-			</PageContent>
-		</header>
-	</ThemeContextConsumer>
+						<li class="navigation-item">
+							<Button
+								link="/bundle"
+								class="navigation-link"
+								:prefetch="false"
+								@click.native="toggleHeader"
+							>
+								link
+							</Button>
+						</li>
+					</ul>
+				</FadeDown>
+			</nav>
+		</PageContent>
+	</header>
 </template>
 
 <script>
 import PageContent from './PageContent';
 
-import { WalletBadge } from '~/components/badges';
+import { countries } from '~/components/ControlFlow';
 import { Button } from '~/components/buttons';
 import { FadeDown } from '~/components/animation';
-import { ConnectWalletButton } from '~/components/Payment';
+import { Logo } from '~/components/Logo';
+import noop from '~/utils/noop';
 
 export default {
 	components: {
 		Button,
-		WalletBadge,
-		ConnectWalletButton,
+		Logo,
 		FadeDown,
 		PageContent
 	},
@@ -63,6 +66,14 @@ export default {
 		hideNavigationOnDesktop: {
 			type: Boolean,
 			default: false
+		},
+		headerOpened: {
+			type: Boolean,
+			default: false
+		},
+		toggleHeader: {
+			type: Function,
+			default: noop
 		}
 	},
 
@@ -70,50 +81,21 @@ export default {
 		const MOBILE_SREEN_WIDTH = 576;
 
 		return {
-			showNavigation: false,
+			countries,
 			MOBILE_SREEN_WIDTH
 		};
 	},
 
 	computed: {
-		account () {
-			return this.$store.getters['ethereum/account'];
-		}
-	},
-
-	watch: {
-		showNavigation () {
-			this.$emit('freeze-page-height', this.showNavigation);
-		}
-	},
-
-	mounted () {
-		this.handleScreenResize();
-
-		if (process.client) {
-			window.addEventListener('resize', this.handleScreenResize);
-		}
-	},
-
-	beforeDestroy () {
-		window.removeEventListener('resize', this.handleScreenResize);
-	},
-
-	methods: {
-		toggleNavigation () {
-			if (process.client && window.innerWidth > this.MOBILE_SREEN_WIDTH) return;
-			this.showNavigation = !this.showNavigation;
+		activeLocale () {
+			return this.$i18n.locale;
 		},
 
-		handleScreenResize () {
-			if (process.client && window.innerWidth > this.MOBILE_SREEN_WIDTH) {
-				this.showNavigation = true;
-			}
-			else {
-				this.showNavigation = false;
-			}
+		locales () {
+			return this.$i18n.locales;
 		}
 	}
+
 };
 </script>
 
@@ -165,12 +147,7 @@ export default {
 	display: inline-block;
 	position: relative;
 	z-index: 10;
-}
-
-.logo-image {
-	display: block;
 	width: 7.5em;
-	height: auto;
 }
 
 .navigation-list {
@@ -186,28 +163,10 @@ export default {
 		z-index: 5;
 		left: 0;
 		top: var(--header-height);
-		height: 100vh;
 		background-color: var(--color-background-default);
-		padding: 1em var(--page-content-padding) 0;
+		padding: 1em var(--page-content-padding) 2em;
 		backdrop-filter: saturate(180%) blur(20px);
 		transition: height 0.5s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease;
-	}
-
-	.page-header.opened .navigation-list:after {
-		transition-delay: 0s;
-
-		content: '';
-		display: block;
-		height: 100%;
-		width: 100%;
-		position: absolute;
-		opacity: 1;
-		z-index: -1;
-		top: 0;
-		left: 0;
-		transition: opacity 0.5s ease;
-
-		background-color: var(--color-background-default);
 	}
 }
 
@@ -226,10 +185,6 @@ export default {
 	color: var(--color-text-default);
 	box-shadow: none;
 	font-size: inherit;
-}
-
-.navigation-button {
-	padding: 0.666em;
 }
 
 /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
@@ -301,30 +256,24 @@ export default {
 		padding: 0.75em 0;
 		text-align: left;
 	}
-
-	.navigation-button {
-		display: block;
-		width: 100%;
-	}
 }
 
 
 .open-nav-button {
 	display: none;
 	position: relative;
-	z-index: 10;
 	float: right;
-	width: 2.5em;
-	height: 2.5em;
+	width: 2.25em;
+	height: 2.25em;
 	padding: 0.5em;
+	color: var(--color-text-default);
 }
 
-.switch-language-button {
+.locale-picker {
 	display: inline-block;
 	vertical-align: middle;
 	margin-left: 0.75em;
 	font-size: inherit;
-	padding: 0.33em 0.5em;
 }
 
 @media screen and (max-width: 576px) {
@@ -332,7 +281,7 @@ export default {
 		display: block;
 	}
 
-	.switch-language-button {
+	.locale-picker {
 		margin-left: 0;
 		margin-top: 0.66em;
 	}

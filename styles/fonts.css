@@ -1,83 +1,11 @@
 @font-face {
-	font-family: 'HelveticaNeue';
+	font-family: 'Pixeboy';
 	font-stretch: normal;
-	src: local('HelveticaNeueCyr-Bold'),
-		local('HelveticaNeueCyr Bold'),
-			url(/fonts/HelveticaNeueCyr-Bold.woff2) format('woff2'),
-			url(/fonts/HelveticaNeueCyr-Bold.woff) format('woff'),
-			url(/fonts/HelveticaNeueCyr-Bold.ttf) format('truetype');
-	font-weight: bold;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'HelveticaNeue';
-	font-stretch: normal;
-	src: local('HelveticaNeueCyr-Light'),
-			local('HelveticaNeueCyr Light'),
-			url(/fonts/HelveticaNeueCyr-Light.woff2) format('woff2'),
-			url(/fonts/HelveticaNeueCyr-Light.woff) format('woff'),
-			url(/fonts/HelveticaNeueCyr-Light.ttf) format('truetype');
-	font-weight: 300;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'HelveticaNeue';
-	font-stretch: normal;
-	src: local('HelveticaNeueCyr-Medium'),
-			local('HelveticaNeueCyr Medium'),
-			url(/fonts/HelveticaNeueCyr-Medium.woff2) format('woff2'),
-			url(/fonts/HelveticaNeueCyr-Medium.woff) format('woff'),
-			url(/fonts/HelveticaNeueCyr-Medium.ttf) format('truetype');
-	font-weight: 500;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'HelveticaNeue';
-	font-stretch: normal;
-	src: local('HelveticaNeueCyr-MediumItalic'),
-			local('HelveticaNeueCyr MediumItalic'),
-			url(/fonts/HelveticaNeueCyr-MediumItalic.woff2) format('woff2'),
-			url(/fonts/HelveticaNeueCyr-MediumItalic.woff) format('woff'),
-			url(/fonts/HelveticaNeueCyr-MediumItalic.ttf) format('truetype');
-	font-weight: 500;
-	font-style: italic;
-}
-
-@font-face {
-	font-family: 'HelveticaNeue';
-	font-stretch: normal;
-	src: local('HelveticaNeueCyr-LightItalic'),
-			local('HelveticaNeueCyr LightItalic'),
-			url(/fonts/HelveticaNeueCyr-LightItalic.woff2) format('woff2'),
-			url(/fonts/HelveticaNeueCyr-LightItalic.woff) format('woff'),
-			url(/fonts/HelveticaNeueCyr-LightItalic.ttf) format('truetype');
-	font-weight: 300;
-	font-style: italic;
-}
-
-@font-face {
-	font-family: 'HelveticaNeue';
-	font-stretch: normal;
-	src: local('HelveticaNeueCyr-Italic'),
-			local('HelveticaNeueCyr Italic'),
-			url(/fonts/HelveticaNeueCyr-Italic.woff2) format('woff2'),
-			url(/fonts/HelveticaNeueCyr-Italic.woff) format('woff'),
-			url(/fonts/HelveticaNeueCyr-Italic.ttf) format('truetype');
-	font-weight: 500;
-	font-style: italic;
-}
-
-@font-face {
-	font-family: 'HelveticaNeue';
-	font-stretch: normal;
-	src: local('HelveticaNeueCyr-Roman'),
-			local('HelveticaNeueCyr Roman'),
-			url(/fonts/HelveticaNeueCyr-Roman.woff2) format('woff2'),
-			url(/fonts/HelveticaNeueCyr-Roman.woff) format('woff'),
-			url(/fonts/HelveticaNeueCyr-Roman.ttf) format('truetype');
-	font-weight: normal;
+	src: local('Pixeboy-Regular'),
+		local('Pixeboy Regular'),
+			url(/fonts/Pixeboy.woff2) format('woff2'),
+			url(/fonts/Pixeboy.woff) format('woff'),
+			url(/fonts/Pixeboy.ttf) format('truetype');
+	font-weight: 400;
 	font-style: normal;
 }

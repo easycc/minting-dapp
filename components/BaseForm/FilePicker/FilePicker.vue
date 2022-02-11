@@ -23,6 +23,7 @@
 				<Button
 					type="button"
 					class="button"
+					:kind="kind"
 					aria-hidden="true"
 					focusable="false"
 					iconName="image"
@@ -76,6 +77,10 @@ export default {
 			required: true
 		},
 		labelText: {
+			type: String,
+			default: undefined
+		},
+		kind: {
 			type: String,
 			default: undefined
 		},
@@ -209,6 +214,7 @@ export default {
 						// this extracts exifdata if available. Returns an empty object if not
 						EXIF.getData(img, function () {
 							that.exifData = this.exifdata;
+							that.$emit('load', img);
 						});
 
 						that.scaleImage(img, that.exifData.Orientation);
@@ -519,16 +525,8 @@ export default {
   z-index: 0;
 	margin: 0;
   font-size: 1em;
-	padding: 2px; /* outline size + outline-offset */
+	padding: 4px; /* outline size + outline-offset */
   overflow: hidden;
-}
-
-.button {
-	font-size: 1rem;
-	padding: 0.375em 0.75em 0.375em 0.75em;
-	font-weight: 400;
-	border-radius: 0.429em;
-	line-height: 1.5;
 }
 
 .file-input {

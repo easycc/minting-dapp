@@ -1,4 +1,3 @@
-
 export default {
 	ssr: true,
 
@@ -57,6 +56,7 @@ export default {
 
 	plugins: [
 		{ src: '~plugins/theme-context' },
+		{ src: '~/plugins/konva', mode: 'client' },
 		{ ssr: false, src: '~/plugins/notifications' }
 	],
 

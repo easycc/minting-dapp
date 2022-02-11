@@ -52,7 +52,7 @@ export default {
 	props: {
 		// default
 		title: {
-			type: String,
+			type: [String, Number],
 			default: ''
 		},
 		iconName: {
@@ -65,7 +65,7 @@ export default {
 		},
 		iconPosition: {
 			type: String,
-			default: 'before',
+			default: 'after',
 			validator: name => ['before', 'after'].includes(name)
 		},
 		kind: {
@@ -145,8 +145,8 @@ export default {
 	},
 
 	methods: {
-		onClick () {
-			this.$emit('click');
+		onClick (event) {
+			this.$emit('click', event);
 		}
 	}
 };
@@ -157,13 +157,12 @@ export default {
 	font-size: 1em;
 	display: inline-block;
 	vertical-align: baseline;
-	padding: 0.75em 1em;
+  padding: 0.5em 1em;
 	text-align: center;
 	box-sizing: border-box;
 	background: var(--color-background-primary);
 	color: var(--color-text-primary);
-	border-radius: 0.75em;
-	box-shadow: var(--volumetric-inner-shadow);
+	border-radius: 0;
 	border: none;
 	font-weight: 500;
 	position: relative;
@@ -171,6 +170,7 @@ export default {
 		opacity var(--smooth-animation),
 		background-color var(--smooth-animation),
 		transform var(--smooth-animation);
+	box-shadow: var(--pixel-shadow);
 }
 
 .button-primary.button-primary {
@@ -200,14 +200,17 @@ export default {
 	box-shadow: none;
 }
 
+.button-content {
+	white-space: nowrap;
+}
 
 .button-content.hidden {
 	opacity: 0;
 }
 
 .title {
-	margin: 0 0.15em;
 	line-height: 1.45;
+	white-space: initial;
 }
 
 .title.single {
@@ -226,16 +229,22 @@ button:disabled {
 }
 
 .emoji {
-	margin-right: 0.1em;
 	font-size: 1.333em;
 	line-height: 1;
 }
 
 .icon {
 	font-size: 1em;
-	margin-right: 0.1em;
 	line-height: 1;
 	color: inherit;
+}
+
+.title + .icon {
+	margin-left: 0.25em;
+}
+
+.icon + .title {
+	margin-left: 0.25em;
 }
 
 .button-content > * {
@@ -259,7 +268,6 @@ button:disabled {
 	height: 2.75em;
 	padding: 0;
 	position: relative;
-	border-radius: 0.5em;
 	text-align: center;
 	overflow: hidden;
 }
@@ -269,6 +277,7 @@ button:disabled {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+	margin: 0;
 }
 
 .collapsed .emoji {

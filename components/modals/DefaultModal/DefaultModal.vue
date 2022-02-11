@@ -1,39 +1,39 @@
 <template>
-	<ThemeContextConsumer v-slot="{ light }">
-		<transition appear name="component-fade" :run="true">
-			<div key="modal" class="modal-background-wrapper">
-				<div class="modal-background-backdrop" tabindex="-1" focusable="false" @click="closeModal" />
+	<transition appear name="component-fade" :run="true">
+		<div key="modal" class="modal-background-wrapper">
+			<LockLayer :onClick="closeModal" class="lock-layer" />
 
-				<section class="content-wrapper" :class="{ 'full-screen-mobile': fullScreenMobile, 'light': light }">
-					<h3 v-if="title" class="modal-title">
-						{{ title }}
-					</h3>
+			<section ref="modalContentWrapper" class="content-wrapper" :class="{ 'full-screen-mobile': fullScreenMobile }">
+				<h3 v-if="title" class="modal-title">
+					{{ title }}
+				</h3>
 
-					<slot />
+				<slot />
 
-					<Fade>
-						<Button
-							v-if="hideCloseButton === false"
-							class="close-button"
-							iconName="cross"
-							title="Close window"
-							collapsed
-							@click="closeModal"
-						/>
-					</Fade>
-				</section>
-			</div>
-		</transition>
-	</ThemeContextConsumer>
+				<Fade>
+					<Button
+						v-if="hideCloseButton === false"
+						class="close-button"
+						iconName="cross"
+						title="Close window"
+						collapsed
+						@click="closeModal"
+					/>
+				</Fade>
+			</section>
+		</div>
+	</transition>
 </template>
 
 <script>
 import { Button } from '~/components/buttons';
 import { Fade } from '~/components/animation';
+import { LockLayer } from '~/components/Layer';
 
 export default {
 	components: {
 		Button,
+		LockLayer,
 		Fade
 	},
 
@@ -72,22 +72,12 @@ export default {
   left: 0;
   z-index: 20;
   width: 100%;
-  height: 100%;
-  overflow: auto;
+  height: 100vh;
 
 	--modal-width: 500px;
 }
 
-.modal-background-backdrop {
-  display: block;
-  position: fixed;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100vh;
+.lock-layer {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
@@ -103,7 +93,7 @@ export default {
   padding: 5em calc(0.5em + 1vw) 2em;
   box-sizing: border-box;
   background-color: var(--color-background-default);
-  border-radius: 1em;
+	box-shadow: var(--pixel-shadow);
 }
 
 @media screen and (max-width: 500px) { /* modal width */
@@ -124,7 +114,8 @@ export default {
   width: 2.75em;
   height: 2.75em;
   box-shadow: none;
-  border-radius: 50%;
+
+	box-shadow: var(--pixel-shadow);
   border: none;
   overflow: hidden;
 	text-indent: 100px;
