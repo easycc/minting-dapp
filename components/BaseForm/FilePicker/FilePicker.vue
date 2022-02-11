@@ -214,7 +214,6 @@ export default {
 						// this extracts exifdata if available. Returns an empty object if not
 						EXIF.getData(img, function () {
 							that.exifData = this.exifdata;
-							that.$emit('load', img);
 						});
 
 						that.scaleImage(img, that.exifData.Orientation);
@@ -234,7 +233,7 @@ export default {
 
 		emitEvent (rawImage, output) {
 			this.$emit('input', rawImage);
-			this.$emit('formatted-input', output);
+			this.$emit('formatted-output', output);
 		},
 
 		emitLoad () {
@@ -467,6 +466,14 @@ export default {
 			if (this.outputFormat === 'file') {
 				return this.currentFile;
 			}
+
+			if (this.outputFormat === 'dom-image') {
+				let image = new Image();
+
+				image.src = imageData;
+				return image;
+			}
+
 
 			// if (this.outputFormat === 'blob') {
 			// 	if (typeof canvasToBlob === 'undefined') {

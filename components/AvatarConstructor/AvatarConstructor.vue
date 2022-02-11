@@ -6,49 +6,60 @@
 		:onResizeEnd="setViewportSize"
 		@close="hideAvatarConstructor"
 	>
-		<Button
-			v-if="status === STATUS.READY_TO_DOWNLOAD"
-			iconName="check"
-			kind="complimentary"
-			class="download-button"
-			@click="downloadImage"
-		>
-			Download
-		</Button>
-
 		<BaseForm>
+			<Button
+				v-if="status === STATUS.READY_TO_DOWNLOAD"
+				iconName="check"
+				kind="complimentary"
+				class="download-button"
+				@click="downloadImage"
+			>
+				Download
+			</Button>
+
 			<ClientOnly
 				v-if="image"
 			>
-				<v-stage
-					ref="stage"
-					class="stage"
-					:config="stageSize"
-					@dragend="status = STATUS.READY_TO_DOWNLOAD"
-					@mousedown="handleStageMouseDown"
-					@touchstart="handleStageMouseDown"
-				>
-					<v-layer>
-						<v-image
-							:config="{
-								image: image,
-								width: stageSize.width,
-								height: stageSize.height
-							}"
-						/>
-					</v-layer>
-					<v-layer ref="layer">
-						<template v-if="pickedLayersExist">
+				<div class="canvas">
+					<Button
+						v-if="selectedShapeName"
+						collapsed
+						title="Delete layer"
+						iconName="bucket"
+						class="delete-layer-button"
+						@click="deleteLayer(selectedShapeName)"
+					/>
+
+					<v-stage
+						ref="stage"
+						class="stage"
+						:config="stageSize"
+						@dragend="status = STATUS.READY_TO_DOWNLOAD"
+						@mousedown="handleStageMouseDown"
+						@touchstart="handleStageMouseDown"
+					>
+						<v-layer>
 							<v-image
-								v-for="pickedLayer in pickedLayers"
-								:key="pickedLayer.name"
-								:config="pickedLayer"
-								@transformend="handleTransformEnd"
+								:config="{
+									image: image,
+									width: stageSize.width,
+									height: stageSize.height
+								}"
 							/>
-						</template>
-						<v-transformer ref="transformer" />
-					</v-layer>
-				</v-stage>
+						</v-layer>
+						<v-layer ref="layer">
+							<template v-if="pickedLayersExist">
+								<v-image
+									v-for="pickedLayer in pickedLayers"
+									:key="pickedLayer.name"
+									:config="pickedLayer"
+									@transformend="handleTransformEnd"
+								/>
+							</template>
+							<v-transformer ref="transformer" />
+						</v-layer>
+					</v-stage>
+				</div>
 			</ClientOnly>
 
 			<div v-if="!image">
@@ -61,12 +72,12 @@
 					kind="primary"
 					title="Choose a photo"
 					class="choose-photo-filepicker"
-					output="base64"
-					accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg"
-					@load="setImage"
+
+					accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg, .heic"
+					outputFormat="dom-image"
+					@formatted-output="setImage"
 				/>
 			</div>
-
 
 			<div class="slider-wrapper">
 				<Swiper
@@ -104,9 +115,10 @@
 				name="avatarImagePicker"
 				title="Change a photo"
 				class="change-photo-filepicker"
-				output="base64"
-				accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg"
-				@load="setImage"
+
+				accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg, .heic"
+				outputFormat="dom-image"
+				@formatted-output="setImage"
 			/>
 		</BaseForm>
 	</DefaultModal>
@@ -168,14 +180,13 @@ export default {
 
 			swiperOptions: {
 				slidesPerView: 4,
-				spaceBetween: 2,
+				spaceBetween: 0,
 				direction: 'horizontal',
 				speed: 800,
 				allowTouchMove: true,
 
 				breakpoints: {
 					560: {
-						spaceBetween: 8,
 						allowTouchMove: false
 					}
 				},
@@ -271,7 +282,8 @@ export default {
 				if (theLastLayer) {
 					this.status = this.STATUS.CHOOSE_LAYER;
 				}
-				this.pickedLayers = this.pickedLayers.filter(layer => layer.name !== path);
+
+				this.deleteLayer(path);
 			}
 
 			else {
@@ -302,6 +314,12 @@ export default {
 		setImage (image) {
 			this.image = image;
 			this.status = this.STATUS.CHOOSE_LAYER;
+		},
+
+		deleteLayer (path) {
+			this.pickedLayers = this.pickedLayers.filter(layer => layer.name !== path);
+			this.resetTransformer();
+			this.selectedShapeName = undefined;
 		},
 
 
@@ -423,6 +441,20 @@ export default {
 
 .choose-photo-filepicker {
 	margin-bottom: 2rem;
+}
+
+.canvas {
+	position: relative;
+}
+
+.delete-layer-button {
+	position: absolute;
+	width: 2em;
+	height: 2em;
+	left: 50%;
+	transform: translate(-50%, 0);
+	z-index: 1;
+	bottom: 1em;
 }
 
 .stage {
