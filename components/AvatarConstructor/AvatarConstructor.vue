@@ -75,7 +75,7 @@
 
 					accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg, .heic"
 					outputFormat="dom-image"
-					@raw-input="setImage"
+					@output="setImage"
 				/>
 			</div>
 
@@ -118,7 +118,7 @@
 
 				accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg, .heic"
 				outputFormat="dom-image"
-				@raw-input="setImage"
+				@output="setImage"
 			/>
 		</BaseForm>
 	</DefaultModal>
