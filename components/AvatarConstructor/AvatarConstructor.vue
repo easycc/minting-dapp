@@ -73,7 +73,7 @@
 					title="Choose a photo"
 					class="choose-photo-filepicker"
 
-					accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg"
+					accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg, .heic"
 					outputFormat="dom-image"
 					@formatted-output="setImage"
 				/>
@@ -116,7 +116,7 @@
 				title="Change a photo"
 				class="change-photo-filepicker"
 
-				accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg"
+				accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg, .heic"
 				outputFormat="dom-image"
 				@formatted-output="setImage"
 			/>
