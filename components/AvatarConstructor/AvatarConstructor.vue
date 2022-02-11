@@ -314,6 +314,7 @@ export default {
 		setImage (image) {
 			this.image = image;
 			this.status = this.STATUS.CHOOSE_LAYER;
+			this.$forceUpdate();
 		},
 
 		deleteLayer (path) {
