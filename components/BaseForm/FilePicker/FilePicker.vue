@@ -180,22 +180,21 @@ export default {
 
 	methods: {
 		uploadFile (event) {
-			let file = event.target.files[0];
+			const { files } = event.target;
+			const reader = new FileReader();
 
-			getOrientedImage(file, (error, canvas) => {
-				if (error) {
-					alert(error);
-					throw error;
-				}
-				else {
-					let dataUrl = canvas.toDataURL();
-					let image = new Image();
+			reader.onload = event_ => {
+				let imageData = event_.target.result;
 
-					image.src = dataUrl;
 
-					this.$emit('output', image);
-				}
-			});
+				let image = new Image();
+
+				image.src = imageData;
+				this.$emit('output', image);
+			};
+			reader.readAsDataURL(files[0]);
+
+			// this.$emit('input', files[0]);
 		}
 	}
 };
