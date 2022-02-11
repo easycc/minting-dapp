@@ -17,13 +17,6 @@
 				Download
 			</Button>
 
-			<template v-if="image">
-				{{ image }}
-				{{ image.src }}
-				{{ image.width }}
-				{{ image.height }}
-			</template>
-
 			<ClientOnly
 				v-if="image"
 			>
@@ -50,7 +43,8 @@
 								:config="{
 									image: image,
 									width: stageSize.width,
-									height: stageSize.height
+									height: stageSize.height,
+									rotation: 0
 								}"
 							/>
 						</v-layer>
@@ -319,9 +313,8 @@ export default {
 		},
 
 		setImage (image) {
-			this.image = image;
+			this.$set(this, 'image', image);
 			this.status = this.STATUS.CHOOSE_LAYER;
-			this.$forceUpdate();
 		},
 
 		deleteLayer (path) {

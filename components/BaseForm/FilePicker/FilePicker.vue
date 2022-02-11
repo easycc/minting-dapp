@@ -179,22 +179,17 @@ export default {
 	},
 
 	methods: {
-		uploadFile (event) {
-			const { files } = event.target;
-			const reader = new FileReader();
+		uploadFile (event_) {
+			let URL = window.webkitURL || window.URL;
+			let url = URL.createObjectURL(event_.target.files[0]);
+			let img = new Image();
 
-			reader.onload = event_ => {
-				let imageData = event_.target.result;
+			img.src = url;
 
 
-				let image = new Image();
-
-				image.src = imageData;
-				this.$emit('output', image);
+			img.onload = function () {
+				this.$emit('output', img);
 			};
-			reader.readAsDataURL(files[0]);
-
-			// this.$emit('input', files[0]);
 		}
 	}
 };
