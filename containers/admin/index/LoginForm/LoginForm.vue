@@ -63,7 +63,7 @@ export default {
 	width: 100%;
 	margin-bottom: 0.66em;
 	text-align: left;
-	font-weight: 500;
+	font-weight: 400;
 	padding-left: 1em;
 }
 

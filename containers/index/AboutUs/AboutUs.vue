@@ -1,7 +1,7 @@
 <template>
 	<DarkTheme>
 		<section class="about-us-section">
-			<PageContent>
+			<PageContent class="content">
 				<h2 class="title">
 					About the authors
 				</h2>
@@ -35,7 +35,9 @@
 					class="authors-image"
 				/>
 			</PageContent>
-			<AvatarConstructor />
+			<ClientOnly>
+				<AvatarConstructor />
+			</ClientOnly>
 		</section>
 	</DarkTheme>
 </template>
@@ -77,14 +79,16 @@ export default {
 }
 
 .text-wrapper {
-	padding-right: 4rem;
+	padding-right: 1.5rem;
+	padding-left: 2rem;
 	display: inline-block;
 	vertical-align: middle;
 	max-width: 30rem;
+	margin-right: 5vw;
 }
 
 p {
-	font-size: calc(1.25em + 0.05vw);
+	font-size: calc(1em + 0.5vw);
 }
 
 .authors-image {
@@ -101,8 +105,49 @@ p {
 		inset 0px -12px 0px rgba(17, 17, 17, 0.3);
 }
 
+@media screen and (max-width: 1100px) {
+	.text-wrapper {
+		margin-right: 2vw;
+	}
+
+	.authors-image {
+		max-width: 20rem;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	p {
+		font-size: 1em;
+	}
+}
+
 .create-avatar-button {
 	background-color: #FDDB33;
 	color: #111;
+	margin-bottom: 2em;
+}
+
+
+
+@media screen and (max-width: 900px) {
+	.content {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.authors-image {
+		order: 1;
+		margin: 0 auto 2rem;
+	}
+
+	.text-wrapper {
+		order: 2;
+		margin: 0 auto;
+	}
+
+	.create-avatar-button {
+		margin-top: 1rem;
+		margin-bottom: 0;
+	}
 }
 </style>

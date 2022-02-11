@@ -1,24 +1,22 @@
 <template>
-	<DefaultModal v-if="showAvatarConstructor" class="modal" @close="hideAvatarConstructor">
+	<DefaultModal
+		v-if="showAvatarConstructor"
+		class="modal"
+		:title="title"
+		:onResizeEnd="setViewportSize"
+		@close="hideAvatarConstructor"
+	>
+		<Button
+			v-if="status === STATUS.READY_TO_DOWNLOAD"
+			iconName="check"
+			kind="complimentary"
+			class="download-button"
+			@click="downloadImage"
+		>
+			Download
+		</Button>
+
 		<BaseForm>
-			<h3>
-				<template v-if="status === STATUS.CHOOSE_PHOTO">
-					Choose your photo
-				</template>
-
-				<template v-else-if="status === STATUS.CHOOSE_LAYER">
-					Pick your hat below
-				</template>
-
-				<template v-else-if="status === STATUS.DRAG_LAYER">
-					Tap and Drag the layer
-				</template>
-
-				<template v-else-if="status === STATUS.READY_TO_DOWNLOAD">
-					Download the photo below
-				</template>
-			</h3>
-
 			<ClientOnly
 				v-if="image"
 			>
@@ -52,16 +50,6 @@
 					</v-layer>
 				</v-stage>
 			</ClientOnly>
-
-			<Button
-				v-if="status === STATUS.READY_TO_DOWNLOAD"
-				iconName="check"
-				kind="complimentary"
-				class="download-button"
-				@click="downloadImage"
-			>
-				Download the photo
-			</Button>
 
 			<div v-if="!image">
 				<div>
@@ -175,17 +163,19 @@ export default {
 			layers,
 			pickedLayers: [],
 			selectedShapeName: '',
+			windowHeight: 0,
+			windowWidth: 0,
 
 			swiperOptions: {
 				slidesPerView: 4,
-				spaceBetween: 8,
+				spaceBetween: 2,
 				direction: 'horizontal',
 				speed: 800,
 				allowTouchMove: true,
 
 				breakpoints: {
 					560: {
-						spaceBetween: 4,
+						spaceBetween: 8,
 						allowTouchMove: false
 					}
 				},
@@ -212,10 +202,10 @@ export default {
 			if (!this.image) return;
 
 			let { height, width } = this.image;
+			let { windowHeight, windowWidth } = this;
 
-			const verticalPadding = 24;
-			let maxWidth = window.innerWidth - verticalPadding;
-			let maxHeight = window.innerHeight * 0.7 - verticalPadding;
+			let maxWidth = windowWidth;
+			let maxHeight = windowHeight * 0.7;
 			let ratio = 0;
 
 			if (width > maxWidth) {
@@ -234,10 +224,39 @@ export default {
 				width,
 				height
 			};
+		},
+
+		title () {
+			let { status } = this;
+
+			let title;
+
+			switch (status) {
+				case STATUS.CHOOSE_PHOTO:
+					title = 'Choose your photo';
+					break;
+
+				case STATUS.CHOOSE_LAYER:
+					title = 'Pick your hat below';
+					break;
+
+				case STATUS.DRAG_LAYER:
+					title = 'Tap and Drag the layer';
+					break;
+			}
+
+			return title;
 		}
 	},
 
 	methods: {
+		setViewportSize (event) {
+			if (!this.windowWidth || !this.windowHeight) {
+				this.windowWidth = event.contentBox.width;
+				this.windowHeight = window.innerHeight;
+			}
+		},
+
 		hideAvatarConstructor () {
 			deleteRouteQuery(['showAvatarConstructor']);
 		},
@@ -331,9 +350,6 @@ export default {
 
 			const selectedNode = stage.findOne(`.${selectedShapeName}`);
 
-			console.log(selectedShapeName);
-			console.log(selectedNode);
-
 			if (selectedNode === transformerNode.node()) {
 				return;
 			}
@@ -346,7 +362,15 @@ export default {
 			}
 		},
 
+		resetTransformer () {
+			const transformerNode = this.$refs.transformer.getNode();
+
+			transformerNode.nodes([]);
+		},
+
 		downloadImage () {
+			this.resetTransformer();
+
 			let stage = this.$refs.stage.getNode();
 			let dataURL = stage.toDataURL({ pixelRatio: 2 });
 
@@ -363,25 +387,42 @@ export default {
 
 .modal >>> .content-wrapper {
 	padding-top: 5rem;
-	padding-left: 0;
-	padding-right: 0;
-	max-width: 100%;
+	margin-top: 0.5em;
+	max-width: 40rem;
 	width: 100%;
-	min-height: calc(100% - 2rem);
+}
+
+@media screen and (max-width: 576px) {
+	.modal >>> .content-wrapper {
+		max-width: 100%;
+		width: 100%;
+		min-height: calc(100% - 2rem);
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 
 .tip-icon {
 	opacity: 0.4;
 	display: inline-block;
 	margin-bottom: 1em;
+	animation: bounce 0.75s infinite;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-40%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .choose-photo-filepicker {
 	margin-bottom: 2rem;
-}
-
-.change-photo-filepicker {
-	margin-top: 3rem;
 }
 
 .stage {
@@ -396,6 +437,15 @@ export default {
 
 .slider-wrapper {
 	position: relative;
+	background-color: var(--color-background-default);
+	padding-bottom: 2rem;
+}
+
+@media screen and (max-width: 576px) {
+	.slider-wrapper {
+		position: sticky;
+		bottom: 0;
+	}
 }
 
 .layers-list {
@@ -415,6 +465,7 @@ export default {
 
 .layer-image {
 	width: 100%;
+	display: block;
 	height: auto;
 }
 
@@ -453,6 +504,18 @@ export default {
 
 .download-button {
 	margin-bottom: 2rem;
+	position: absolute;
+	left: 0.75em;
+	top: 1em;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+}
+
+.slide-button-prev {
+	left: 4px;
+}
+.slide-button-next {
+	right: 4px;
 }
 
 

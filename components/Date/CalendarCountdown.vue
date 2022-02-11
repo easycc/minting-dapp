@@ -132,14 +132,14 @@ export default {
 
 .time-part-value {
 	font-size: calc(1.5em + 0.5vw);
-	font-weight: 600;
+	font-weight: 400;
 	margin-bottom: 0.5rem;
 	display: block;
 	color: var(--color-text-primary);
 }
 
 .time-part-title {
-	font-weight: 500;
+	font-weight: 400;
 	font-size: 1.125em;
 	color: var(--color-text-default);
 }

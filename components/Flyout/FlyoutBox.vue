@@ -260,7 +260,7 @@ export default {
 	text-overflow: ellipsis;
 	padding-left: 1em;
 	font-size: 1em;
-	font-weight: 600;
+	font-weight: 400;
 }
 
 .close-button {

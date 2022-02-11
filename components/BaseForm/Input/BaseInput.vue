@@ -178,7 +178,6 @@ export default {
 
 <style scoped>
 .label {
-	font-weight: 400;
 	color: var(--color-text-primary);
 }
 
@@ -236,17 +235,17 @@ export default {
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 	color: var(--color-text-secondary);
 	opacity: 1; /* Firefox */
-	font-weight: 300;
+
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
 	color: var(--color-text-default);
-	font-weight: 300;
+
 }
 
 ::-ms-input-placeholder { /* Microsoft Edge */
 	color: var(--color-text-default);
-	font-weight: 300;
+
 }
 
 input::-moz-focus-inner {

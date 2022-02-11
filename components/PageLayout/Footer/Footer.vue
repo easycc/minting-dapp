@@ -169,7 +169,7 @@ export default {
   padding: 1.25em 0.75em;
 	padding-left: 0.75em;
   box-sizing: border-box;
-	font-weight: 500;
+	font-weight: 400;
   color: var(--color-text-primary);
 	font-size: inherit;
 }

@@ -102,7 +102,7 @@ export default {
 .label-text {
 	display: block;
 	font-size: 1rem;
-	font-weight: 500;
+	font-weight: 400;
 	line-height: 1.143;
 	margin-bottom: 0.429em;
 	letter-spacing: -0.005em;

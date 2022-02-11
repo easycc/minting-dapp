@@ -78,11 +78,8 @@ export default {
 	},
 
 	data () {
-		const MOBILE_SREEN_WIDTH = 576;
-
 		return {
-			countries,
-			MOBILE_SREEN_WIDTH
+			countries
 		};
 	},
 

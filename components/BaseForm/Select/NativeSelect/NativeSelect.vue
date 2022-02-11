@@ -92,7 +92,7 @@ export default {
 	color: var(--color-text-primary);
 	background-color: var(--color-background-primary);
 	padding: 0.75em 1.5em 0.75em 0.75em;
-	font-weight: 500;
+	font-weight: 400;
 	border-radius: 0.5em;
 	line-height: inherit;
 

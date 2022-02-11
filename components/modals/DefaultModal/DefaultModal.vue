@@ -3,24 +3,27 @@
 		<div key="modal" class="modal-background-wrapper">
 			<LockLayer :onClick="closeModal" class="lock-layer" />
 
-			<section ref="modalContentWrapper" class="content-wrapper" :class="{ 'full-screen-mobile': fullScreenMobile }">
-				<h3 v-if="title" class="modal-title">
-					{{ title }}
-				</h3>
 
-				<slot />
+			<Size :onResizeEnd="onResizeEnd">
+				<section ref="modalContentWrapper" class="content-wrapper" :class="{ 'full-screen-mobile': fullScreenMobile }">
+					<h3 v-if="title" class="modal-title">
+						{{ title }}
+					</h3>
 
-				<Fade>
-					<Button
-						v-if="hideCloseButton === false"
-						class="close-button"
-						iconName="cross"
-						title="Close window"
-						collapsed
-						@click="closeModal"
-					/>
-				</Fade>
-			</section>
+					<slot />
+
+					<Fade>
+						<Button
+							v-if="hideCloseButton === false"
+							class="close-button"
+							iconName="cross"
+							title="Close window"
+							collapsed
+							@click="closeModal"
+						/>
+					</Fade>
+				</section>
+			</Size>
 		</div>
 	</transition>
 </template>
@@ -29,12 +32,15 @@
 import { Button } from '~/components/buttons';
 import { Fade } from '~/components/animation';
 import { LockLayer } from '~/components/Layer';
+import { Size } from '~/components/EventListener';
+import noop from '~/utils/noop';
 
 export default {
 	components: {
 		Button,
 		LockLayer,
-		Fade
+		Fade,
+		Size
 	},
 
 	props: {
@@ -46,6 +52,11 @@ export default {
 		title: {
 			type: String,
 			default: null
+		},
+
+		onResizeEnd: {
+			type: Function,
+			default: noop
 		},
 
 		fullScreenMobile: {
@@ -129,13 +140,12 @@ export default {
 
 
 .modal-title {
-  font-size: 1em;
+  font-size: 1.25em;
   position: absolute;
   z-index: 10;
-  font-weight: 600;
   line-height: 1.2;
   left: calc(0.5em + 1vw);
-  top: 1em;
+  top: 0.5em;
   text-transform: uppercase;
   color: var(--color-text-secondary);
   letter-spacing: -0.005em;

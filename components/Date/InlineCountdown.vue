@@ -40,7 +40,7 @@ export default {
 
 		const EVENT_HAS_STARTED = currentDate > eventDate;
 
-		if (EVENT_HAS_STARTED) {	
+		if (EVENT_HAS_STARTED) {
 			this.$emit('finish');
 			this.hours = 0;
 			this.minutes = 0;
@@ -69,7 +69,7 @@ export default {
 <style scoped>
 .time-part-item {
 	display: inline;
-	font-weight: 500;
+	font-weight: 400;
 	color: var(--color-text-primary);
 }
 

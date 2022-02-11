@@ -27,7 +27,6 @@ export default {
 	border-radius: 0.5em;
 	text-align: center;
 	font-size: 1rem;
-	font-weight: 500;
 	background-color: var(--color-background-default);
 	color: var(--color-text-primary);
 	margin-bottom: 1em;
