@@ -17,6 +17,13 @@
 				Download
 			</Button>
 
+			<template v-if="image">
+				{{ image }}
+				{{ image.src }}
+				{{ image.width }}
+				{{ image.height }}
+			</template>
+
 			<ClientOnly
 				v-if="image"
 			>
