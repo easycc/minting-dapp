@@ -214,6 +214,7 @@ export default {
 						// this extracts exifdata if available. Returns an empty object if not
 						EXIF.getData(img, function () {
 							that.exifData = this.exifdata;
+							that.$emit('raw-input', img)
 						});
 
 						that.scaleImage(img, that.exifData.Orientation);
