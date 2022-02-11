@@ -494,7 +494,7 @@ export default {
 		0px 4px 0px #639BFF;
 }
 
-.layer-pick-button-active:hover {
+.layer-pick-button-active:hover, .layer-pick-button-active:focus:hover {
 	box-shadow:
 		4px 0px 0px #639BFF,
 		-4px 0px 0px #639BFF,
