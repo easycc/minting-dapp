@@ -184,6 +184,7 @@ export default {
 
 			getOrientedImage(file, (error, canvas) => {
 				if (error) {
+					alert(error);
 					throw error;
 				}
 				else {
@@ -192,7 +193,7 @@ export default {
 
 					image.src = dataUrl;
 
-					this.$emit('output', image)
+					this.$emit('output', image);
 				}
 			});
 		}
