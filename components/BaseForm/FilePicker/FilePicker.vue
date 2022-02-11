@@ -541,7 +541,7 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
-  font-size: 1000px;
+  font-size: 4rem;
   padding: 0;
   opacity: 0;
   margin: 0;
