@@ -109,6 +109,17 @@
 					</template>
 				</Swiper>
 			</div>
+
+
+			<FilePicker
+				v-if="status !== STATUS.CHOOSE_PHOTO"
+				name="avatarImagePicker"
+				title="Change a photo"
+				class="change-photo-filepicker"
+				output="base64"
+				accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg"
+				@load="setImage"
+			/>
 		</BaseForm>
 	</DefaultModal>
 </template>
@@ -174,6 +185,7 @@ export default {
 
 				breakpoints: {
 					560: {
+						spaceBetween: 4,
 						allowTouchMove: false
 					}
 				},
@@ -319,6 +331,8 @@ export default {
 
 			const selectedNode = stage.findOne(`.${selectedShapeName}`);
 
+			console.log(selectedShapeName);
+			console.log(selectedNode);
 
 			if (selectedNode === transformerNode.node()) {
 				return;
@@ -366,6 +380,10 @@ export default {
 	margin-bottom: 2rem;
 }
 
+.change-photo-filepicker {
+	margin-top: 3rem;
+}
+
 .stage {
 	margin-bottom: 1em;
 }
@@ -410,18 +428,40 @@ export default {
 }
 
 .layer-pick-button:hover {
-	box-shadow: 0 0 0 4px var(--color-background-primary);
+	box-shadow:
+		4px 0px 0px var(--color-background-primary),
+		-4px 0px 0px var(--color-background-primary),
+		0px -4px 0px var(--color-background-primary),
+		0px 4px 0px var(--color-background-primary);
 }
 
 .layer-pick-button-active {
-	box-shadow: 0 0 0 4px #639BFF;
+	box-shadow:
+		4px 0px 0px #639BFF,
+		-4px 0px 0px #639BFF,
+		0px -4px 0px #639BFF,
+		0px 4px 0px #639BFF;
 }
 
 .layer-pick-button-active:hover {
-	box-shadow: 0 0 0 4px #639BFF !important;
+	box-shadow:
+		4px 0px 0px #639BFF,
+		-4px 0px 0px #639BFF,
+		0px -4px 0px #639BFF,
+		0px 4px 0px #639BFF;
 }
 
 .download-button {
 	margin-bottom: 2rem;
+}
+
+
+@media screen and (max-width: 576px) {
+	.slide-button-prev {
+		left: 0.5em;
+	}
+	.slide-button-next {
+		right: 0.5em;
+	}
 }
 </style>

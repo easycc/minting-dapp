@@ -76,7 +76,6 @@ export const actions = {
 				return null;
 			})
 			.catch(error => {
-				console.log(error);
 				this.$notify({
 					group: 'all',
 					type: 'warning',
