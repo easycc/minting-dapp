@@ -136,8 +136,6 @@ import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper';
 
 import 'swiper/css/swiper.css';
 
-// import Konva from 'konva';
-
 import layers from './layers';
 import { downloadURI } from './utils';
 
@@ -226,7 +224,7 @@ export default {
 			let { windowHeight, windowWidth } = this;
 
 			let maxWidth = windowWidth;
-			let maxHeight = windowHeight * 0.7;
+			let maxHeight = windowHeight * 0.6;
 			let ratio = 0;
 
 			if (width > maxWidth) {
@@ -463,10 +461,10 @@ export default {
 	position: absolute;
 	width: 2em;
 	height: 2em;
+	top: 1em;
 	left: 50%;
 	transform: translate(-50%, 0);
 	z-index: 1;
-	bottom: 1em;
 }
 
 .stage {
