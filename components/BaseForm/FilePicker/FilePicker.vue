@@ -187,7 +187,7 @@ export default {
 			img.src = url;
 
 
-			img.onload = function () {
+			img.onload = () => {
 				this.$emit('output', img);
 			};
 		}

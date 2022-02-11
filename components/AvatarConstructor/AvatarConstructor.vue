@@ -38,17 +38,23 @@
 						@mousedown="handleStageMouseDown"
 						@touchstart="handleStageMouseDown"
 					>
-						<v-layer>
+						<v-layer
+							v-if="image"
+							ref="layer"
+						>
 							<v-image
 								:config="{
-									image: image,
+									x: 0,
+									y: 0,
 									width: stageSize.width,
 									height: stageSize.height,
+									image,
+									draggable: false,
 									rotation: 0
 								}"
 							/>
 						</v-layer>
-						<v-layer ref="layer">
+						<v-layer>
 							<template v-if="pickedLayersExist">
 								<v-image
 									v-for="pickedLayer in pickedLayers"
@@ -127,7 +133,10 @@
 
 <script>
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper';
+
 import 'swiper/css/swiper.css';
+
+// import Konva from 'konva';
 
 import layers from './layers';
 import { downloadURI } from './utils';
@@ -172,7 +181,7 @@ export default {
 			STATUS,
 			status: STATUS.CHOOSE_PHOTO,
 
-			image: null,
+			image: undefined,
 			layers,
 			pickedLayers: [],
 			selectedShapeName: '',
@@ -313,7 +322,9 @@ export default {
 		},
 
 		setImage (image) {
-			this.$set(this, 'image', image);
+			this.image = image;
+
+
 			this.status = this.STATUS.CHOOSE_LAYER;
 		},
 
