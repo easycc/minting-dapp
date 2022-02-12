@@ -55,7 +55,8 @@ export default {
 	loading: { color: '#007AFE' },
 
 	plugins: [
-		{ src: '~plugins/theme-context' },
+		{ src: '~/plugins/gtag' },
+		{ src: '~/plugins/theme-context' },
 		{ src: '~/plugins/konva', mode: 'client' },
 		{ ssr: false, src: '~/plugins/notifications' }
 	],
@@ -77,7 +78,6 @@ export default {
 
 	modules: [
 		'@nuxtjs/axios',
-		'@nuxtjs/google-analytics',
 		['vue-scrollto/nuxt', { duration: 0 }]
 	],
 
@@ -91,10 +91,6 @@ export default {
 		baseURL: 'https://mylife.tech',
 		proxyHeaders: true,
 		credentials: true
-	},
-
-	googleAnalytics: {
-		// id: 'UA-193008827-1'
 	},
 
 	googleOptimize: {
