@@ -285,7 +285,7 @@ export default {
 		},
 
 		pickLayer (path) {
-			let { pickedLayersExist } = this;
+			let { pickedLayersExist, stageSize } = this;
 			let layerExist = Boolean(this.pickedLayers.find(layer => layer.name === path));
 
 			if (layerExist) {
@@ -307,15 +307,23 @@ export default {
 					this.status = this.STATUS.DRAG_LAYER;
 				}
 
+				const layerWidth = 120;
+				const layerHeight = 120;
+				const half = 2;
+				const layerHalfWidth = layerWidth / half;
+				const stageHalfWidth = stageSize.width / half;
+
+				const stageCenter = stageHalfWidth - layerHalfWidth;
+
 				let pickedLayer = {
 					image,
 					name: path,
-					x: 100,
-					y: 100,
+					x: stageCenter,
+					y: 60,
 					scaleX: 1,
 					scaleY: 1,
-					width: 120,
-					height: 120,
+					width: layerWidth,
+					height: layerHeight,
 					draggable: true
 				};
 
@@ -406,7 +414,7 @@ export default {
 			let stage = this.$refs.stage.getNode();
 			let dataURL = stage.toDataURL({ pixelRatio: 2 });
 
-			downloadURI(dataURL, 'stage.png');
+			downloadURI(dataURL, 'circus-performer.png');
 		}
 	}
 };
