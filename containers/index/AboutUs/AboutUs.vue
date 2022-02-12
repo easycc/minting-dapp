@@ -150,4 +150,11 @@ p {
 		margin-bottom: 0;
 	}
 }
+
+
+@media screen and (max-width: 900px) {
+	.text-wrapper {
+		max-width: 100%;
+	}
+}
 </style>

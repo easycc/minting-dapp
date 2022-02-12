@@ -1,7 +1,7 @@
 export default {
-	ssr: true,
+	'ssr': true,
 
-	env: {
+	'env': {
 		FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
 		FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
 		FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
@@ -11,7 +11,7 @@ export default {
 		MAINTENANCE_MODE: process.env.MAINTENANCE_MODE
 	},
 
-	head: {
+	'head': {
 		title: 'Minting dapp',
 		meta: [
 			{ charset: 'utf-8' },
@@ -46,59 +46,63 @@ export default {
 		]
 	},
 
-	css: [
+	'css': [
 		'~/styles/variables.css',
 		'normalize.css/normalize.css',
 		'~/styles/typography.css'
 	],
 
-	loading: { color: '#007AFE' },
+	'loading': { color: '#007AFE' },
 
-	plugins: [
-		{ src: '~/plugins/gtag' },
+	'plugins': [
 		{ src: '~/plugins/theme-context' },
 		{ src: '~/plugins/konva', mode: 'client' },
 		{ ssr: false, src: '~/plugins/notifications' }
 	],
 
-	buildModules: [
+	'buildModules': [
 		'@nuxtjs/dotenv',
 		'@nuxtjs/moment',
 		'@nuxtjs/markdownit'
 	],
-	markdownit: {
+	'markdownit': {
 		typographer: true,
 		linkify: true
 	},
 
-	moment: {
+	'moment': {
 		defaultLocale: 'en',
 		locales: []
 	},
 
-	modules: [
+	'modules': [
 		'@nuxtjs/axios',
-		['vue-scrollto/nuxt', { duration: 0 }]
+		['vue-scrollto/nuxt', { duration: 0 }],
+		'@nuxtjs/google-gtag'
 	],
 
-	render: {
+	'google-gtag': {
+		id: 'G-CKB51MMP1N'
+	},
+
+	'render': {
 		bundleRenderer: {
 			runInNewContext: false
 		}
 	},
 
-	axios: {
+	'axios': {
 		baseURL: 'https://mylife.tech',
 		proxyHeaders: true,
 		credentials: true
 	},
 
-	googleOptimize: {
+	'googleOptimize': {
 		experimentsDir: '~/experiments',
 		excludeBots: true
 	},
 
-	build: {
+	'build': {
 		extractCSS: process.env.NODE_ENV === 'production',
 		transpile: ['vee-validate'],
 		extend (config) {
@@ -126,5 +130,5 @@ export default {
 			});
 		}
 	},
-	layoutTransition: 'layout'
+	'layoutTransition': 'layout'
 };
