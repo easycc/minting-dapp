@@ -197,7 +197,6 @@ export default {
 
 .button:focus:hover {
 	outline: none;
-	box-shadow: none;
 }
 
 .button-content {

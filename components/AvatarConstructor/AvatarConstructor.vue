@@ -107,11 +107,15 @@
 					</SwiperSlide>
 
 					<template v-slot:button-prev>
-						<ButtonPrev class="slide-button-prev" />
+						<label class="slide-button-label">
+							<ButtonPrev class="slide-button-prev" />
+						</label>
 					</template>
 
 					<template v-slot:button-next>
-						<ButtonNext class="slide-button-next" />
+						<label class="slide-button-label">
+							<ButtonNext class="slide-button-next" />
+						</label>
 					</template>
 				</Swiper>
 			</div>
@@ -120,7 +124,7 @@
 			<FilePicker
 				v-if="status !== STATUS.CHOOSE_PHOTO"
 				name="avatarImagePicker"
-				title="Change a photo"
+				title="Change the photo"
 				class="change-photo-filepicker"
 
 				accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .svg, .heic"
@@ -480,7 +484,7 @@ export default {
 .slider-wrapper {
 	position: relative;
 	background-color: var(--color-background-default);
-	padding-bottom: 2rem;
+	padding-bottom: 1rem;
 }
 
 @media screen and (max-width: 576px) {
