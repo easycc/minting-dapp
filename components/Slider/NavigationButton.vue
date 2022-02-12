@@ -26,10 +26,16 @@ export default {
 	z-index: 3;
 	top: 50%;
 	transform: translate(0, -50%);
-	width: 1.75em;
-	height: 4em;
+	width: 2.5em;
+	height: 3.5em;
 }
 
+
+@media screen and (max-width: 576px) {
+	.slide-button {
+		height: 4em;
+	}
+}
 
 .slide-button:hover {
 	background-color: var(--color-background-secondary);

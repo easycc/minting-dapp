@@ -7,7 +7,7 @@
 	>
 		<Input
 			v-model.trim="editableSearchValue"
-			:placeholder="placeholder ? placeholder : $t('components.form.selectWithSearch.fallbackTitle')"
+			:placeholder="placeholder ? placeholder : 'Search'"
 			name="selectWithSerachInput"
 			class="search-input"
 			:maxLength="100"

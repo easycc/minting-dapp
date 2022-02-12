@@ -3,7 +3,7 @@
 		<DefaultModal
 			v-if="showLanguageModal"
 			class="language-modal"
-			:title="$t('components.toggleLanguageModal.title')"
+			title="Choose language"
 			@close="onClose"
 		>
 			<FadeUp tag="ul" class="locales-list" group>

@@ -25,5 +25,6 @@ export default {
 	--color-background-default: #222;
 	--color-background-primary: #444;
 	--color-background-secondary: #323232;
+	--color-background-complimentary: #252525;
 }
 </style>

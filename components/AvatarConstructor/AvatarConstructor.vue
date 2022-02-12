@@ -100,6 +100,8 @@
 						<Button
 							class="layer-pick-button"
 							:class="{ 'layer-pick-button-active': pickedLayers.some(pickedLayer => pickedLayer.name === layer) }"
+							:disabled="!image"
+							:aria-hidden="!image"
 							@click="pickLayer(layer)"
 						>
 							<img :src="layer" :alt="`${layer} layer`" class="layer-image" />
@@ -107,15 +109,11 @@
 					</SwiperSlide>
 
 					<template v-slot:button-prev>
-						<label class="slide-button-label">
-							<ButtonPrev class="slide-button-prev" />
-						</label>
+						<ButtonPrev class="slide-button-prev" />
 					</template>
 
 					<template v-slot:button-next>
-						<label class="slide-button-label">
-							<ButtonNext class="slide-button-next" />
-						</label>
+						<ButtonNext class="slide-button-next" />
 					</template>
 				</Swiper>
 			</div>
@@ -576,9 +574,11 @@ export default {
 @media screen and (max-width: 576px) {
 	.slide-button-prev {
 		left: 0.5em;
+		width: 1.75em;
 	}
 	.slide-button-next {
 		right: 0.5em;
+		width: 1.75em;
 	}
 }
 </style>

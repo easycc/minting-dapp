@@ -169,7 +169,7 @@ export default {
 				return title;
 			}
 
-			return this.$t('components.form.select.fallbackTitle');
+			return 'Search';
 		}
 	},
 

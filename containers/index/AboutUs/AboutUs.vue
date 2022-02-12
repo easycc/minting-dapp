@@ -67,9 +67,7 @@ export default {
 
 <style scoped>
 .about-us-section {
-	padding-top: 4rem;
-	padding-bottom: 4rem;
-	background-color: var(--color-background-default);
+	background-color: #252525;
 }
 
 .title {
@@ -128,7 +126,6 @@ p {
 }
 
 
-
 @media screen and (max-width: 900px) {
 	.content {
 		display: flex;
@@ -157,4 +154,5 @@ p {
 		max-width: 100%;
 	}
 }
+
 </style>

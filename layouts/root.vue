@@ -4,10 +4,16 @@
 		<Maintenance>
 			<nuxt />
 		</Maintenance>
+
+		<ClientOnly>
+			<PortalTarget multiple name="flyout" />
+		</ClientOnly>
 	</div>
 </template>
 
 <script>
+import { PortalTarget } from 'portal-vue';
+
 import { Maintenance } from '~/components/router';
 import { Notifications } from '~/components/PageLayout';
 import LocaleStorage from '~/services/locale-storage';
@@ -15,6 +21,7 @@ import LocaleStorage from '~/services/locale-storage';
 export default {
 	components: {
 		Maintenance,
+		PortalTarget,
 		Notifications
 	},
 

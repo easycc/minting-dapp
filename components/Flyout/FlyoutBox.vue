@@ -2,12 +2,13 @@
 	<Size :onResizeEnd="!mobileViewport ? handleResize : noop">
 		<div class="flyout-box" ref="flyoutBox" :role="role">
 			<div class="flyout-content">
-				<div class="flyout-header" v-if="mobileViewport">
-					<h3 class="title" v-if="title">{{title}}</h3>
+				<div class="flyout-header">
 					<Button
 						class="close-button"
 						@click="onHide"
-						:title="$t('components.flyoutBox.closeButton.title')"
+						title="Close"
+						iconName="cross"
+						collapsed
 					/>
 				</div>
 
@@ -216,21 +217,22 @@ export default {
 
 @media screen and (max-width: 576px) {
 	.flyout-box {
-		max-height: 100vh;
-		height: 100%;
+		max-height: auto;
+		/* height: 100%; */
 		top: 0;
 		width: 100% !important;
 		position: fixed;
 		left: 50%;
 		transform: translate(-50%, 0);
+		padding: 1em;
 	}
 }
 
 .flyout-content {
 	position: relative;
-	box-shadow: var(--volumetric-shadow), rgb(15, 15, 15, 0.2) 0px 9px 24px;
-	border-radius: 0.5em;
 	background-color: var(--color-background-secondary);
+
+	box-shadow: var(--pixel-shadow), 4px 0px 0 200vw rgba(17, 17, 17, 0.5);
 	height: 100%;
 	flex-grow: 1;
 	display: flex;
@@ -247,8 +249,8 @@ export default {
 	border-top-left-radius: inherit;
 	top: 0;
 	left: 0;
+	padding: 0.5em;
 	background-color: var(--color-background-secondary);
-	border-bottom: 1px solid var(--color-background-primary);
 }
 
 .title {
@@ -264,11 +266,7 @@ export default {
 }
 
 .close-button {
-	padding: 0.666em 0.875em;
-	background-color: transparent;
-	box-shadow: none;
 	margin-left: auto;
-	color: var(--color-compliment-secondary);
 }
 
 .close-button:hover {
@@ -285,6 +283,7 @@ export default {
 }
 
 .flyout-header ~ .flyout-main {
-	padding-top: 1.25em;
+	padding-top: 0em;
+	padding-bottom: 1em;
 }
 </style>

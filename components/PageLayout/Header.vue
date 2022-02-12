@@ -161,7 +161,7 @@ export default {
 		left: 0;
 		top: var(--header-height);
 		background-color: var(--color-background-default);
-		padding: 1em var(--page-content-padding) 2em;
+		padding: 1em var(--page-horizontal-padding) 2em;
 		backdrop-filter: saturate(180%) blur(20px);
 		transition: height 0.5s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease;
 	}

@@ -4,7 +4,9 @@
 			<!-- <Header /> -->
 		</template>
 
+		<GetAnimalsBack />
 		<AboutUs />
+		<Road />
 
 		<template v-slot:footer>
 			<!-- <Footer /> -->
@@ -14,14 +16,16 @@
 
 <script>
 import { Page, Header, Footer } from '~/components/PageLayout';
-import { AboutUs } from '~/containers/index';
+import { AboutUs, Road, GetAnimalsBack } from '~/containers/index';
 
 export default {
-	layout: 'light-theme',
+	layout: 'dark-theme',
 
 	components: {
 		Page,
 		AboutUs,
+		Road,
+		GetAnimalsBack,
 		Header,
 		Footer
 	}
