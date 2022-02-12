@@ -1,5 +1,5 @@
 <template>
-	<Size :onResizeEnd="!mobileViewport ? handleResize : noop">
+	<Size :onResizeEnd="handleResize">
 		<div class="flyout-box" ref="flyoutBox" :role="role">
 			<div class="flyout-content">
 				<div class="flyout-header">
@@ -104,7 +104,7 @@ export default {
 		},
 
 		updatePlacement() {
-			if (this.mobileViewport) return;
+			// if (this.mobileViewport) return;
 
 			const flyoutElement = this.flyoutBox;
 			const arrowElement = this.arrowElement;
@@ -215,18 +215,7 @@ export default {
 	flex-direction: column;
 }
 
-@media screen and (max-width: 576px) {
-	.flyout-box {
-		max-height: auto;
-		/* height: 100%; */
-		top: 0;
-		width: 100% !important;
-		position: fixed;
-		left: 50%;
-		transform: translate(-50%, 0);
-		padding: 1em;
-	}
-}
+
 
 .flyout-content {
 	position: relative;
