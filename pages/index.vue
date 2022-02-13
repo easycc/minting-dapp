@@ -1,5 +1,5 @@
 <template>
-	<Page>
+	<Page class="page">
 		<template v-slot:header>
 			<!-- <Header /> -->
 		</template>

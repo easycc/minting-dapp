@@ -1,23 +1,25 @@
 <template>
-	<section class="road-section">
-		<PageContent class="content">
-			<img
-				src="./images/hyppo.png"
-				class="hyppo"
-				alt="Hyppo in the yellow car on the road"
-				width="615"
-				height="555"
-			/>
+	<div class="road-section-wrapper">
+		<section class="road-section">
+			<PageContent class="content">
+				<img
+					src="./images/hyppo.png"
+					class="hyppo"
+					alt="Hyppo in the yellow car on the road"
+					width="615"
+					height="555"
+				/>
 
-			<img
-				src="./images/crocodile.png"
-				class="crocodile"
-				alt="Hyppo in the yellow car on the road"
-				width="690"
-				height="465"
-			/>
-		</PageContent>
-	</section>
+				<img
+					src="./images/crocodile.png"
+					class="crocodile"
+					alt="Hyppo in the yellow car on the road"
+					width="690"
+					height="465"
+				/>
+			</PageContent>
+		</section>
+	</div>
 </template>
 
 <script>
@@ -31,9 +33,15 @@ export default {
 </script>
 
 <style scoped>
+.road-section-wrapper {
+	padding-top: 80px;
+	overflow: hidden;
+	background-color: #252525;
+}
+
 .road-section {
 	background-color: #76757D;
-	height: 160px;
+	height: 240px;
 	position: relative;
 
 	background-image: url('./images/road-markings.svg');
@@ -45,14 +53,29 @@ export default {
 	border-bottom: calc(var(--pixel-size) * 2) solid #575471;
 }
 
+.content {
+	padding: 0;
+}
+
 .hyppo {
 	width: 205px;
 	height: 185px;
 
 	position: absolute;
-	bottom: 2em;
 
-	left: 10vw;
+	right: 0;
+	animation: move 10s cubic-bezier(0.1, -0.6, 0.2, 0) infinite;
+	animation-delay: 0s;
+	top: -4em;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(calc(-1 * 100vw - 100%));
+  }
 }
 
 .crocodile {
@@ -63,15 +86,10 @@ export default {
 	right: 10vw;
 
 	bottom: 1.5em;
+	animation-duration: 6s;
 }
 
 @media screen and (max-width: 576px) {
-	.hyppo {
-		top: -2em;
-		bottom: initial;
-		transform: none;
-	}
-
 	.road-section {
 		height: 400px;
 	}
