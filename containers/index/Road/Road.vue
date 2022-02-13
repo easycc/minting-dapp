@@ -34,7 +34,7 @@ export default {
 
 <style scoped>
 .road-section-wrapper {
-	padding-top: 80px;
+	padding-top: 100px;
 	overflow: hidden;
 	background-color: #252525;
 }
@@ -66,7 +66,7 @@ export default {
 	right: 0;
 	animation: move 10s cubic-bezier(0.1, -0.6, 0.2, 0) infinite;
 	animation-delay: 0s;
-	top: -4em;
+	top: -5em;
 }
 
 @keyframes move {

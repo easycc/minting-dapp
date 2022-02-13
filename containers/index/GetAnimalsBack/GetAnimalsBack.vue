@@ -20,8 +20,8 @@
 								:src="slide.src"
 								:alt="slide.alt"
 								class="image"
-								width="500"
-								height="500"
+								width="200"
+								height="auto"
 							/>
 						</SwiperSlide>
 
@@ -50,7 +50,7 @@
 					</template>
 
 					<p class="vote-title">
-						To be honest, we don't know the answer ourselves.
+						The elephant will be very upset with your vote =(
 					</p>
 				</Tooltip>
 
@@ -65,7 +65,7 @@
 
 
 					<p class="vote-title">
-						The elephant will be very upset with your vote =(
+						To be honest, we don't know the answer ourselves.
 					</p>
 				</Tooltip>
 			</PageContent>
@@ -134,6 +134,7 @@ export default {
 				direction: 'horizontal',
 				speed: 800,
 				allowTouchMove: true,
+				loop: true,
 
 				breakpoints: {
 					560: {
