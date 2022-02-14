@@ -12,11 +12,11 @@ export default {
 	},
 
 	'head': {
-		title: 'Minting dapp',
+		title: 'Circus Escape',
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5 shrink-to-fit=no' },
-			{ hid: 'description', name: 'description', content: 'Minting dapp.' },
+			{ hid: 'description', name: 'description', content: 'Circus Escape.' },
 
 			{ name: 'msapplication-TileColor', content: '#ffffff' },
 			{ name: 'msapplication-TileImage', content: './favicon/ms-icon-144x144.png' },
