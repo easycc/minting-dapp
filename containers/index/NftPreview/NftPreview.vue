@@ -160,36 +160,37 @@ export default {
 
 .boxes-list-in-roll {
 	animation-name: roll;
+	animation-timing-function: linear;
 }
 
 @keyframes roll {
 	0% {
 		transform: translateX(-50%);
-		animation-timing-function: cubic-bezier(.54,.15,.59,.55);
+		/* animation-timing-function: cubic-bezier(.54,.15,.59,.55); */
 	}
 	25% {
 		transform: translateX(-80%);
-		animation-timing-function: linear;
+		/* animation-timing-function: linear; */
 	}
 	25.01% {
 		transform: translateX(-20%);
-		animation-timing-function: linear;
+		/* animation-timing-function: linear; */
 	}
 	50% {
 		transform: translateX(-50%);
-		animation-timing-function: linear;
+		/* animation-timing-function: linear; */
 	}
 	75% {
 		transform: translateX(-80%);
-		animation-timing-function: linear;
+		/* animation-timing-function: linear; */
 	}
 	75.01% {
 		transform: translateX(-20%);
-		animation-timing-function: cubic-bezier(.41,.55,.56,.99);
+		/* animation-timing-function: cubic-bezier(.41,.55,.56,.99); */
 	}
 	100% {
 		transform: translateX(-50%);
-		animation-timing-function: cubic-bezier(.41,.55,.56,.99);
+		/* animation-timing-function: cubic-bezier(.41,.55,.56,.99); */
 	}
 }
 
