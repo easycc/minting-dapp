@@ -13,19 +13,19 @@ export default [
 	},
 	{
 		src: require('./4.png'),
-		color: '#E69C6D'
+		color: '#FB6400'
 	},
 	{
 		src: require('./5.png'),
-		color: '#ECCD94'
+		color: '#FFEC3B'
 	},
 	{
 		src: require('./6.png'),
-		color: '#111'
+		color: '#151515'
 	},
 	{
 		src: require('./7.png'),
-		color: '#A85954'
+		color: '#900800'
 	},
 	{
 		src: require('./8.png'),

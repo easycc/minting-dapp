@@ -14,7 +14,7 @@
 						:class="{ 'boxes-list-in-roll': rollStarted }"
 						:style="{
 							width: `calc((var(--box-size) + var(--box-margin) * 2) * ${totalBoxesAmount})`,
-							animationDuration: `${ROLL_DURATION_IN_SECONDS}s`
+							animationDuration: `${ROLL_DURATION_IN_SECONDS}ms`
 						}"
 					>
 						<li
@@ -33,7 +33,7 @@
 							>
 								<img
 									v-if="index === startElementIndex"
-									:src="nfts[index].src"
+									:src="nfts[rollsCounter].src"
 									width="160"
 									height="auto"
 									alt="NFT"
@@ -111,10 +111,10 @@ export default {
 
 	data () {
 		return {
-			ROLL_DURATION_IN_SECONDS: 3,
+			ROLL_DURATION_IN_SECONDS: 3000,
 			START_ELEMENT_OFFSET: 3,
 
-			rollCounter: 0,
+			rollsCounter: 0,
 
 			nfts: shuffle(nfts),
 
@@ -144,9 +144,9 @@ export default {
 
 		buttonTitle () {
 			let buttonTitle;
-			let { rollCounter } = this;
+			let { rollsCounter } = this;
 
-			switch (rollCounter) {
+			switch (rollsCounter) {
 				case 0:
 					buttonTitle = 'Let’s roll it!';
 					break;
@@ -169,23 +169,27 @@ export default {
 
 	methods: {
 		roll () {
-			let { rollCounter, totalBoxesAmount } = this;
+			let { rollsCounter, totalBoxesAmount, ROLL_DURATION_IN_SECONDS } = this;
 
 			this.openBox = false;
 			this.rollStarted = true;
-			const MILISECONDS_IN_SECOND = 1000;
+
+			const HALF = 2;
+			let halfDuration = this.ROLL_DURATION_IN_SECONDS / HALF;
 
 			setTimeout(() => {
-				if (rollCounter + 1 === totalBoxesAmount) {
-					this.rollCounter = 0;
+				if (rollsCounter + 1 === totalBoxesAmount) {
+					this.rollsCounter = 0;
 				}
 				else {
-					this.rollCounter++;
+					this.rollsCounter++;
 				}
+			}, halfDuration);
 
+			setTimeout(() => {
 				this.rollStarted = false;
 				this.openBox = true;
-			}, this.ROLL_DURATION_IN_SECONDS * MILISECONDS_IN_SECOND);
+			}, ROLL_DURATION_IN_SECONDS);
 		},
 
 		randomShadowColor () {
@@ -193,13 +197,17 @@ export default {
 		},
 
 		boxParams (index) {
-			let { START_ELEMENT_OFFSET, startElementIndex, endElementIndex } = this;
+			let { START_ELEMENT_OFFSET, startElementIndex, endElementIndex, rollsCounter } = this;
 			let src;
 			let shadow;
 
 			let offsetBetweenStartAndEnd = endElementIndex - startElementIndex;
 
-			if (index < startElementIndex + START_ELEMENT_OFFSET) {
+			if (index === startElementIndex || index === endElementIndex) {
+				shadow = nfts[rollsCounter].color;
+			}
+
+			else if (index < startElementIndex + START_ELEMENT_OFFSET) {
 				shadow = nfts[index].color;
 			}
 
@@ -405,7 +413,7 @@ export default {
 .box-image-wrapper-open:after {
 	height: 0;
 	padding: 0;
-	border-bottom: 0;
+	border: 0;
 }
 
 .roll-button {
