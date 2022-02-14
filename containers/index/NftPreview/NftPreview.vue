@@ -29,10 +29,10 @@
 						>
 							<div
 								class="nft-image-wrapper"
-								:style="`--shadow-color: ${getShadow(index)}`"
+								:style="`--shadow-color: ${boxParams(index).shadow}`"
 							>
 								<img
-									v-if="index === middleBoxIndex"
+									v-if="index === startElementIndex"
 									:src="nfts[index].src"
 									width="160"
 									height="auto"
@@ -44,7 +44,7 @@
 							<div
 								class="box-image-wrapper"
 								:class="{
-									'box-image-wrapper-open': openBox && index === middleBoxIndex
+									'box-image-wrapper-open': openBox && index === startElementIndex
 								}"
 							>
 								<img
@@ -98,7 +98,7 @@ import { Button } from '~/components/buttons';
 import { Icon } from '~/components/Icon';
 import { Tooltip } from '~/components/Flyout';
 import { PageContent } from '~/components/PageLayout';
-import { shuffle } from '~/utils/array';
+import { shuffle, randomElement } from '~/utils/array';
 
 export default {
 	components: {
@@ -112,6 +112,8 @@ export default {
 	data () {
 		return {
 			ROLL_DURATION_IN_SECONDS: 3,
+			START_ELEMENT_OFFSET: 3,
+
 			rollCounter: 0,
 
 			nfts: shuffle(nfts),
@@ -122,12 +124,22 @@ export default {
 	},
 
 	computed: {
-		middleBoxIndex () {
-			return 3;
+		middleViewportBoxIndex () {
+			const HALF = 2;
+
+			return Math.round(this.totalBoxesAmount / HALF) - 1;
 		},
 
 		totalBoxesAmount () {
 			return this.nfts.length;
+		},
+
+		startElementIndex () {
+			return this.START_ELEMENT_OFFSET;
+		},
+
+		endElementIndex () {
+			return this.totalBoxesAmount - this.START_ELEMENT_OFFSET - 1;
 		},
 
 		buttonTitle () {
@@ -156,16 +168,6 @@ export default {
 	},
 
 	methods: {
-		getShadow (index) {
-			let { middleBoxIndex, totalBoxesAmount } = this;
-
-			if (index >= middleBoxIndex) {
-				return nfts[totalBoxesAmount - 1 - index].color;
-			}
-
-			return nfts[index].color;
-		},
-
 		roll () {
 			let { rollCounter, totalBoxesAmount } = this;
 
@@ -186,8 +188,28 @@ export default {
 			}, this.ROLL_DURATION_IN_SECONDS * MILISECONDS_IN_SECOND);
 		},
 
+		randomShadowColor () {
+			return randomElement(this.nfts.map(nft => nft.color));
+		},
+
 		boxParams (index) {
-			let src = require('./images/hidden/default.png');
+			let { START_ELEMENT_OFFSET, startElementIndex, endElementIndex } = this;
+			let src;
+			let shadow;
+
+			let offsetBetweenStartAndEnd = endElementIndex - startElementIndex;
+
+			if (index < startElementIndex + START_ELEMENT_OFFSET) {
+				shadow = nfts[index].color;
+			}
+
+			else if (index >= endElementIndex - START_ELEMENT_OFFSET && index <= endElementIndex + START_ELEMENT_OFFSET) {
+				shadow = nfts[index - offsetBetweenStartAndEnd].color;
+			}
+
+			else {
+				shadow = this.randomShadowColor();
+			}
 
 			switch (index) {
 				case 4:
@@ -197,9 +219,12 @@ export default {
 				case 16:
 					src = require('./images/hidden/bitten-off.png');
 					break;
+
+				default:
+					src = require('./images/hidden/default.png');
 			}
 
-			return { src };
+			return { src, shadow };
 		}
 	}
 };
@@ -330,7 +355,7 @@ export default {
 	height: 50%;
 	background: transparent;
 	border-radius: 50%;
-	box-shadow: 0px 0px calc(var(--box-size) / 2) 30px var(--shadow-color);
+	box-shadow: 0px 0px calc(var(--box-size) / 2) calc(var(--box-size) / 4) var(--shadow-color);
 }
 
 .box-image {

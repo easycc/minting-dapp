@@ -15,3 +15,9 @@ export function shuffle (array) {
 
 	return array;
 }
+
+export function randomElement (array) {
+	let item = array[Math.floor(Math.random() * array.length)];
+
+	return item;
+}
