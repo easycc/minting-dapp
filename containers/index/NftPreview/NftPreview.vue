@@ -22,7 +22,6 @@
 							:key="box"
 							class="box-item"
 							:style="{ marginRight: `var(--box-margin)`, marginLeft: `var(--box-margin)` }"
-							:class="boxParams(index).class"
 						>
 							<img
 								:src="boxParams(index).src"
@@ -31,6 +30,27 @@
 								alt="Hidden image - unknown NFT"
 								class="box-image"
 							/>
+
+
+							<Tooltip v-if="index === 4 || index === 16" class="with-mouse">
+								<template v-slot:trigger>
+									<img src="./images/features/mouse.png" alt="Mouse" />
+								</template>
+
+								<p class="vote-title">
+									Squeak squeak
+								</p>
+							</Tooltip>
+
+							<Tooltip v-if="index === 3 || index === 15" class="with-scull">
+								<template v-slot:trigger>
+									<img src="./images/features/scull.png" alt="Scull" />
+								</template>
+
+								<p class="vote-title">
+									Arghhh
+								</p>
+							</Tooltip>
 						</li>
 					</ul>
 				</div>
@@ -52,20 +72,22 @@ import { setTimeout } from 'timers';
 import { DarkTheme } from '~/components/Themes';
 import { Button } from '~/components/buttons';
 import { Icon } from '~/components/Icon';
+import { Tooltip } from '~/components/Flyout';
 import { PageContent } from '~/components/PageLayout';
 
 export default {
 	components: {
 		DarkTheme,
 		PageContent,
+		Tooltip,
 		Button,
 		Icon
 	},
 
 	data () {
 		return {
-			BOXES_AMOUNT: 15,
-			ROLL_DURATION_IN_SECONDS: 5,
+			BOXES_AMOUNT: 19,
+			ROLL_DURATION_IN_SECONDS: 3,
 			rollCounter: 0,
 
 			inRoll: false
@@ -88,17 +110,16 @@ export default {
 			let className = '';
 
 			switch (index) {
-				case 7:
-					className = 'with-scull';
+				case 4:
+					src = require('./images/hidden/bitten-off.png');
 					break;
 
-				case 8:
+				case 16:
 					src = require('./images/hidden/bitten-off.png');
-					className = 'with-mouse';
 					break;
 			}
 
-			return { src, class: className };
+			return { src };
 		}
 	}
 };
@@ -154,43 +175,21 @@ export default {
 	position: absolute;
 	left: 50%;
 	top: 0;
-	transform: translateX(-50%);
+	transform: translateX(calc(-1 * (var(--box-margin) + var(--box-size) / 2) * 7));
 }
 
 
 .boxes-list-in-roll {
 	animation-name: roll;
-	animation-timing-function: linear;
+	animation-timing-function: easy-in-out;
 }
 
 @keyframes roll {
 	0% {
-		transform: translateX(-50%);
-		/* animation-timing-function: cubic-bezier(.54,.15,.59,.55); */
-	}
-	25% {
-		transform: translateX(-80%);
-		/* animation-timing-function: linear; */
-	}
-	25.01% {
-		transform: translateX(-20%);
-		/* animation-timing-function: linear; */
-	}
-	50% {
-		transform: translateX(-50%);
-		/* animation-timing-function: linear; */
-	}
-	75% {
-		transform: translateX(-80%);
-		/* animation-timing-function: linear; */
-	}
-	75.01% {
-		transform: translateX(-20%);
-		/* animation-timing-function: cubic-bezier(.41,.55,.56,.99); */
+		transform: translateX(calc(-1 * (var(--box-margin) + var(--box-size) / 2) * 7));
 	}
 	100% {
-		transform: translateX(-50%);
-		/* animation-timing-function: cubic-bezier(.41,.55,.56,.99); */
+		transform: translateX(calc(-100% - (-1 * (var(--box-margin) + var(--box-size) / 2) * 7)));
 	}
 }
 
@@ -201,33 +200,30 @@ export default {
 	margin: 0;
 	height: inherit;
 	position: relative;
+
+	background-repeat: no-repeat;
+	background-size: contain;
+
+	height: var(--box-size);
+	width: var(--box-size);
 }
 
-
-.box-item.with-mouse:before {
-	content: '';
+.with-mouse {
 	position: absolute;
+	z-index: 1;
 	left: calc(-1 * var(--box-size) / 4);
-	bottom: calc(-1 * var(--box-size) / 50);
+	bottom: calc(-1 * var(--box-size) / 25);
 	width: calc(var(--box-size) / 2.5);
 	height: calc(var(--box-size) / 2.5);
-	background-image: url('./images/features/rat.png');
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
 }
 
-.box-item.with-scull:before {
-	content: '';
+.with-scull {
 	position: absolute;
+	z-index: 1;
 	left: calc(-1 * var(--box-size) / 4);
-	bottom: calc(-1 * var(--box-size) / 50);
+	bottom: calc(-1 * var(--box-size) / 25);
 	width: calc(var(--box-size) / 3);
 	height: calc(var(--box-size) / 2.5);
-	background-image: url('./images/features/scull.png');
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
 }
 
 
@@ -239,4 +235,6 @@ export default {
 .roll-button {
 	background-color: #fb6400;
 }
+
+
 </style>
