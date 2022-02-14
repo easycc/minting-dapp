@@ -2,7 +2,7 @@
 	<Size :onResizeEnd="handleResize">
 		<div class="flyout-box" ref="flyoutBox" :role="role">
 			<div class="flyout-content">
-				<div class="flyout-header">
+				<div class="flyout-header" v-if="mobileViewport">
 					<Button
 						class="close-button"
 						@click="onHide"

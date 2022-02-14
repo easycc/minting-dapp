@@ -11,33 +11,57 @@
 				<div class="boxes-list-wrapper">
 					<ul
 						class="boxes-list"
-						:class="{ 'boxes-list-in-roll': inRoll }"
+						:class="{ 'boxes-list-in-roll': rollStarted }"
 						:style="{
-							width: `calc((var(--box-size) + var(--box-margin) * 2) * ${BOXES_AMOUNT})`,
+							width: `calc((var(--box-size) + var(--box-margin) * 2) * ${totalBoxesAmount})`,
 							animationDuration: `${ROLL_DURATION_IN_SECONDS}s`
 						}"
 					>
 						<li
-							v-for="(box, index) in BOXES_AMOUNT"
+							v-for="(box, index) in totalBoxesAmount"
 							:key="box"
 							class="box-item"
-							:style="{ marginRight: `var(--box-margin)`, marginLeft: `var(--box-margin)` }"
-						>
-							<img
-								:src="boxParams(index).src"
-								width="160"
-								height="auto"
-								alt="Hidden image - unknown NFT"
-								class="box-image"
-							/>
 
+							:style="{
+								marginRight: `var(--box-margin)`,
+								marginLeft: `var(--box-margin)`
+							}"
+						>
+							<div
+								class="nft-image-wrapper"
+								:style="`--shadow-color: ${getShadow(index)}`"
+							>
+								<img
+									v-if="index === middleBoxIndex"
+									:src="nfts[index].src"
+									width="160"
+									height="auto"
+									alt="NFT"
+									class="nft-image"
+								/>
+							</div>
+
+							<div
+								class="box-image-wrapper"
+								:class="{
+									'box-image-wrapper-open': openBox && index === middleBoxIndex
+								}"
+							>
+								<img
+									:src="boxParams(index).src"
+									width="160"
+									height="auto"
+									alt="Hidden image - unknown NFT"
+									class="box-image"
+								/>
+							</div>
 
 							<Tooltip v-if="index === 4 || index === 16" class="with-mouse">
 								<template v-slot:trigger>
 									<img src="./images/features/mouse.png" alt="Mouse" />
 								</template>
 
-								<p class="vote-title">
+								<p class="speach-balloon-title">
 									Squeak squeak
 								</p>
 							</Tooltip>
@@ -47,7 +71,7 @@
 									<img src="./images/features/scull.png" alt="Scull" />
 								</template>
 
-								<p class="vote-title">
+								<p class="speach-balloon-title">
 									Arghhh
 								</p>
 							</Tooltip>
@@ -57,8 +81,8 @@
 
 				<Button
 					class="roll-button"
-					title="Let's roll it!"
-					:disabled="inRoll"
+					:title="buttonTitle"
+					:disabled="rollStarted"
 					@click="roll"
 				/>
 			</PageContent>
@@ -67,13 +91,14 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers';
+import nfts from './images/nfts';
 
 import { DarkTheme } from '~/components/Themes';
 import { Button } from '~/components/buttons';
 import { Icon } from '~/components/Icon';
 import { Tooltip } from '~/components/Flyout';
 import { PageContent } from '~/components/PageLayout';
+import { shuffle } from '~/utils/array';
 
 export default {
 	components: {
@@ -86,28 +111,83 @@ export default {
 
 	data () {
 		return {
-			BOXES_AMOUNT: 19,
 			ROLL_DURATION_IN_SECONDS: 3,
 			rollCounter: 0,
 
-			inRoll: false
+			nfts: shuffle(nfts),
+
+			rollStarted: false,
+			openBox: false
 		};
 	},
 
+	computed: {
+		middleBoxIndex () {
+			return 3;
+		},
+
+		totalBoxesAmount () {
+			return this.nfts.length;
+		},
+
+		buttonTitle () {
+			let buttonTitle;
+			let { rollCounter } = this;
+
+			switch (rollCounter) {
+				case 0:
+					buttonTitle = 'Let’s roll it!';
+					break;
+
+				case 1:
+					buttonTitle = 'Roll it again!';
+					break;
+
+				case 2:
+					buttonTitle = 'Final roll!';
+					break;
+
+				default:
+					buttonTitle = 'Let’s roll it!';
+			}
+
+			return buttonTitle;
+		}
+	},
+
 	methods: {
+		getShadow (index) {
+			let { middleBoxIndex, totalBoxesAmount } = this;
+
+			if (index >= middleBoxIndex) {
+				return nfts[totalBoxesAmount - 1 - index].color;
+			}
+
+			return nfts[index].color;
+		},
+
 		roll () {
-			this.rollCounter++;
-			this.inRoll = true;
+			let { rollCounter, totalBoxesAmount } = this;
+
+			this.openBox = false;
+			this.rollStarted = true;
 			const MILISECONDS_IN_SECOND = 1000;
 
 			setTimeout(() => {
-				this.inRoll = false;
+				if (rollCounter + 1 === totalBoxesAmount) {
+					this.rollCounter = 0;
+				}
+				else {
+					this.rollCounter++;
+				}
+
+				this.rollStarted = false;
+				this.openBox = true;
 			}, this.ROLL_DURATION_IN_SECONDS * MILISECONDS_IN_SECOND);
 		},
 
 		boxParams (index) {
 			let src = require('./images/hidden/default.png');
-			let className = '';
 
 			switch (index) {
 				case 4:
@@ -129,6 +209,7 @@ export default {
 .about-us-section {
 	background-color: #252525;
 	text-align: center;
+	overflow: hidden;
 }
 
 .content {
@@ -154,7 +235,6 @@ export default {
 	--box-size: 15rem;
 
 
-	overflow: hidden;
 	margin-bottom: 2rem;
 	position: relative;
 	height: var(--box-size);
@@ -212,7 +292,7 @@ export default {
 	position: absolute;
 	z-index: 1;
 	left: calc(-1 * var(--box-size) / 4);
-	bottom: calc(-1 * var(--box-size) / 25);
+	bottom: calc(-1 * var(--box-size) / 14);
 	width: calc(var(--box-size) / 2.5);
 	height: calc(var(--box-size) / 2.5);
 }
@@ -220,21 +300,102 @@ export default {
 .with-scull {
 	position: absolute;
 	z-index: 1;
-	left: calc(-1 * var(--box-size) / 4);
-	bottom: calc(-1 * var(--box-size) / 25);
+	left: calc(-1 * var(--box-size) / 2.35);
+	bottom: calc(-1 * var(--box-size) / 14);
 	width: calc(var(--box-size) / 3);
 	height: calc(var(--box-size) / 2.5);
 }
 
-
-.box-image {
+.nft-image, .box-image {
 	width: var(--box-size);
 	height: inherit;
+}
+
+.nft-image {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+}
+
+.nft-image-wrapper:before {
+	content: '';
+	display: block;
+	z-index: -1;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 50%;
+	position: absolute;
+	width: 50%;
+	height: 50%;
+	background: transparent;
+	border-radius: 50%;
+	box-shadow: 0px 0px calc(var(--box-size) / 2) 30px var(--shadow-color);
+}
+
+.box-image {
+	z-index: 1;
+	position: relative;
+}
+
+
+.box-image-wrapper {
+	position: relative;
+	transform-style: preserve-3d;
+	transform: rotateX(0deg);
+	transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
+	transform-origin: 100% 100%;
+}
+
+.box-image-wrapper:after {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 1em;
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: #fff;
+	transform: rotateX(90deg);
+	transform-origin: 0% 0%;
+
+
+	background: #C78751;
+	border-left: calc(var(--box-size) / 30) solid #111111;
+	border-top: calc(var(--box-size) / 30) solid #111111;
+	border-right: calc(var(--box-size) / 30) solid #111111;
+
+	box-sizing: border-box;
+
+	transform: rotateX(90deg);
+}
+
+.box-image-wrapper-open {
+	transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
+	transform: rotateX(90deg);
+}
+
+.box-image-wrapper-open:after {
+	height: 0;
+	padding: 0;
+	border-bottom: 0;
 }
 
 .roll-button {
 	background-color: #fb6400;
 }
 
+.speach-balloon-title {
+	font-size: 1.25em;
+	max-width: 16rem;
+	padding: 1em;
+	margin: 0;
+	text-align: center;
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+}
 
 </style>
