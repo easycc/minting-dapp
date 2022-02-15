@@ -84,7 +84,15 @@ export default {
 		background-color: #8EC6F4;
 		background-image: url('./images/clouds.svg');
   }
+  25% {
+		background-color: #8EC6F4;
+		background-image: url('./images/clouds.svg');
+  }
   30% {
+		background-color: #ECCD94;
+		background-image: url('./images/clouds.svg');
+  }
+  35% {
 		background-color: #ECCD94;
 		background-image: url('./images/clouds.svg');
   }
@@ -109,8 +117,9 @@ export default {
 		background-image: url('./images/clouds.svg');
 		background-color: #ECCD94;
 	}
-  85% {
+  95% {
 		background-image: url('./images/clouds.svg');
+		background-color: #ECCD94;
   }
   100% {
 		background-color: #8EC6F4;
