@@ -327,13 +327,15 @@ export default {
 
 	height: var(--box-size);
 	width: var(--box-size);
+}
 
+.box-item-images {
   transform-style: preserve-3d;
   perspective: 550px;
   position: relative;
 }
 
-.box-item > * {
+.box-item-images > * {
   backface-visibility: hidden;
 }
 
