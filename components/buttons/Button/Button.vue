@@ -169,7 +169,8 @@ export default {
 	transition:
 		opacity var(--smooth-animation),
 		background-color var(--smooth-animation),
-		transform var(--smooth-animation);
+		transform var(--smooth-animation),
+		background-image var(--smooth-animation);
 	box-shadow: var(--pixel-shadow);
 }
 
@@ -185,6 +186,10 @@ export default {
 
 .button:hover {
 	background-color: var(--color-background-secondary);
+}
+
+.button:active {
+	box-shadow: var(--pixel-shadow-active);
 }
 
 .button-primary:hover {
@@ -225,6 +230,13 @@ a[disabled="disabled"] {
 button:disabled {
 	opacity: 0.8;
 	cursor: not-allowed;
+	background-image:
+		repeating-linear-gradient(45deg,
+			rgb(255, 255, 255, 0.2) 0%,
+			rgb(255, 255, 255, 0.2) 10%,
+			rgb(255, 255, 255, 0) 10%,
+			rgb(255, 255, 255, 0) 20%
+		);
 }
 
 .emoji {

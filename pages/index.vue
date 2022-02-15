@@ -4,6 +4,7 @@
 			<!-- <Header /> -->
 		</template>
 
+		<Sky />
 		<NftPreview />
 		<GetAnimalsBack />
 		<AboutUs />
@@ -17,7 +18,9 @@
 
 <script>
 import { Page, Header, Footer } from '~/components/PageLayout';
-import { AboutUs, Road, GetAnimalsBack, NftPreview } from '~/containers/index';
+import {
+	AboutUs, Road, Sky, GetAnimalsBack, NftPreview
+} from '~/containers/index';
 
 export default {
 	layout: 'dark-theme',
@@ -28,6 +31,7 @@ export default {
 		Road,
 		GetAnimalsBack,
 		NftPreview,
+		Sky,
 		Header,
 		Footer
 	}

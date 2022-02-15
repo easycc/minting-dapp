@@ -22,9 +22,11 @@
 						We love animals and don't really like circuses, as you understand...
 					</p>
 
-					<Button class="create-avatar-button" @click="toggleAvatarConstructor">
-						Want an avatar with a hat?
-					</Button>
+					<Button
+						class="create-avatar-button"
+						title="Want an avatar with a hat?"
+						@click="toggleAvatarConstructor"
+					/>
 				</div>
 
 				<img
@@ -123,6 +125,23 @@ p {
 	background-color: #FDDB33;
 	color: #111;
 	margin-bottom: 2em;
+	margin-top: 1em;
+	position: relative;
+}
+
+.create-avatar-button:before {
+	content: '';
+	position: absolute;
+	z-index: 1;
+	top: 0em;
+	right: 0em;
+	transform: translate(0%, -100%);
+	display: inline-block;
+	background-image: url('./images/hat.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 3em;
+	height: 1.25em;
 }
 
 
@@ -140,6 +159,11 @@ p {
 	.text-wrapper {
 		order: 2;
 		margin: 0 auto;
+		text-align: center;
+	}
+
+	p {
+		text-align: left;
 	}
 
 	.create-avatar-button {

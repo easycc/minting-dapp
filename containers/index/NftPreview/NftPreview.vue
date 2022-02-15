@@ -284,7 +284,7 @@ export default {
 @media screen and (max-width: 576px) {
 	.boxes-list-wrapper {
 		--box-margin: 1.25em;
-		--box-size: 10rem;
+		--box-size: 13rem;
 	}
 }
 

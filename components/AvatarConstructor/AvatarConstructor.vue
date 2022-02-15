@@ -554,6 +554,10 @@ export default {
 		0px 4px 0px #639BFF;
 }
 
+.layer-pick-button:disabled {
+	background-image: initial;
+}
+
 .download-button {
 	margin-bottom: 2rem;
 	position: absolute;

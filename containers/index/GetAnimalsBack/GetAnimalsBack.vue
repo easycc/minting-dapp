@@ -173,8 +173,10 @@ export default {
 .slider-wrapper {
 	position: relative;
 	margin-bottom: 3rem;
-	width: calc(100% + var(--page-horizontal-padding) * 2);
-	margin-left: calc(var(--page-horizontal-padding) * -1);;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 60rem;
+	width: 100%;
 }
 
 .slide .image {
@@ -183,8 +185,14 @@ export default {
 }
 
 @media screen and (max-width: 560px) {
+	.slider-wrapper {
+		width: calc(100% + var(--page-horizontal-padding) * 2);
+		margin-left: calc(var(--page-horizontal-padding) * -1);
+		margin-right: 0;
+	}
+
 	.slide {
-		width: 70vw;
+		width: 45vw;
 	}
 }
 

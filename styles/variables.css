@@ -9,4 +9,10 @@
 
 
 	--pixel-shadow: 4px 0px 0px #111111, -4px 0px 0px #111111, 0px -4px 0px #111111, 0px 4px 0px #111111, inset 0px -4px 0px rgba(17, 17, 17, 0.3);
+	--pixel-shadow-active:
+		4px 0px 0px #111111,
+		-4px 0px 0px #111111,
+		0px -4px 0px #111111,
+		0px 4px 0px #111111,
+		inset 0px 0px 0px 4px rgba(17, 17, 17, 0.3);
 }
