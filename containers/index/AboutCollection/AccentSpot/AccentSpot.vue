@@ -64,6 +64,13 @@ export default {
 	right: calc(9 * var(--pixel-size)); /* 9 - width of element */
 }
 
+
+@media screen and (max-width: 900px) {
+	.accent-spot:before, .accent-spot:after {
+		display: none;
+	}
+}
+
 .accent-spot-content {
 	position: relative;
 	z-index: 2;

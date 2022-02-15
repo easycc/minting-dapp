@@ -1,5 +1,7 @@
 <template>
 	<section class="sky-section">
+		<div class="space-background">
+
 		<PageContent class="content">
 			<div class="text-wrapper">
 			<h2 class="title">
@@ -14,7 +16,7 @@
 				</p>
 			</div>
 
-			<AccentSpot>
+			<AccentSpot class="accent-spot">
 				<ul class="accent-spot-list">
 					<li class="accent-spot-item">
 						<span class="accent-spot-title">
@@ -84,6 +86,7 @@
 				height="250"
 			/>
 		</div>
+		</div>
 	</section>
 </template>
 
@@ -113,19 +116,44 @@ export default {
 	text-align: center;
 }
 
+.space-background {
+	--space-gradient: linear-gradient(180deg, #17021E 0%, rgba(23, 2, 30, 0.7) 45%, rgba(23, 2, 30, 0) 80%);
+
+	background-image: var(--space-gradient);
+	background-size: 100% 100%;
+	background-position: 0 0;
+	position: relative;
+}
+
+.space-background:before {
+	height: 39%;
+	position: absolute;
+	display: block;
+	z-index: 1;
+	width: 100%;
+	top: 0;
+	left: 0;
+	content: '';
+	background-image: url('./images/stars.svg');
+	opacity: 0.7;
+	background-repeat: repeat;
+	background-size: 250px 250px;
+}
+
 .content {
 	padding-bottom: 2rem;
+	position: relative;
+	z-index: 2;
 }
 
 .title {
 	width: 100%;
 	display: block;
 	text-shadow: initial;
-	animation: text 16s linear infinite;
 }
 
 .text-wrapper {
-	max-width: 36rem;
+	max-width: 40rem;
 	padding: 0 0 2em;
 	margin-left: auto;
 	margin-right: auto;
@@ -133,11 +161,14 @@ export default {
 
 p {
 	font-size: calc(1em + 0.25vw);
-	animation: text 16s linear infinite;
 }
 
 .text-wrapper p:last-child {
 	margin-bottom: 0;
+}
+
+.accent-spot {
+	margin-bottom: 4rem;
 }
 
 .sky-animation {
@@ -195,27 +226,6 @@ p {
 		background-color: #8EC6F4;
 		background-image: url('./images/clouds.svg');
   }
-}
-
-@keyframes text {
-	0% {
-		color: #111;
-  }
-  35% {
-		color: #111;
-	}
-  40% {
-		color: #fff;
-	}
-  65% {
-		color: #fff;
-	}
-  70% {
-		color: #111;
-	}
-  100% {
-		color: #111;
-	}
 }
 
 .elephant, .walrus, .crocodile, .jirafa {
