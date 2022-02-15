@@ -191,7 +191,7 @@ export default {
 	}
 
 	.slide {
-		width: 45vw;
+		width: 50vw;
 	}
 }
 
