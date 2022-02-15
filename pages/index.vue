@@ -4,9 +4,9 @@
 			<!-- <Header /> -->
 		</template>
 
-		<Sky />
-		<NftPreview />
+		<AboutCollection />
 		<GetAnimalsBack />
+		<NftPreview />
 		<AboutUs />
 		<Road />
 
@@ -19,7 +19,7 @@
 <script>
 import { Page, Header, Footer } from '~/components/PageLayout';
 import {
-	AboutUs, Road, Sky, GetAnimalsBack, NftPreview
+	AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection
 } from '~/containers/index';
 
 export default {
@@ -29,9 +29,9 @@ export default {
 		Page,
 		AboutUs,
 		Road,
+		AboutCollection,
 		GetAnimalsBack,
 		NftPreview,
-		Sky,
 		Header,
 		Footer
 	}

@@ -129,6 +129,10 @@ p {
 	position: relative;
 }
 
+.create-avatar-button:hover {
+	background-color: #ffea71;
+}
+
 .create-avatar-button:before {
 	content: '';
 	position: absolute;

@@ -158,7 +158,6 @@ export default {
 <style scoped>
 .get-animals-back-section {
 	background-color: #222222;
-	border-bottom: calc(var(--pixel-size) * 2) solid var(--color-background-secondary);
 	text-align: center;
 }
 
@@ -219,9 +218,17 @@ export default {
 	background-color: var(--color-negative);
 }
 
+.vote-negative-button:hover {
+	background-color: #fa6681;
+}
+
 .vote-positive-button {
 	background-color: var(--color-positive);
 	margin-right: 1em;
+}
+
+.vote-positive-button:hover {
+	background-color: #95d455;
 }
 
 .votes-counter {

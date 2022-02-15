@@ -251,6 +251,8 @@ export default {
 	background-color: #252525;
 	text-align: center;
 	overflow: hidden;
+	border-bottom: calc(var(--pixel-size) * 2) solid var(--color-background-secondary);
+	border-top: calc(var(--pixel-size) * 2) solid var(--color-background-secondary);
 }
 
 .content {
@@ -392,6 +394,9 @@ export default {
 
 .roll-button {
 	background-color: #fb6400;
+}
+.roll-button:hover {
+	background-color: #fb9700;
 }
 
 .speach-balloon-title {
