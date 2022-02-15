@@ -357,7 +357,7 @@ export default {
 .with-mouse {
 	position: absolute;
 	z-index: 1;
-	left: calc(-1 * var(--box-size) / 4);
+	left: calc(-1 * var(--box-size) / 5);
 	bottom: calc(-1 * var(--box-size) / 14);
 	width: calc(var(--box-size) / 2.5);
 	height: calc(var(--box-size) / 2.5);
