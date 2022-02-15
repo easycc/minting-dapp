@@ -21,42 +21,47 @@
 							v-for="(box, index) in totalBoxesAmount"
 							:key="box"
 							class="box-item"
-
-							:style="{
-								marginRight: `var(--box-margin)`,
-								marginLeft: `var(--box-margin)`
-							}"
+							:style="`--shadow-color: ${boxParams(index).shadow}; margin-right: var(--box-margin); margin-left: var(--box-margin)`"
 						>
-							<div
-								class="nft-image-wrapper"
-								:style="`--shadow-color: ${boxParams(index).shadow}`"
+							<transition-group
+								mode="out-in"
+								tag="div"
+								name="flip"
+								class="box-item-images"
 							>
-								<img
-									v-if="index === startElementIndex"
-									:src="nfts[rollsCounter].src"
-									width="160"
-									height="auto"
-									alt="NFT"
-									class="nft-image"
-								/>
-							</div>
+								<div
+									v-show="openBox && index === startElementIndex"
+									key="nft-image-wrapper"
+									class="nft-image-wrapper"
+								>
+									<img
+										:src="nfts[rollsCounter].src"
+										width="160"
+										height="auto"
+										alt="NFT"
+										class="nft-image"
+									/>
+								</div>
 
-							<div
-								class="box-image-wrapper"
-								:class="{
-									'box-image-wrapper-open': openBox && index === startElementIndex
-								}"
+								<div
+									v-show="!openBox || index !== startElementIndex"
+									key="box-image-wrapper"
+									class="box-image-wrapper"
+								>
+									<img
+										:src="boxParams(index).src"
+										width="160"
+										height="auto"
+										alt="Hidden image - unknown NFT"
+										class="box-image"
+									/>
+								</div>
+							</transition-group>
+
+							<Tooltip
+								v-if="index === 4 || index === 16"
+								class="with-mouse"
 							>
-								<img
-									:src="boxParams(index).src"
-									width="160"
-									height="auto"
-									alt="Hidden image - unknown NFT"
-									class="box-image"
-								/>
-							</div>
-
-							<Tooltip v-if="index === 4 || index === 16" class="with-mouse">
 								<template v-slot:trigger>
 									<img src="./images/features/mouse.png" alt="Mouse" />
 								</template>
@@ -66,7 +71,10 @@
 								</p>
 							</Tooltip>
 
-							<Tooltip v-if="index === 3 || index === 15" class="with-scull">
+							<Tooltip
+								v-if="index === 3 || index === 15"
+								class="with-scull"
+							>
 								<template v-slot:trigger>
 									<img src="./images/features/scull.png" alt="Scull" />
 								</template>
@@ -147,17 +155,17 @@ export default {
 			let { rollsCounter } = this;
 
 			switch (rollsCounter) {
-				case 0:
-					buttonTitle = 'Let’s roll it!';
-					break;
+				// case 0:
+				// 	buttonTitle = 'Let’s roll it!';
+				// 	break;
 
-				case 1:
-					buttonTitle = 'Roll it again!';
-					break;
+				// case 1:
+				// 	buttonTitle = 'Roll it again!';
+				// 	break;
 
-				case 2:
-					buttonTitle = 'Final roll!';
-					break;
+				// case 2:
+				// 	buttonTitle = 'Final roll!';
+				// 	break;
 
 				default:
 					buttonTitle = 'Let’s roll it!';
@@ -319,6 +327,29 @@ export default {
 
 	height: var(--box-size);
 	width: var(--box-size);
+
+  transform-style: preserve-3d;
+  perspective: 550px;
+  position: relative;
+}
+
+.box-item > * {
+  backface-visibility: hidden;
+}
+
+.box-item:before {
+	content: '';
+	display: block;
+	z-index: -1;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 50%;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	background: transparent;
+	border-radius: 50%;
+	box-shadow: 0px 0px calc(var(--box-size) / 1) calc(var(--box-size) / 2) var(--shadow-color);
 }
 
 .with-mouse {
@@ -351,70 +382,11 @@ export default {
 	z-index: 0;
 }
 
-.nft-image-wrapper:before {
-	content: '';
-	display: block;
-	z-index: -1;
-	transform: translate(-50%, -50%);
-	left: 50%;
-	top: 50%;
-	position: absolute;
-	width: 50%;
-	height: 50%;
-	background: transparent;
-	border-radius: 50%;
-	box-shadow: 0px 0px calc(var(--box-size) / 2) calc(var(--box-size) / 4) var(--shadow-color);
-}
-
 .box-image {
 	z-index: 1;
 	position: relative;
 }
 
-
-.box-image-wrapper {
-	position: relative;
-	transform-style: preserve-3d;
-	transform: rotateX(0deg);
-	transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
-	transform-origin: 100% 100%;
-}
-
-.box-image-wrapper:after {
-	content: '';
-	display: block;
-	width: 100%;
-	height: 1em;
-	position: absolute;
-	z-index: 2;
-	top: 0;
-	left: 0;
-	right: 0;
-	background-color: #fff;
-	transform: rotateX(90deg);
-	transform-origin: 0% 0%;
-
-
-	background: #C78751;
-	border-left: calc(var(--box-size) / 30) solid #111111;
-	border-top: calc(var(--box-size) / 30) solid #111111;
-	border-right: calc(var(--box-size) / 30) solid #111111;
-
-	box-sizing: border-box;
-
-	transform: rotateX(90deg);
-}
-
-.box-image-wrapper-open {
-	transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
-	transform: rotateX(90deg);
-}
-
-.box-image-wrapper-open:after {
-	height: 0;
-	padding: 0;
-	border: 0;
-}
 
 .roll-button {
 	background-color: #fb6400;
@@ -431,4 +403,17 @@ export default {
 	margin: 0 auto;
 }
 
+
+.flip-leave-active,
+.flip-enter-active {
+  opacity: 1;
+  transform: rotateY(0deg);
+  transition: all 0.8s;
+}
+
+.flip-enter,
+.flip-leave-to {
+  transform: rotateY(180deg);
+  opacity: 0;
+}
 </style>
