@@ -18,6 +18,7 @@ export default {
 	vertical-align: top;
 	position: relative;
 	padding: 0 calc(var(--pixel-size) * 6) calc(var(--pixel-size) * 2);
+	color: #fff;
 }
 
 .accent-spot:before, .accent-spot:after {

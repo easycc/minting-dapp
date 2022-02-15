@@ -103,7 +103,7 @@ export default {
 <style scoped>
 .sky-section {
 	overflow: hidden;
-	background-color: #252525;
+	background-color: #8EC6F4;
 
 	background-image: url('./images/clouds.svg');
 	background-size: 250px 250px;
@@ -120,6 +120,8 @@ export default {
 .title {
 	width: 100%;
 	display: block;
+	text-shadow: initial;
+	animation: text 16s linear infinite;
 }
 
 .text-wrapper {
@@ -127,8 +129,11 @@ export default {
 	padding: 0 0 2em;
 	margin-left: auto;
 	margin-right: auto;
-	/* animation: bg 16s linear infinite; */
-	/* background-image: initial !important; */
+}
+
+p {
+	font-size: calc(1em + 0.25vw);
+	animation: text 16s linear infinite;
 }
 
 .text-wrapper p:last-child {
@@ -157,25 +162,17 @@ export default {
 		background-color: #8EC6F4;
 		background-image: url('./images/clouds.svg');
   }
-  25% {
+  24% {
 		background-color: #8EC6F4;
 		background-image: url('./images/clouds.svg');
   }
-  30% {
-		background-color: #ECCD94;
-		background-image: url('./images/clouds.svg');
-  }
   35% {
-		background-color: #ECCD94;
-		background-image: url('./images/clouds.svg');
-  }
-  45% {
 		background-image: url('./images/none.svg');
   }
-  50% {
+  40% {
 		background-color: #17021E;
 	}
-  55% {
+  45% {
 		background-image: url('./images/stars.svg');
 		background-size: 250px 250px;
   }
@@ -198,6 +195,27 @@ export default {
 		background-color: #8EC6F4;
 		background-image: url('./images/clouds.svg');
   }
+}
+
+@keyframes text {
+	0% {
+		color: #111;
+  }
+  35% {
+		color: #111;
+	}
+  40% {
+		color: #fff;
+	}
+  65% {
+		color: #fff;
+	}
+  70% {
+		color: #111;
+	}
+  100% {
+		color: #111;
+	}
 }
 
 .elephant, .walrus, .crocodile, .jirafa {
