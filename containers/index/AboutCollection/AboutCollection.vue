@@ -4,7 +4,7 @@
 			<PageContent class="content">
 				<div class="text-wrapper">
 					<h2 class="title">
-						9 circus animals fulfilled their dream
+						9 circus animals make their dreams true
 					</h2>
 					<p>
 						They were forced to walk a tightrope, juggle, follow commands.
