@@ -121,17 +121,18 @@ export default {
 
 .first-wave {
 	animation-duration: 16s;
+	animation-delay: -6s;
 }
 
 .second-wave {
-	animation-delay: -7s;
+	animation-delay: -12s;
 	bottom: 7em;
 	animation-direction: reverse;
 	animation-duration: 22s;
 }
 
 .third-wave {
-	animation-delay: -14s;
+	animation-delay: -20s;
 	bottom: 9em;
 	animation-duration: 28s;
 }
