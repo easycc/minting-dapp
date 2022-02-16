@@ -176,7 +176,7 @@ export default {
 		right: calc(0.5em + 3vw);
   }
   100% {
-		top: -170px;
+		top: -225px;
 		right: calc(0.5em + 3vw);
   }
 }
