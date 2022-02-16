@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 
 import { Button } from '~/components/buttons';
 
@@ -36,9 +36,9 @@ export default {
 	methods: {
 		googleSignUp () {
 			try {
-				const GOOGLE_AUTH_PROVIDER = new firebase.auth.GoogleAuthProvider();
+				// const GOOGLE_AUTH_PROVIDER = new firebase.auth.GoogleAuthProvider();
 
-				this.$fire.auth.signInWithPopup(GOOGLE_AUTH_PROVIDER);
+				// this.$fire.auth.signInWithPopup(GOOGLE_AUTH_PROVIDER);
 			}
 			catch (error) {
 				console.error(error);

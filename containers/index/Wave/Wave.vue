@@ -94,7 +94,7 @@ export default {
 	position: absolute;
 	right: 0em;
 
-	animation: move 20s cubic-bezier(0.1, -0.6, 0.2, 0) infinite;
+	animation: move 20s linear infinite;
 	animation-delay: 0s;
 	bottom: 5em;
 }
@@ -106,7 +106,7 @@ export default {
 	position: absolute;
 	right: 7em;
 
-	animation: move 20s cubic-bezier(0.1, -0.6, 0.2, 0) infinite;
+	animation: move 20s linear infinite;
 	animation-delay: 0s;
 	bottom: 5em;
 }

@@ -232,13 +232,6 @@ export default {
 	background-color: #95d455;
 }
 
-.votes-counter {
-	display: block;
-	padding-top: 1em;
-	width: 100%;
-	color: var(--color-text-secondary);
-}
-
 
 .vote-title {
 	font-size: 1.25em;

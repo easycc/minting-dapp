@@ -64,7 +64,7 @@ export default {
 	position: absolute;
 
 	right: 0;
-	animation: move 10s cubic-bezier(0.1, -0.6, 0.2, 0) infinite;
+	animation: move 10s linear infinite;
 	animation-delay: 0s;
 	top: -5em;
 }

@@ -21,7 +21,7 @@ export default {
 
 	computed: {
 		formattedPecentage () {
-			let formatPercentage = new Intl.NumberFormat(this.$i18n.locale, {
+			let formatPercentage = new Intl.NumberFormat('en', {
 				style: 'percent',
 				maximumFractionDigits: 3,
 				minimumFractionDigits: 0

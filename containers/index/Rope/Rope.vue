@@ -9,7 +9,7 @@
 					To be continued...
 				</p>
 			</PageContent>
-			<section class="rope">
+			<div class="rope">
 				<img
 					src="./images/elephant.png"
 					class="elephant"
@@ -17,7 +17,7 @@
 					width="690"
 					height="465"
 				/>
-			</section>
+			</div>
 
 			<PageContent class="content">
 				<p>No animals were harmed.</p>
@@ -94,10 +94,10 @@ export default {
 
 @keyframes move {
   0% {
-    transform: translateX(100%) rotateZ(2000deg);
+    transform: translateX(100%);
   }
   100% {
-    transform: translateX(calc(-1 * 100vw - 100%)) rotateZ(0deg);
+    transform: translateX(calc(-1 * 100vw - 100%));
   }
 }
 
@@ -109,7 +109,7 @@ export default {
 	z-index: 2;
 
 	right: 0;
-	animation: move 32s cubic-bezier(0.1, -0.6, 0.2, 0) infinite;
+	animation: move 32s linear infinite;
 	animation-delay: 0s;
 	top: 0;
 }

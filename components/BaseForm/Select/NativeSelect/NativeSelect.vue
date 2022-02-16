@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import isEqual from 'lodash/isEqual';
 
 import { Label } from '../../Label';
 
