@@ -249,20 +249,20 @@ p {
 
 .walrus {
 	top: 5em;
-	animation-delay: -4s;
+	animation-delay: 0s;
 	animation-duration: 16s;
 }
 
 .jirafa {
 	top: 0em;
-	animation-delay: -16s;
+	animation-delay: -24s;
 	animation-duration: 21s;
 }
 
 .elephant {
 	top: initial;
 	bottom: 0;
-	animation-delay: -2s;
+	animation-delay: -4s;
 	animation-duration: 20s;
 }
 
@@ -273,16 +273,16 @@ p {
 
 	.walrus {
 		animation-duration: 8s;
-		animation-delay: -4s;
 	}
 
 	.jirafa {
-		animation-duration: 12s;
+		animation-duration: 10s;
+		animation-delay: -28s;
 	}
 
 	.elephant {
-		animation-duration: 12s;
-	animation-delay: 0s;
+		animation-duration: 10s;
+		animation-delay: -2s;
 	}
 }
 
