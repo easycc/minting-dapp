@@ -15,47 +15,53 @@
 		<div
 			class="elephant"
 			:class="{ fallen }"
-			:style="`--fall-height: ${fallHeight}px; --fall-duration: ${topOffset / 300}s; --rotates: ${fallHeight / 100}deg`"
+			:style="`--fall-height: ${topOffset}px; --fall-duration: ${fallHeight / 300}s; --rotates: ${fallHeight}deg`"
 		>
-			<Button
-				v-if="balloons.includes('yellow')"
-				class="yellow-balloon balloon"
-				@click="popBalloon('yellow')"
-			>
-				<img
-					src="static/flying-elephant/yellow-balloon.png"
-					alt="Yellow balloon"
-					width="55"
-					height="100"
-				/>
-			</Button>
+			<Pop>
+				<Button
+					v-if="balloons.includes('yellow')"
+					class="yellow-balloon balloon"
+					@click="popBalloon('yellow')"
+				>
+					<img
+						src="static/flying-elephant/yellow-balloon.png"
+						alt="Yellow balloon"
+						width="55"
+						height="100"
+					/>
+				</Button>
+			</Pop>
 
-			<Button
-				v-if="balloons.includes('blue')"
-				class="blue-balloon balloon"
-				@click="popBalloon('blue')"
-			>
-				<img
-					src="static/flying-elephant/blue-balloon.png"
-					alt="Blue balloon"
-					width="55"
-					height="100"
-				/>
-			</Button>
+			<Pop>
+				<Button
+					v-if="balloons.includes('blue')"
+					class="blue-balloon balloon"
+					@click="popBalloon('blue')"
+				>
+					<img
+						src="static/flying-elephant/blue-balloon.png"
+						alt="Blue balloon"
+						width="55"
+						height="100"
+					/>
+				</Button>
+			</Pop>
 
 
-			<Button
-				v-if="balloons.includes('red')"
-				class="balloon red-balloon"
-				@click="popBalloon('red')"
-			>
-				<img
-					src="static/flying-elephant/red-balloon.png"
-					alt="Red balloon"
-					width="55"
-					height="110"
-				/>
-			</Button>
+			<Pop>
+				<Button
+					v-if="balloons.includes('red')"
+					class="balloon red-balloon"
+					@click="popBalloon('red')"
+				>
+					<img
+						src="static/flying-elephant/red-balloon.png"
+						alt="Red balloon"
+						width="55"
+						height="110"
+					/>
+				</Button>
+			</Pop>
 
 			<img
 				ref="elephant"
@@ -83,7 +89,7 @@
 					Weeeee...
 				</template>
 				<template v-else>
-					Thanks! I'm ok
+					Ouch. Thanks!
 				</template>
 			</p>
 		</div>
@@ -97,6 +103,7 @@
 <script>
 import { setTimeout } from 'timers';
 
+import { Pop } from '~/components/animation';
 import { Page, Header, Footer } from '~/components/PageLayout';
 import {
 	AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection, Rope, Wave
@@ -109,6 +116,7 @@ export default {
 	components: {
 		Page,
 		AboutUs,
+		Pop,
 		Road,
 		AboutCollection,
 		GetAnimalsBack,
@@ -124,8 +132,8 @@ export default {
 			balloons: ['red', 'yellow', 'blue'],
 			fallen: false,
 			thankful: false,
-			fallHeight: 0,
-			topOffset: 0
+			topOffset: 0,
+			fallHeight: 0
 		};
 	},
 
@@ -139,17 +147,17 @@ export default {
 					document.body
 				);
 
-				this.fallHeight = elephantRect.top - 50;
-				this.topOffset = document.body.offsetHeight - elephantRect.top;
+				this.topOffset = elephantRect.top - 100;
+
+				this.fallHeight = document.body.offsetHeight - elephantRect.top;
 
 				this.fallen = true;
 
 				const MILISECONDS_IN_SECONDS = 1000;
-				const DELAY = 500;
 
 				setTimeout(() => {
 					this.thankful = true;
-				}, this.topOffset / 300 * MILISECONDS_IN_SECONDS + DELAY);
+				}, this.fallHeight / 300 * MILISECONDS_IN_SECONDS);
 			}
 		}
 	}
@@ -260,20 +268,24 @@ export default {
 	position: absolute;
 	z-index: 1;
 	top: 0;
-	left: 50%;
+	left: 0;
+}
+
+.balloon:focus {
+	outline: none;
 }
 
 .red-balloon {
-	transform: translate(-50%, 0);
+	left: 37%;
 }
 
 .yellow-balloon {
-	transform: translate(-90%, 0);
+	left: 22%;
 	top: calc(var(--pixel-size) * 2);
 }
 
 .blue-balloon {
-	transform: translate(-10%, 0);
+	left: 50%;
 	top: calc(var(--pixel-size) * 2);
 }
 </style>

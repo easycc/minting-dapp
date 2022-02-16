@@ -11,11 +11,11 @@
 			</PageContent>
 			<div class="rope">
 				<img
-					src="./images/elephant.png"
-					class="elephant"
-					alt="Elephant with a yellow balloon on the rope"
-					width="690"
-					height="465"
+					src="./images/fur-seal.png"
+					class="fur-seal"
+					alt="fur-seal with a yellow balloon on the rope"
+					width="185"
+					height="165"
 				/>
 			</div>
 
@@ -101,9 +101,9 @@ export default {
   }
 }
 
-.elephant {
-	width: 180px;
-	height: 170px;
+.fur-seal {
+	width: 185px;
+	height: 165px;
 
 	position: absolute;
 	z-index: 2;
@@ -115,7 +115,7 @@ export default {
 }
 
 @media screen and (max-width: 576px) {
-	.elephant {
+	.fur-seal {
 		animation-duration: 14s;
 	}
 }
