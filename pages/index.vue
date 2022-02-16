@@ -202,7 +202,7 @@ export default {
 }
 
 .elephant.thankful {
-	animation: walk-away 14s linear;
+	animation: walk-away 14s ease-in;
 }
 
 @keyframes walk-away {
@@ -210,7 +210,7 @@ export default {
     transform: translateX(0);
 		right: calc(0.5em + 3vw);
   }
-  4% {
+  20% {
     transform: translateX(0);
 		right: calc(0.5em + 3vw);
   }
