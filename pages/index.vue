@@ -7,8 +7,10 @@
 		<AboutCollection />
 		<GetAnimalsBack />
 		<NftPreview />
+		<Wave />
 		<AboutUs />
 		<Road />
+		<Rope />
 
 		<template v-slot:footer>
 			<!-- <Footer /> -->
@@ -19,7 +21,7 @@
 <script>
 import { Page, Header, Footer } from '~/components/PageLayout';
 import {
-	AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection
+	AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection, Rope, Wave
 } from '~/containers/index';
 
 export default {
@@ -32,6 +34,8 @@ export default {
 		AboutCollection,
 		GetAnimalsBack,
 		NftPreview,
+		Rope,
+		Wave,
 		Header,
 		Footer
 	}

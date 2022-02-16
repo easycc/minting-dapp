@@ -252,7 +252,6 @@ export default {
 	text-align: center;
 	overflow: hidden;
 	border-bottom: calc(var(--pixel-size) * 2) solid var(--color-background-secondary);
-	border-top: calc(var(--pixel-size) * 2) solid var(--color-background-secondary);
 }
 
 .content {

@@ -159,6 +159,7 @@ export default {
 .get-animals-back-section {
 	background-color: #222222;
 	text-align: center;
+	border-bottom: calc(var(--pixel-size) * 2) solid var(--color-background-secondary);
 }
 
 .section-title {

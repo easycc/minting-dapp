@@ -1,91 +1,90 @@
 <template>
 	<section class="sky-section">
 		<div class="space-background">
+			<PageContent class="content">
+				<div class="text-wrapper">
+					<h2 class="title">
+						9 circus animals fulfilled their dream
+					</h2>
+					<p>
+						They were forced to walk a tightrope, juggle, follow commands.
+					</p>
 
-		<PageContent class="content">
-			<div class="text-wrapper">
-			<h2 class="title">
-				9 circus animals fulfilled their dream
-			</h2>
-				<p>
-					They were forced to walk a tightrope, juggle, follow commands.
-				</p>
+					<p>
+						But everything changed on the day when the fur seal managed to negotiate a liter of gasoline from a monkey...
+					</p>
+				</div>
 
-				<p>
-					But everything changed on the day when the fur seal managed to negotiate a liter of gasoline from a monkey...
-				</p>
+				<AccentSpot class="accent-spot">
+					<ul class="accent-spot-list">
+						<li class="accent-spot-item">
+							<span class="accent-spot-title">
+								1
+								<img
+									src="./images/accent-title/gasoline.png"
+									alt="Gasoline"
+									width="28"
+									height="auto"
+									class="accent-spot-title-icon"
+								/>
+							</span>
+							circus burned down
+						</li>
+
+						<li class="accent-spot-item">
+							<span class="accent-spot-title">
+								5,000
+							</span>
+							unique NFT
+						</li>
+
+						<li class="accent-spot-item">
+							<span class="accent-spot-title">
+								500,000
+							</span>
+							pixels used
+						</li>
+
+						<li class="accent-spot-item">
+							<span class="accent-spot-title">
+								0,05 ETH
+							</span>
+							mint price
+						</li>
+					</ul>
+				</AccentSpot>
+			</PageContent>
+
+			<div class="sky-animation">
+				<img
+					src="./images/crocodile.png"
+					class="crocodile"
+					alt="Crocodile on the bird"
+					width="250"
+					height="250"
+				/>
+				<img
+					src="./images/walrus.png"
+					class="walrus"
+					alt="Walrus with a pirat hat in the plane"
+					width="250"
+					height="250"
+				/>
+				<img
+					src="./images/jirafa.png"
+					class="jirafa"
+					alt="Jirafa on the bird"
+					width="250"
+					height="500"
+				/>
+				<img
+					src="./images/elephant.png"
+					class="elephant"
+					alt="Elephant with a watermelon hat in the UFO"
+					width="250"
+					height="250"
+				/>
 			</div>
-
-			<AccentSpot class="accent-spot">
-				<ul class="accent-spot-list">
-					<li class="accent-spot-item">
-						<span class="accent-spot-title">
-							1
-							<img
-								src="./images/accent-title/gasoline.png"
-								alt="Gasoline"
-								width="28"
-								height="auto"
-								class="accent-spot-title-icon"
-							/>
-						</span>
-						circus burned down
-					</li>
-
-					<li class="accent-spot-item">
-						<span class="accent-spot-title">
-							5,000
-						</span>
-						unique NFT
-					</li>
-
-					<li class="accent-spot-item">
-						<span class="accent-spot-title">
-							500,000
-						</span>
-						pixels used
-					</li>
-
-					<li class="accent-spot-item">
-						<span class="accent-spot-title">
-							0,05 ETH
-						</span>
-						mint price
-					</li>
-				</ul>
-			</AccentSpot>
-		</PageContent>
-
-		<div class="sky-animation">
-			<img
-				src="./images/crocodile.png"
-				class="crocodile"
-				alt="Crocodile on the bird"
-				width="250"
-				height="250"
-			/>
-			<img
-				src="./images/walrus.png"
-				class="walrus"
-				alt="Walrus with a pirat hat in the plane"
-				width="250"
-				height="250"
-			/>
-			<img
-				src="./images/jirafa.png"
-				class="jirafa"
-				alt="Jirafa on the bird"
-				width="250"
-				height="500"
-			/>
-			<img
-				src="./images/elephant.png"
-				class="elephant"
-				alt="Elephant with a watermelon hat in the UFO"
-				width="250"
-				height="250"
-			/>
-		</div>
 		</div>
 	</section>
 </template>
@@ -114,6 +113,7 @@ export default {
 	background-repeat: repeat;
 	animation: bg 16s linear infinite;
 	text-align: center;
+	border-bottom: calc(var(--pixel-size) * 2) solid var(--color-background-secondary);
 }
 
 .space-background {
@@ -153,7 +153,7 @@ export default {
 }
 
 .text-wrapper {
-	max-width: 40rem;
+	max-width: 42rem;
 	padding: 0 0 2em;
 	margin-left: auto;
 	margin-right: auto;

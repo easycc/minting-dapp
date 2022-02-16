@@ -65,7 +65,7 @@ export default {
 }
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 576px) {
 	.accent-spot:before, .accent-spot:after {
 		display: none;
 	}

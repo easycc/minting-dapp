@@ -13,7 +13,7 @@
 				<img
 					src="./images/crocodile.png"
 					class="crocodile"
-					alt="Hyppo in the yellow car on the road"
+					alt="Crocodile slipped on the banana"
 					width="690"
 					height="465"
 				/>
