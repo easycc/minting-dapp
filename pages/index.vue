@@ -14,7 +14,7 @@
 
 		<div
 			class="elephant"
-			:class="{ fallen }"
+			:class="{ fallen, 'thankful': thankful }"
 			:style="`--fall-height: ${topOffset}px; --fall-duration: ${fallHeight / 300}s; --rotates: ${fallHeight}deg`"
 		>
 			<Pop>
@@ -173,9 +173,11 @@ export default {
 @keyframes move {
   0% {
     top: 100%;
+		right: calc(0.5em + 3vw);
   }
   100% {
-    top: -170px;
+		top: -170px;
+		right: calc(0.5em + 3vw);
   }
 }
 
@@ -187,7 +189,7 @@ export default {
 	height: 225px;
 
 	bottom: 0;
-	right: calc(0.5em + 3vw);
+	right: calc(100% + 500px);
 	animation: move 50s linear infinite;
 	animation-delay: 0s;
 }
@@ -197,6 +199,31 @@ export default {
 }
 .elephant.fallen .elephant-image {
 	animation: rotate var(--fall-duration) ease-in;
+}
+
+.elephant.thankful {
+	animation: walk-away 14s linear;
+}
+
+@keyframes walk-away {
+  0% {
+    transform: translateX(0);
+		right: calc(0.5em + 3vw);
+  }
+  4% {
+    transform: translateX(0);
+		right: calc(0.5em + 3vw);
+  }
+  100% {
+    transform: translateX(calc(-1 * 100vw - 100%));
+		right: calc(0.5em + 3vw);
+  }
+}
+
+@media screen and (max-width: 576px) {
+	.elephant.thankful {
+		animation-duration: 8s;
+	}
 }
 
 .message {
@@ -231,9 +258,11 @@ export default {
 @keyframes fall {
   0% {
     top: var(--fall-height);
+		right: calc(0.5em + 3vw);
   }
   100% {
     top: calc(100% - 225px);
+		right: calc(0.5em + 3vw);
   }
 }
 
