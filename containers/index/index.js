@@ -1,3 +1,4 @@
+export { default as Spotlight } from './Spotlight/Spotlight';
 export { default as AboutUs } from './AboutUs/AboutUs';
 export { default as AboutCollection } from './AboutCollection/AboutCollection';
 export { default as Road } from './Road/Road';

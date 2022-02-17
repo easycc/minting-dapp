@@ -4,6 +4,7 @@
 			<!-- <Header /> -->
 		</template>
 
+		<Spotlight />
 		<AboutCollection />
 		<GetAnimalsBack />
 		<NftPreview />
@@ -106,7 +107,7 @@ import { setTimeout } from 'timers';
 import { Pop } from '~/components/animation';
 import { Page, Header, Footer } from '~/components/PageLayout';
 import {
-	AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection, Rope, Wave
+	Spotlight, AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection, Rope, Wave
 } from '~/containers/index';
 import { getClientRectInParent } from '~/helpers/dom';
 
@@ -117,6 +118,7 @@ export default {
 		Page,
 		AboutUs,
 		Pop,
+		Spotlight,
 		Road,
 		AboutCollection,
 		GetAnimalsBack,
