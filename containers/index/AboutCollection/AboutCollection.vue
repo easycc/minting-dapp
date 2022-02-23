@@ -4,14 +4,14 @@
 			<PageContent class="content">
 				<div class="text-wrapper">
 					<h2 class="title">
-						9 circus animals make their dreams true
+						9 circus animals make their dreams come true
 					</h2>
 					<p>
 						They were forced to walk a tightrope, juggle, follow commands.
 					</p>
 
 					<p>
-						But everything changed on the day when the fur seal managed to negotiate a liter of gasoline from a monkey...
+						One day the fur seal managed to negotiate a liter of gasoline from a monkey...
 					</p>
 				</div>
 
@@ -47,7 +47,7 @@
 
 						<li class="accent-spot-item">
 							<span class="accent-spot-title">
-								0,05 ETH
+								0,03 ETH
 							</span>
 							mint price
 						</li>
@@ -153,7 +153,7 @@ export default {
 }
 
 .text-wrapper {
-	max-width: 42rem;
+	max-width: 35rem;
 	padding: 0 0 2em;
 	margin-left: auto;
 	margin-right: auto;

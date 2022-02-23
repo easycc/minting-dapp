@@ -8,20 +8,28 @@
 				</h2>
 				<Icon name="arrow-bottom" class="tip-icon" />
 
-				<div class="boxes-list-wrapper">
+				<div
+					class="boxes-list-wrapper"
+					:style="`
+						--roll-end-position: calc(50% - (var(--box-margin) * 2 + var(--box-size)) * (${totalBoxesAmount} - 3 * 2 - 1));
+						--boxes-list-width: calc((var(--box-size) + var(--box-margin) * 2)* ${totalBoxesAmount});
+						--start-element-offset: ${START_ELEMENT_OFFSET}`"
+				>
 					<ul
 						class="boxes-list"
 						:class="{ 'boxes-list-in-roll': rollStarted }"
 						:style="{
 							width: `calc((var(--box-size) + var(--box-margin) * 2) * ${totalBoxesAmount})`,
-							animationDuration: `${ROLL_DURATION_IN_SECONDS}ms`
+							animationDuration: `${ROLL_DURATION_IN_SECONDS}ms`,
+							transform: `translateX(
+								calc(-1 * (var(--box-margin) + var(--box-size) / 2) * ${START_ELEMENT_OFFSET * 2 + 1})`
 						}"
 					>
 						<li
 							v-for="(box, index) in totalBoxesAmount"
 							:key="box"
 							class="box-item"
-							:style="`--shadow-color: ${boxParams(index).shadow}; margin-right: var(--box-margin); margin-left: var(--box-margin)`"
+							:style="`--shadow-color: ${boxParams(index).shadow}`"
 						>
 							<transition-group
 								mode="out-in"
@@ -285,7 +293,7 @@ export default {
 @media screen and (max-width: 576px) {
 	.boxes-list-wrapper {
 		--box-margin: 1.25em;
-		--box-size: 13rem;
+		--box-size: 50vw;
 	}
 }
 
@@ -297,7 +305,6 @@ export default {
 	position: absolute;
 	left: 50%;
 	top: 0;
-	transform: translateX(calc(-1 * (var(--box-margin) + var(--box-size) / 2) * 7));
 }
 
 
@@ -308,10 +315,10 @@ export default {
 
 @keyframes roll {
 	0% {
-		transform: translateX(calc(-1 * (var(--box-margin) + var(--box-size) / 2) * 7));
+		left: 50%;
 	}
 	100% {
-		transform: translateX(calc(-100% - (-1 * (var(--box-margin) + var(--box-size) / 2) * 7)));
+		left: var(--roll-end-position);
 	}
 }
 
@@ -328,6 +335,10 @@ export default {
 
 	height: var(--box-size);
 	width: var(--box-size);
+
+	margin-right: var(--box-margin);
+	margin-left: var(--box-margin);
+	z-index: 0;
 }
 
 .box-item-images {

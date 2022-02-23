@@ -3,7 +3,7 @@
 		<section class="get-animals-back-section">
 			<PageContent class="content">
 				<h2 class="section-title">
-					The circus owners are trying to get the animals back!
+					The circus owners are trying to catch the animals and get them back!
 				</h2>
 
 				<div class="slider-wrapper">
@@ -36,7 +36,7 @@
 				</div>
 
 				<h3 class="voting-title">
-					Will they catch the animals?
+					Will they catch them?
 				</h3>
 
 
@@ -165,7 +165,7 @@ export default {
 .section-title {
 	display: block;
 	width: 100%;
-	max-width: 32rem;
+	max-width: 38rem;
 	margin-left: auto;
 	margin-right: auto;
 }

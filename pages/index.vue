@@ -149,7 +149,7 @@ export default {
 					document.body
 				);
 
-				this.topOffset = elephantRect.top - 100;
+				this.topOffset = elephantRect.top - 110;
 
 				this.fallHeight = document.body.offsetHeight - elephantRect.top;
 
@@ -209,7 +209,6 @@ export default {
 
 @keyframes walk-away {
   0% {
-    transform: translateX(0);
 		right: calc(0.5em + 3vw);
   }
   20% {

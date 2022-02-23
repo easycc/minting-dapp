@@ -224,7 +224,9 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
-  font-size: 4rem;
+  font-size: 1000px;
+	height: 100%;
+	width: 100%;
   padding: 0;
   opacity: 0;
   margin: 0;

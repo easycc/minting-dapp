@@ -21,7 +21,7 @@
 
 			<PageContent class="content">
 				<p>No animals were harmed.</p>
-				<p>The story, all names, characters, and incidents portrayed in this production are fictitious..</p>
+				<p>The story, all names, characters, and incidents portrayed in this production are fictitious.</p>
 			</PageContent>
 		</section>
 	</LightTheme>
