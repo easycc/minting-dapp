@@ -19,16 +19,16 @@ export default {
 			{ hid: 'description', name: 'description', content: 'Circus Escape.' },
 
 			{ name: 'msapplication-TileColor', content: '#da532c' },
-			{ name: 'msapplication-TileImage', content: './favicon/ms-icon-144x144.png' },
+			{ name: 'msapplication-TileImage', content: '/favicon/ms-icon-144x144.png' },
 			{ name: 'theme-color', content: '#ffffff' }
 		],
 		link: [
-			{ rel: 'apple-touch-icon', sizes: '180x180', href: './favicon/site.webmanifest' },
-			{ rel: 'icon', sizes: '32x32', type: 'image/png', href: './favicon/favicon-32x32.png' },
-			{ rel: 'icon', sizes: '16x16', type: 'image/png', href: './favicon/favicon-16x16.png' },
-			{ rel: 'manifest', href: './favicon/site.webmanifest' },
+			{ rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/site.webmanifest' },
+			{ rel: 'icon', sizes: '32x32', type: 'image/png', href: '/favicon/favicon-32x32.png' },
+			{ rel: 'icon', sizes: '16x16', type: 'image/png', href: '/favicon/favicon-16x16.png' },
+			{ rel: 'manifest', href: '/favicon/site.webmanifest' },
 
-			{ rel: 'mask-icon', color: '#5bbad5', href: './favicon/safari-pinned-tab.svg' }
+			{ rel: 'mask-icon', color: '#5bbad5', href: '/favicon/safari-pinned-tab.svg' }
 		]
 	},
 
