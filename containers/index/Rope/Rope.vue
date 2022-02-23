@@ -1,6 +1,6 @@
 <template>
 	<LightTheme>
-		<section class="rope-section">
+		<footer class="rope-section">
 			<PageContent class="content">
 				<h2 class="title">
 					What is the end of this story?
@@ -10,20 +10,21 @@
 				</p>
 			</PageContent>
 			<div class="rope">
-				<img
-					src="./images/fur-seal.png"
-					class="fur-seal"
-					alt="fur-seal with a yellow balloon on the rope"
-					width="185"
-					height="165"
-				/>
+				<div class="fur-seal">
+					<img
+						src="./images/fur-seal.png"
+						alt="fur-seal with a yellow balloon on the rope"
+						width="185"
+						height="165"
+					/>
+				</div>
 			</div>
 
 			<PageContent class="content">
 				<p>No animals were harmed.</p>
 				<p>The story, all names, characters, and incidents portrayed in this production are fictitious.</p>
 			</PageContent>
-		</section>
+		</footer>
 	</LightTheme>
 </template>
 
@@ -109,7 +110,7 @@ export default {
 	z-index: 2;
 
 	right: 0;
-	animation: move 32s linear infinite;
+	animation: move 24s linear infinite;
 	animation-delay: 0s;
 	top: 0;
 }
@@ -117,6 +118,24 @@ export default {
 @media screen and (max-width: 576px) {
 	.fur-seal {
 		animation-duration: 14s;
+	}
+}
+
+.fur-seal img {
+	animation: walk 400ms linear infinite;
+}
+
+@keyframes walk {
+	0% {
+		transform: translateY(-10px);
+	}
+
+	50% {
+		transform: translateY(0px);
+	}
+
+	100% {
+		transform: translateY(-10px);
 	}
 }
 </style>
