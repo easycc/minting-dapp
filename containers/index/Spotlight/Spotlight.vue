@@ -290,6 +290,7 @@ export default {
 
 .giraffe {
 	position: absolute;
+	z-index: 3;
 	left: 290px;
 	top: 50px;
 	animation: giraffe 6s linear infinite;
