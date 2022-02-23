@@ -428,7 +428,10 @@ export default {
   transition: all 0.8s;
 }
 
-.flip-enter,
+.flip-enter {
+  transform: rotateY(-180deg);
+  opacity: 0;
+}
 .flip-leave-to {
   transform: rotateY(180deg);
   opacity: 0;

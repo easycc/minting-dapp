@@ -73,9 +73,9 @@
 
 						<div class="animal crocodile">
 							<img
-								src="./images/animals/crocodile.png"
-								alt="Crocodile is runnnig from circus"
-								width="215"
+								src="./images/animals/lion.png"
+								alt="Crocodile is running from circus"
+								width="155"
 								height="155"
 							/>
 						</div>
@@ -92,6 +92,14 @@
 					</div>
 				</div>
 			</div>
+
+			<img
+				src="./images/animals/crocodile.png"
+				class="bottom-crocodile"
+				alt="Crocodile with gasoline is smiling"
+				width="322"
+				height="240"
+			/>
 		</PageContent>
 	</section>
 </template>
@@ -129,13 +137,13 @@ export default {
 	background-size:
 		400px auto,
 		1000px auto,
-		285px auto,
+		350px auto,
 		250px auto,
 		100%;
 	background-position:
 		0 bottom,
-		calc(50% + 200px) 405px,
-		calc(50% - 400px) 405px,
+		calc(41% + 2vw) 405px,
+		calc(30% - 330px + 1vw) 395px,
 		center 0,
 		0 0;
 	background-repeat:
@@ -162,6 +170,7 @@ export default {
 
 	background-image:
 		url('./images/clouds.svg');
+
 	background-repeat: repeat-x;
 	background-size: 750px auto;
 	background-position: calc(50% + 375px) 0;
@@ -201,6 +210,7 @@ export default {
 .subtitle {
 	color: rgb(247, 247, 247);
 	margin-bottom: 2rem;
+	text-shadow: 0px 0.075em 0px rgba(0, 0, 0, 0.4);
 }
 
 .primary-button {
@@ -442,5 +452,14 @@ export default {
 	}
 }
 
+.bottom-crocodile {
+	position: absolute;
+	left: calc(50% - 130px);
+	bottom: -60px;
+	z-index: 1;
+	animation: walk 400ms ease-in-out infinite;
+
+	display: inline-block;
+}
 
 </style>
