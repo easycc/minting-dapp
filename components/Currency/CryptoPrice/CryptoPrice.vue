@@ -1,6 +1,6 @@
 <template>
 	<span class="crypto-currency">
-		{{ value * amount }} {{ name }}
+		{{ (value * amount).toFixed(2) }} {{ name }}
 	</span>
 </template>
 

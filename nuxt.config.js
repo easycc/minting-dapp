@@ -16,19 +16,35 @@ export default {
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5 shrink-to-fit=no' },
-			{ hid: 'description', name: 'description', content: 'Circus Escape.' },
+			{ hid: 'description', name: 'description', content: '5000 NFT captured moments of circus animals making their dreams come true' },
 
 			{ name: 'msapplication-TileColor', content: '#da532c' },
-			{ name: 'msapplication-TileImage', content: '/favicon/ms-icon-144x144.png' },
-			{ name: 'theme-color', content: '#ffffff' }
+			{ name: 'msapplication-TileImage', content: '/ms-icon-144x144.png' },
+			{ name: 'theme-color', content: '#ffffff' },
+
+
+			{ property: 'og:title', content: 'Circus Escape' },
+			{ property: 'og:site_name', content: 'Circus Escape' },
+			{ property: 'og:image', content: 'https://circus-escape.vercel.app/thumbnail.png' },
+			{ property: 'og:description', content: '5000 NFT captured moments of circus animals making their dreams come true' },
+			{ property: 'og:url', content: 'https://circus-escape.vercel.app/' },
+			{ property: 'og:image:width', content: '1200' },
+			{ property: 'og:image:height', content: '627' },
+			{ property: 'og:type', content: 'website' },
+
+
+			{ name: 'twitter:image:alt', content: 'Burning Circus and animals that are escaping' },
+			{ name: 'twitter:card', content: 'summary_large_image' },
+			{ name: 'twitter:site', content: '@CircusEscape' },
+			{ property: 'twitter:creator', content: '@CircusEscape' }
 		],
 		link: [
-			{ rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/site.webmanifest' },
-			{ rel: 'icon', sizes: '32x32', type: 'image/png', href: '/favicon/favicon-32x32.png' },
-			{ rel: 'icon', sizes: '16x16', type: 'image/png', href: '/favicon/favicon-16x16.png' },
-			{ rel: 'manifest', href: '/favicon/site.webmanifest' },
+			{ rel: 'apple-touch-icon', sizes: '180x180', href: '/site.webmanifest' },
+			{ rel: 'icon', sizes: '32x32', type: 'image/png', href: '/favicon-32x32.png' },
+			{ rel: 'icon', sizes: '16x16', type: 'image/png', href: '/favicon-16x16.png' },
+			{ rel: 'manifest', href: '/site.webmanifest' },
 
-			{ rel: 'mask-icon', color: '#5bbad5', href: '/favicon/safari-pinned-tab.svg' }
+			{ rel: 'mask-icon', color: '#5bbad5', href: '/safari-pinned-tab.svg' }
 		]
 	},
 

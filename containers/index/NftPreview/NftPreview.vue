@@ -12,7 +12,6 @@
 					class="boxes-list-wrapper"
 					:style="`
 						--roll-end-position: calc(50% - (var(--box-margin) * 2 + var(--box-size)) * (${totalBoxesAmount} - 3 * 2 - 1));
-						--boxes-list-width: calc((var(--box-size) + var(--box-margin) * 2)* ${totalBoxesAmount});
 						--start-element-offset: ${START_ELEMENT_OFFSET}`"
 				>
 					<ul
@@ -131,10 +130,10 @@ export default {
 			START_ELEMENT_OFFSET: 3,
 
 			rollsCounter: 0,
+			rollStarted: false,
 
 			nfts: shuffle(nfts),
 
-			rollStarted: false,
 			openBox: false
 		};
 	},
@@ -310,7 +309,7 @@ export default {
 
 .boxes-list-in-roll {
 	animation-name: roll;
-	animation-timing-function: easy-in-out;
+	animation-timing-function: ease-in-out;
 }
 
 @keyframes roll {

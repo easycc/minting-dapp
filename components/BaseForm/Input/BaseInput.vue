@@ -191,14 +191,14 @@ export default {
 	display: block;
 	width: 100%;
 	height: auto;
-	border-radius: 0.5em;
+	border-radius: 0;
 	padding: 0.75em 1.125em;
 	box-sizing: border-box;
 	font-family: inherit;
 	text-align: inherit;
 	font-size: 1em;
 	background: var(--color-background-secondary);
-	border: 1px solid var(--color-background-primary);
+	border: 0;
 	box-shadow: none;
 	color: inherit;
 	font-weight: inherit;

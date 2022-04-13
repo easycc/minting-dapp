@@ -1,31 +1,36 @@
 <template>
-	<LightTheme>
-		<footer class="rope-section">
-			<PageContent class="content">
-				<h2 class="title">
-					What is the end of this story?
-				</h2>
-				<p class="subtitle">
-					To be continued...
-				</p>
-			</PageContent>
-			<div class="rope">
-				<div class="fur-seal">
-					<img
-						src="./images/fur-seal.png"
-						alt="fur-seal with a yellow balloon on the rope"
-						width="185"
-						height="165"
-					/>
-				</div>
-			</div>
+	<footer class="rope-section">
+		<div class="shadow-wrapper">
+			<div class="shadow" />
+		</div>
 
-			<PageContent class="content">
-				<p>No animals were harmed.</p>
-				<p>The story, all names, characters, and incidents portrayed in this production are fictitious.</p>
-			</PageContent>
-		</footer>
-	</LightTheme>
+		<div class="light-wrapper">
+			<div class="light" />
+		</div>
+		<PageContent class="content">
+			<h2 class="title">
+				What is the end of this story?
+			</h2>
+			<p class="subtitle">
+				To be continued...
+			</p>
+		</PageContent>
+		<div class="rope">
+			<div class="animal">
+				<img
+					src="./images/animal.png"
+					alt="animal with a yellow balloon on the rope"
+					width="185"
+					height="165"
+				/>
+			</div>
+		</div>
+
+		<PageContent class="content">
+			<p>No animals were harmed.</p>
+			<p>The story, all names, characters, and incidents portrayed in this production are fictitious.</p>
+		</PageContent>
+	</footer>
 </template>
 
 <script>
@@ -43,12 +48,80 @@ export default {
 <style scoped>
 .rope-section {
 	overflow: hidden;
-	background-color: #8EC6F4;
+	background-image: linear-gradient(180deg, #222, #111);
+	position: relative;
+	z-index: 1;
+}
+
+.light-wrapper {
+	display: block;
+	z-index: 1;
+	width: 400px;
+	height: 400px;
+	transform: translate(-50%, 0);
+	position: absolute;
+
+
+	top: 140px;
+	right: 0;
+
+	animation: move 24s linear infinite;
+	animation-delay: 1s;
+}
+
+.light {
+	display: block;
+	animation: wiggle 4s ease-in-out infinite;
+	width: 100%;
+	height: 100%;
+
+	box-shadow: 0 0 0 200vw rgb(0, 0, 0, 0.2);
+	border-radius: 50%;
+}
+
+.shadow-wrapper {
+	display: block;
+	z-index: 0;
+	width: 400px;
+	height: 400px;
+	transform: translate(-50%, 0);
+	position: absolute;
+
+
+	top: 140px;
+	right: 0;
+
+	animation: move 24s linear infinite;
+	animation-delay: 1s;
+}
+
+.shadow {
+	width: inherit;
+	height: inherit;
+	animation: walk 400ms linear infinite;
+
+	background-image: url('./images/animal-shadow.png');
+	background-repeat: no-repeat;
+	background-size: 180px auto;
+	background-position: center;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: translate(8%, 1%);
+  }
+  50% {
+    transform: translate(-8%, 0%);
+  }
+  100% {
+    transform: translate(8%, 1%);
+  }
 }
 
 .rope {
 	height: 270px;
 	position: relative;
+	z-index: 0;
 }
 
 .content {
@@ -95,33 +168,26 @@ export default {
 
 @keyframes move {
   0% {
-    transform: translateX(100%);
+    transform: translateX(500px);
   }
   100% {
-    transform: translateX(calc(-1 * 100vw - 100%));
+    transform: translateX(calc(-100vw - 500px));
   }
 }
 
-.fur-seal {
-	width: 185px;
-	height: 165px;
+.animal {
+	width: 180px;
+	height: 170px;
 
 	position: absolute;
 	z-index: 2;
 
 	right: 0;
 	animation: move 24s linear infinite;
-	animation-delay: 0s;
 	top: 0;
 }
 
-@media screen and (max-width: 576px) {
-	.fur-seal {
-		animation-duration: 14s;
-	}
-}
-
-.fur-seal img {
+.animal img {
 	animation: walk 400ms linear infinite;
 }
 

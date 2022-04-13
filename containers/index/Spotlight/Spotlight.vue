@@ -7,16 +7,17 @@
 					Escape
 				</h1>
 				<p class="subtitle">
-					Join an incredible story
+					Join this incredible story
 				</p>
 			</div>
 
-			<Button
+
+			<!-- <Button
 				title="View on opensea"
 				kind="primary"
 				href="https://opensea.io/collection/circus-escape"
 				class="primary-button"
-			/>
+			/> -->
 
 			<div class="circus-wrapper">
 				<div class="fire">
@@ -92,6 +93,7 @@
 					</div>
 				</div>
 			</div>
+			<PaymentForm />
 
 			<img
 				src="./images/animals/crocodile.png"
@@ -107,11 +109,13 @@
 <script>
 import { PageContent } from '~/components/PageLayout';
 import { Button } from '~/components/buttons';
+import { PaymentForm } from '~/components/Payment';
 
 export default {
 	components: {
 		PageContent,
-		Button
+		Button,
+		PaymentForm
 	}
 };
 </script>
@@ -120,14 +124,13 @@ export default {
 .sky-section {
 	--escape-duration: 10s;
 
-
 	overflow: hidden;
 	background-color: #8EC6F4;
 	background-image:
 		url('./images/grass.png'),
 		url('./images/trees.png'),
 		url('./images/snow.png'),
-		url('./images/flags.png'),
+		/* url('./images/flags.png'), */
 		linear-gradient(180deg,
 			#8EC6F4 0%,
 			#8EC6F4 440px,
@@ -138,23 +141,24 @@ export default {
 		400px auto,
 		1000px auto,
 		350px auto,
-		250px auto,
+		/* 250px auto, */
 		100%;
 	background-position:
 		0 bottom,
 		calc(41% + 2vw) 405px,
 		calc(30% - 330px + 1vw) 395px,
-		center 0,
+		/* center 0, */
 		0 0;
 	background-repeat:
 		repeat-x,
 		no-repeat,
 		no-repeat,
-		repeat-x,
+		/* repeat-x, */
 		repeat-x;
 	text-align: center;
 	position: relative;
 	border-bottom: calc(var(--pixel-size) * 2) solid var(--color-background-secondary);
+	z-index: 0;
 }
 
 .sky-section:before {
@@ -163,10 +167,9 @@ export default {
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: -1;
 	width: 100%;
 	height: 440px;
-
 
 	background-image:
 		url('./images/clouds.svg');
@@ -174,12 +177,22 @@ export default {
 	background-repeat: repeat-x;
 	background-size: 750px auto;
 	background-position: calc(50% + 375px) 0;
+	animation: bgMove 60s linear infinite;
+}
+
+
+@keyframes bgMove {
+  0% {
+		background-position: 0 7%;
+  }
+  100% {
+		background-position: 100% 7%;
+  }
 }
 
 .content {
 	padding-top: 4.5rem;
 	padding-bottom: 150px;
-	position: relative;
 	z-index: 2;
 }
 
@@ -187,6 +200,8 @@ export default {
 	max-width: 42rem;
 	margin-left: auto;
 	margin-right: auto;
+	position: relative;
+	z-index: 1;
 }
 
 .title {
@@ -354,19 +369,19 @@ export default {
 
 .elephant {
 	--end-point-x: -400px;
-	--end-point-y: 500px;
+	--end-point-y: 600px;
 	animation-delay: 0s;
 }
 
 .crocodile {
 	--end-point-x: -600px;
-	--end-point-y: 500px;
+	--end-point-y: 600px;
 	animation-delay: -4s;
 }
 
 .rhino {
 	--end-point-x: 800px;
-	--end-point-y: 500px;
+	--end-point-y: 600px;
 	animation-delay: -7s;
 }
 
@@ -454,7 +469,7 @@ export default {
 
 .bottom-crocodile {
 	position: absolute;
-	left: calc(50% - 130px);
+	right: 0;
 	bottom: -60px;
 	z-index: 1;
 	animation: walk 400ms ease-in-out infinite;

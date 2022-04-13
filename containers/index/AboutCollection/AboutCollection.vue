@@ -90,8 +90,7 @@
 </template>
 
 <script>
-import AccentSpot from './AccentSpot/AccentSpot';
-
+import AccentSpot from '~/components/AccentSpot/AccentSpot';
 import { PageContent } from '~/components/PageLayout';
 
 export default {

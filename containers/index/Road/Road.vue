@@ -36,7 +36,7 @@ export default {
 .road-section-wrapper {
 	padding-top: 100px;
 	overflow: hidden;
-	background-color: #252525;
+	margin-top: -100px;
 }
 
 .road-section {

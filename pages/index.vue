@@ -9,8 +9,8 @@
 		<GetAnimalsBack />
 		<NftPreview />
 		<Wave />
-		<AboutUs />
 		<Road />
+		<AboutUs />
 		<Rope />
 
 		<div
