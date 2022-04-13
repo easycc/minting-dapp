@@ -27,11 +27,11 @@ export default {
 
 	async mounted () {
 		await this.connectWallet();
+
+		await this.$store.dispatch('ethereum/fetchCollection');
 	},
 
 	methods: {
-
-
 		async connectWallet () {
 			const storedAccount = LocaleStorage.getItem('account');
 

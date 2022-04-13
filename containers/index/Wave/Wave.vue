@@ -76,7 +76,7 @@ export default {
 	background-position: 0 7%;
 	background-repeat: repeat-x;
 	/* border-bottom: calc(var(--pixel-size) * 2) solid var(--color-background-secondary); */
-	animation: bgMove 70s linear infinite;
+	animation: bgMove 30s linear infinite;
 }
 
 .water {
@@ -153,10 +153,10 @@ export default {
 
 @keyframes bgMove {
   0% {
-		background-position: 0 7%;
+		background-position: 250px 7%;
   }
   100% {
-		background-position: 100% 7%;
+		background-position: 0 7%;
   }
 }
 

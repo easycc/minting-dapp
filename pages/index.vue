@@ -1,7 +1,7 @@
 <template>
 	<Page class="page">
 		<template v-slot:header>
-			<!-- <Header /> -->
+			<Header />
 		</template>
 
 		<Spotlight />
@@ -106,6 +106,7 @@ import { setTimeout } from 'timers';
 
 import { Pop } from '~/components/animation';
 import { Page, Header, Footer } from '~/components/PageLayout';
+import { LightTheme } from '~/components/Themes';
 import {
 	Spotlight, AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection, Rope, Wave
 } from '~/containers/index';
@@ -118,6 +119,7 @@ export default {
 		Page,
 		AboutUs,
 		Pop,
+		LightTheme,
 		Spotlight,
 		Road,
 		AboutCollection,

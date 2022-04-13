@@ -35,12 +35,10 @@
 
 <script>
 import { PageContent } from '~/components/PageLayout';
-import { LightTheme } from '~/components/Themes';
 
 export default {
 	components: {
-		PageContent,
-		LightTheme
+		PageContent
 	}
 };
 </script>
@@ -75,7 +73,7 @@ export default {
 	width: 100%;
 	height: 100%;
 
-	box-shadow: 0 0 0 200vw rgb(0, 0, 0, 0.2);
+	box-shadow: 0 0 0 300vw rgb(0, 0, 0, 0.2);
 	border-radius: 50%;
 }
 

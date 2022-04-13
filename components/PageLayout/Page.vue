@@ -176,7 +176,7 @@ export default {
 .header {
 	grid-area: header;
   z-index: 10;
-	position: sticky;
+	position: absolute;
 	top: 0;
 	left: 0;
 }

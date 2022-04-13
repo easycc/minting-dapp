@@ -177,7 +177,7 @@ export default {
 	background-repeat: repeat-x;
 	background-size: 750px auto;
 	background-position: calc(50% + 375px) 0;
-	animation: bgMove 60s linear infinite;
+	animation: bgMove 50s linear infinite;
 }
 
 
@@ -186,7 +186,7 @@ export default {
 		background-position: 0 7%;
   }
   100% {
-		background-position: 100% 7%;
+		background-position: 750px 7%;
   }
 }
 

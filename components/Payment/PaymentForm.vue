@@ -1,11 +1,12 @@
 <template>
 	<AccentSpot class="accent-spot" kind="secondary">
 		<FormSubmit successMessage="Congratulations! Visit OpenSea to sea your asset." class="payment-form">
-			<BaseForm @submit="mintNft(999)">
+			<BaseForm @submit="mintNft">
 				<div class="mint-amount-field">
 					<Button
 						:title="`Buy ${mintAmount - 1} NFT`"
 						collapsed
+
 						iconName="minus"
 						class="input-button minus"
 						:disabled="mintAmount <= 1"
@@ -54,9 +55,9 @@
 					</template>
 					<ConnectWalletButton v-else class="submit-button" />
 				</div>
-			<!-- <AssetsLastBadge /> -->
 			</BaseForm>
 		</FormSubmit>
+		<AssetsLastBadge class="assets-last-badge" />
 	</AccentSpot>
 </template>
 
@@ -139,6 +140,10 @@ export default {
 	text-align: center;
 }
 
+::v-deep .accent-spot-content {
+	padding-bottom: 1em;
+}
+
 .mint-amount-field ::v-deep .input {
 	padding: 0;
 	font-size: 3em;
@@ -160,14 +165,15 @@ export default {
 
 .input-button {
 	display: inline-block;
-	vertical-align: middle;
+	vertical-align: top;
+	background: #555;
 	font-size: 0.75em;
+	margin-top: 0.75em;
 }
 
 .submit-button {
 	display: inline-block;
 	width: auto;
-	/* background-color: #fb6400 !important; */
 }
 
 .button-wrapper {
@@ -195,5 +201,16 @@ export default {
 		padding-bottom: 0.5em;
 		margin-right: 0;
 	}
+
+	::v-deep .accent-spot-content {
+		padding-bottom: 2em;
+	}
+}
+
+.assets-last-badge {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, 50%);
 }
 </style>
