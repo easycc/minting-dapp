@@ -34,11 +34,19 @@
 </template>
 
 <script>
+import track from './music/track.mp3';
+
 import { PageContent } from '~/components/PageLayout';
 
 export default {
 	components: {
 		PageContent
+	},
+
+	data () {
+		return {
+			track
+		};
 	}
 };
 </script>

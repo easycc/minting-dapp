@@ -8,7 +8,7 @@
 					<ul class="navigation-list">
 						<li class="navigation-item">
 							<a
-								href="https://google.com/"
+								href="https://twitter.com/CircusEscape"
 								class="navigation-link twitter"
 								target="_blank"
 								rel="noopener noreferrer nofollow"
@@ -70,9 +70,14 @@ export default {
   width: 100%;
   touch-action: manipulation;
   font-size: 1em;
-  padding: 1em 0 0.625em;
+  padding: 3em 0 0.625em;
 	transition: backdrop-filter 0.5s ease;
 	transition-delay: 0.5s;
+
+	background-image: url('./images/flags.png');
+	background-position: calc(50% - 125px) 0;
+	background-size: 250px 50px, auto;
+	background-repeat: repeat-x, no-repeat;
 }
 
 .header-navigation-wrapper {

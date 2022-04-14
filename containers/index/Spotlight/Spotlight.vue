@@ -196,6 +196,13 @@ export default {
 	z-index: 2;
 }
 
+
+@media screen and (max-width: 576px) {
+	.content {
+		padding-top: 7rem;
+	}
+}
+
 .text-wrapper {
 	max-width: 42rem;
 	margin-left: auto;
@@ -210,7 +217,7 @@ export default {
 	display: block;
 	text-shadow: initial;
 	line-height: 1.075;
-	text-shadow: 0px 0.0375em 0px rgba(0, 0, 0, 0.4);
+	text-shadow: 0px 0.0375em 0px rgba(0, 0, 0, 0.65);
 	letter-spacing: 0.01em;
 	margin-bottom: 0.5rem;
 }
@@ -219,17 +226,13 @@ export default {
 	font-size: 0.375em;
 	letter-spacing: 0.05em;
 	display: block;
-	text-shadow: 0px 0.075em 0px rgba(0, 0, 0, 0.4);
+	text-shadow: 0px 0.075em 0px rgba(0, 0, 0, 0.65);
 }
 
 .subtitle {
 	color: rgb(247, 247, 247);
 	margin-bottom: 2rem;
-	text-shadow: 0px 0.075em 0px rgba(0, 0, 0, 0.4);
-}
-
-.primary-button {
-	margin-bottom: 2em;
+	text-shadow: 0px 0.075em 0px rgba(0, 0, 0, 0.65);
 }
 
 .circus-wrapper {

@@ -4,7 +4,7 @@
 			group="all"
 			position="top center"
 			class="notification"
-			:duration="3000"
+			:duration="5000"
 		/>
 	</ClientOnly>
 </template>

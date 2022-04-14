@@ -153,7 +153,11 @@ export const actions = {
 		.once('error', error => {
 			throw error;
 		})
-		.then(receipt => receipt)
+		.then(receipt => {
+			dispatch('fetchCollectionContractData');
+
+			return receipt;
+		})
 		.catch(error => {
 			throw error;
 		});

@@ -2,40 +2,42 @@
 	<AccentSpot class="accent-spot" kind="secondary">
 		<FormSubmit successMessage="Congratulations! Visit OpenSea to sea your asset." class="payment-form">
 			<BaseForm @submit="mintNft">
-				<div class="mint-amount-field">
-					<Button
-						:title="`Buy ${mintAmount - 1} NFT`"
-						collapsed
+				<AssetsLastBadge />
 
-						iconName="minus"
-						class="input-button minus"
-						:disabled="mintAmount <= 1"
-						@click="mintAmount--"
-					/>
+				<div class="right">
+					<div class="mint-amount-field">
+						<Button
+							:title="`Buy ${mintAmount - 1} NFT`"
+							collapsed
 
-					<Input
-						v-model="mintAmount"
+							iconName="minus"
+							class="input-button minus"
+							:disabled="mintAmount <= 1"
+							@click="mintAmount--"
+						/>
 
-						type="number"
-						placeholder="1"
-						name="mintAmount"
-						:max="maxMintAmount"
-						:min="0"
-						:required="true"
-						class="mint-amount-input"
-					/>
+						<Input
+							v-model="mintAmount"
 
-					<Button
-						:title="`Buy ${mintAmount + 1} NFT`"
-						collapsed
-						iconName="plus"
-						class="input-button plus"
-						:disabled="mintAmount >= maxMintAmount"
-						@click="mintAmount++"
-					/>
-				</div>
+							type="number"
+							placeholder="1"
+							name="mintAmount"
+							:max="maxMintAmount"
+							:min="0"
+							:required="true"
+							class="mint-amount-input"
+						/>
 
-				<div class="button-wrapper">
+						<Button
+							:title="`Buy ${mintAmount + 1} NFT`"
+							collapsed
+							iconName="plus"
+							class="input-button plus"
+							:disabled="mintAmount >= maxMintAmount"
+							@click="mintAmount++"
+						/>
+					</div>
+
 					<span class="price">
 						<CryptoPrice
 							:name="network.currency.symbol"
@@ -57,7 +59,6 @@
 				</div>
 			</BaseForm>
 		</FormSubmit>
-		<AssetsLastBadge class="assets-last-badge" />
 	</AccentSpot>
 </template>
 
@@ -129,15 +130,21 @@ export default {
 
 .payment-form {
 	width: 100%;
-	padding: 0 0.5em;
+	padding: 0 0.75em;
 	text-align: left;
 	position: relative;
+	display: flex;
+	flex-direction: row;
 }
 
 .mint-amount-field {
 	display: inline-block;
 	vertical-align: middle;
 	text-align: center;
+}
+
+.mint-amount-field {
+	display: block;
 }
 
 ::v-deep .accent-spot-content {
@@ -176,41 +183,35 @@ export default {
 	width: auto;
 }
 
-.button-wrapper {
-	float: right;
-	padding-top: 0.5em;
+.right {
+	text-align: center;
+	margin-left: auto;
+}
+
+.price {
+	display: block;
+	padding-bottom: 0.5em;
+	margin-right: 0;
 }
 
 
 @media screen and (max-width: 650px) {
 	.payment-form {
 		text-align: center;
+		flex-direction: column;
 	}
 
-	.button-wrapper {
-		float: initial;
-		padding-top: 0;
+	.right {
+		margin-right: auto;
+		padding-top: 2em;
 	}
 
 	.mint-amount-field {
-		margin-bottom: 1em;
-	}
-
-	.price {
-		display: block;
-		padding-bottom: 0.5em;
-		margin-right: 0;
+		margin-bottom: 0.25em;
 	}
 
 	::v-deep .accent-spot-content {
 		padding-bottom: 2em;
 	}
-}
-
-.assets-last-badge {
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	transform: translate(-50%, 50%);
 }
 </style>
