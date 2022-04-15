@@ -43,6 +43,7 @@ export default {
 	font-size: 1.125rem;
 	color: var(--color-text-primary);
 	position: relative;
+	background: transparent;
 
 	--progress-bar-background-color: var(--color-background-primary)
 }

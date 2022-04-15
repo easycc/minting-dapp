@@ -19,7 +19,7 @@ export default {
 <style scoped>
 .light-theme {
 	--color-text-default: #595858;
-	--color-text-primary: #111;
+	--color-text-primary: #151515;
 	--color-text-secondary: #999;
 
 	--color-background-default: #fff;

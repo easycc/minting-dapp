@@ -13,7 +13,7 @@
 
 		<li class="social-link-item">
 			<a
-				href="https://google.com/"
+				href="https://discord.gg/UJ5pchvqDx"
 				class="navigation-link discord"
 				target="_blank"
 				rel="noopener noreferrer nofollow"

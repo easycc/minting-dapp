@@ -23,6 +23,7 @@ export default {
 	display: inline-block;
 	vertical-align: top;
 	position: relative;
+	z-index: 0;
 	padding: 0 calc(var(--pixel-size) * 6) calc(var(--pixel-size) * 2);
 	color: #fff;
 }
@@ -114,5 +115,6 @@ export default {
 
 .secondary .accent-spot-content {
 	background-color: var(--color-background-secondary);
+
 }
 </style>

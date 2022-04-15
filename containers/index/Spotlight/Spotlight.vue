@@ -97,14 +97,12 @@
 
 <script>
 import { PageContent } from '~/components/PageLayout';
-import { Button } from '~/components/buttons';
 import { PaymentForm } from '~/components/Payment';
 import SocialLinks from '~/containers/SocialLinks/SocialLinks';
 
 export default {
 	components: {
 		PageContent,
-		Button,
 		SocialLinks,
 		PaymentForm
 	}
