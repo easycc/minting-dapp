@@ -1,0 +1,12 @@
+{
+	"contractAddress": "0x44eaFdAaB2227998966eEdBA20d4304cCF0A46De",
+	"cost": 0.005,
+	"maxSupply": 600,
+	"maxMintAmount": 5,
+	"symbol": "CESC",
+	"name": "Circus Escape",
+	"network": {
+		"id": "ETHEREUM",
+		"chainId": 4
+	}
+}

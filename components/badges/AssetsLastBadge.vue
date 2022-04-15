@@ -1,11 +1,10 @@
 <template>
 	<DefaultBadge v-if="collection" class="assets-last-badge">
-
 		<ProgressBar
-			:length="collection.maxSupply"
+			:length="config.maxSupply"
 			:value="collection.totalSupply"
 		/>
-		<span class="title">{{ collection.totalSupply }} / {{ collection.maxSupply }}</span>
+		<span class="title">{{ collection.totalSupply }} / {{ config.maxSupply }}</span>
 		<span class="subtitle">minted</span>
 	</DefaultBadge>
 </template>
@@ -13,12 +12,19 @@
 <script>
 import DefaultBadge from './DefaultBadge';
 
+import config from '~/collection/config.json';
 import { ProgressBar } from '~/components/progress';
 
 export default {
 	components: {
 		DefaultBadge,
 		ProgressBar
+	},
+
+	data () {
+		return {
+			config
+		};
 	},
 
 	computed: {

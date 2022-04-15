@@ -1,42 +1,27 @@
-import Web3EthContract from 'web3-eth-contract';
-
-import Web3 from '../services/Web3';
+import WindowWeb3 from '../services/WindowWeb3';
+import InfuraWeb3 from '../services/InfuraWeb3';
 import abi from '../collection/abi.json';
+import config from '../collection/config.json';
 
 import NETWORKS from '~/constants/networks';
 
-
 export const state = () => ({
 	collection: {
-		contractAddress: '0xfcD1186589a5801e30290765a340d0B968a568aB',
-		abi,
-		cost: 0.05,
-
-		maxMintAmount: 0,
-		totalSupply: 0,
-		maxSupply: 0,
-		symbol: null,
-		name: null,
-		network: {
-			id: 'ETHEREUM',
-			chainId: 4
-		}
+		totalSupply: 0
 	},
 	account: null
 });
 
 export const actions = {
-
 	async connect ({ commit, dispatch, getters }) {
 		const { ethereum } = window;
-		let { collection, network } = getters;
-
-		await window.ethereum.enable();
+		let { network } = getters;
 
 		const metamaskIsInstalled = ethereum && ethereum.isMetaMask;
 		let account = null;
 
 		if (metamaskIsInstalled) {
+			await window.ethereum.enable();
 			ethereum.on('accountsChanged', () => {
 				dispatch('connect');
 			});
@@ -44,7 +29,7 @@ export const actions = {
 				dispatch('connect');
 			});
 
-			return Web3.eth.getAccounts()
+			return WindowWeb3.eth.getAccounts()
 					.then(async foundAccounts => {
 						account = foundAccounts[0];
 
@@ -63,7 +48,7 @@ export const actions = {
 					.then(networkIdStr => {
 						let networkId = parseInt(networkIdStr, 10);
 
-						if (networkId === collection.network.chainId) {
+						if (networkId === config.network.chainId) {
 							commit('SET_STATE', ['account', account]);
 						}
 						else {
@@ -86,42 +71,21 @@ export const actions = {
 					});
 		}
 
-		let message = 'Please install Metamask';
-
 		this.$notify({
 			group: 'all',
 			type: 'warning',
-			title: message
+			title: 'Please install Metamask'
 		});
 	},
 
-	async fetchCollection ({ dispatch }) {
-		const { ethereum } = window;
-		const metamaskIsInstalled = ethereum;
-
-		if (!metamaskIsInstalled) return;
-
-		await dispatch('fetchCollectionContractData');
-	},
-
 	async fetchCollectionContractData ({ commit, getters }) {
-		let { SmartContract, network } = getters;
-		let totalSupply = SmartContract.methods.totalSupply().call();
-		let maxMintAmount = SmartContract.methods.maxMintAmount().call();
-		let maxSupply = SmartContract.methods.maxSupply().call();
-		let cost = SmartContract.methods.cost().call();
-		let symbol = SmartContract.methods.symbol().call();
-		let name = SmartContract.methods.name().call();
+		let { InfuraSmartContract } = getters;
+		let totalSupply = InfuraSmartContract.methods.totalSupply().call();
 
-		return Promise.all([totalSupply, maxMintAmount, maxSupply, cost, symbol, name])
+		return Promise.all([totalSupply])
 		.then(values => {
 			commit('UPDATE_STATE', ['collection', {
-				totalSupply: parseInt(values[0], 10),
-				maxMintAmount: parseInt(values[1], 10),
-				maxSupply: parseInt(values[2], 10),
-				cost: parseFloat(Web3.utils.fromWei(values[3], network.currency.name)),
-				symbol: values[4],
-				name: values[5]
+				totalSupply: parseInt(values[0], 10)
 			}]);
 
 			return values;
@@ -136,17 +100,17 @@ export const actions = {
 	},
 
 	async mintNft ({ getters, dispatch }, { mintAmount }) {
-		let { account, SmartContract, collection } = getters;
+		let { account, SmartContract } = getters;
 
-		let amount = mintAmount * collection.cost;
+		let amount = mintAmount * config.cost;
 
-		let donationAmountInWei = Web3.utils.toWei(String(amount), 'ether');
+		let valueInWei = WindowWeb3.utils.toWei(String(amount), 'ether');
 
-		let totalCostWei = String(donationAmountInWei);
+		let totalCostWei = String(valueInWei);
 
 		return SmartContract.methods.mint(mintAmount)
 		.send({
-			to: collection.contractAddress,
+			to: config.contractAddress,
 			from: account,
 			value: totalCostWei
 		})
@@ -200,25 +164,27 @@ export const getters = {
 	},
 
 	network (state) {
-		let { collection } = state;
+		let network = {};
 
-		if (collection && collection.network.id) {
-			let network = {};
-
-			network = NETWORKS[collection.network.id];
-			network.chain = network.chains[collection.network.chainId];
-			return network;
-		}
-		return null;
+		network = NETWORKS[config.network.id];
+		network.chain = network.chains[config.network.chainId];
+		return network;
 	},
 
-	SmartContract (state) {
-		let { collection } = state;
-
-		if (collection.contractAddress) {
-			return new Web3EthContract(
+	SmartContract () {
+		if (config.contractAddress) {
+			return new WindowWeb3.eth.Contract(
 				abi,
-				collection.contractAddress
+				config.contractAddress
+			);
+		}
+	},
+
+	InfuraSmartContract () {
+		if (config.contractAddress) {
+			return new InfuraWeb3.eth.Contract(
+				abi,
+				config.contractAddress
 			);
 		}
 	}

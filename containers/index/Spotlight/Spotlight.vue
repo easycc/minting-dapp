@@ -11,14 +11,6 @@
 				</p>
 			</div>
 
-
-			<!-- <Button
-				title="View on opensea"
-				kind="primary"
-				href="https://opensea.io/collection/circus-escape"
-				class="primary-button"
-			/> -->
-
 			<div class="circus-wrapper">
 				<div class="fire">
 					<img
@@ -39,8 +31,6 @@
 							class="circus-curtain-image"
 						/>
 
-						<!--  -->
-
 						<div class="animal rhino">
 							<img
 								src="./images/animals/rhino.png"
@@ -60,8 +50,6 @@
 							height="315"
 							class="circus-curtain-image"
 						/>
-
-						<!--  -->
 
 						<div class="animal elephant">
 							<img
@@ -94,6 +82,7 @@
 				</div>
 			</div>
 			<PaymentForm />
+			<SocialLinks />
 
 			<img
 				src="./images/animals/crocodile.png"
@@ -110,11 +99,13 @@
 import { PageContent } from '~/components/PageLayout';
 import { Button } from '~/components/buttons';
 import { PaymentForm } from '~/components/Payment';
+import SocialLinks from '~/containers/SocialLinks/SocialLinks';
 
 export default {
 	components: {
 		PageContent,
 		Button,
+		SocialLinks,
 		PaymentForm
 	}
 };
@@ -192,14 +183,21 @@ export default {
 
 .content {
 	padding-top: 4.5rem;
-	padding-bottom: 150px;
+	padding-bottom: 10rem;
 	z-index: 2;
 }
 
 
+@media screen and (max-width: 900px) {
+	.content {
+		padding-bottom: 12rem;
+	}
+}
+
 @media screen and (max-width: 576px) {
 	.content {
 		padding-top: 7rem;
+		padding-bottom: 13rem;
 	}
 }
 
@@ -372,19 +370,19 @@ export default {
 
 .elephant {
 	--end-point-x: -400px;
-	--end-point-y: 600px;
+	--end-point-y: 700px;
 	animation-delay: 0s;
 }
 
 .crocodile {
 	--end-point-x: -600px;
-	--end-point-y: 600px;
+	--end-point-y: 700px;
 	animation-delay: -4s;
 }
 
 .rhino {
 	--end-point-x: 800px;
-	--end-point-y: 600px;
+	--end-point-y: 700px;
 	animation-delay: -7s;
 }
 

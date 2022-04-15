@@ -33,7 +33,7 @@
 
 						<li class="accent-spot-item">
 							<span class="accent-spot-title">
-								5,000
+								600
 							</span>
 							unique NFT
 						</li>
@@ -47,7 +47,7 @@
 
 						<li class="accent-spot-item">
 							<span class="accent-spot-title">
-								0,03 ETH
+								0,05 ETH
 							</span>
 							mint price
 						</li>

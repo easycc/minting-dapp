@@ -22,7 +22,7 @@
 							type="number"
 							placeholder="1"
 							name="mintAmount"
-							:max="maxMintAmount"
+							:max="config.maxMintAmount"
 							:min="0"
 							:required="true"
 							class="mint-amount-input"
@@ -33,7 +33,7 @@
 							collapsed
 							iconName="plus"
 							class="input-button plus"
-							:disabled="mintAmount >= maxMintAmount"
+							:disabled="mintAmount >= config.maxMintAmount"
 							@click="mintAmount++"
 						/>
 					</div>
@@ -42,20 +42,21 @@
 						<CryptoPrice
 							:name="network.currency.symbol"
 							:network="network.name"
-							:value="collection.cost"
+							:value="config.cost"
 							:amount="mintAmount"
 						/>
 						+ gas
 					</span>
 
-					<template v-if="account">
+					<Fade>
 						<SubmitButton
+							v-if="account"
 							class="submit-button"
 							kind="primary"
 							title="Buy with ETH"
 						/>
-					</template>
-					<ConnectWalletButton v-else class="submit-button" />
+						<ConnectWalletButton v-else class="submit-button" />
+					</Fade>
 				</div>
 			</BaseForm>
 		</FormSubmit>
@@ -65,6 +66,7 @@
 <script>
 import ConnectWalletButton from './ConnectWalletButton';
 
+import { Fade } from '~/components/animation';
 import {
 	SubmitButton,
 	BaseForm,
@@ -76,10 +78,12 @@ import { Button } from '~/components/buttons';
 import NETWORKS from '~/constants/networks';
 import { AssetsLastBadge } from '~/components/badges';
 import AccentSpot from '~/components/AccentSpot/AccentSpot';
+import config from '~/collection/config.json';
 
 export default {
 	components: {
 		ConnectWalletButton,
+		Fade,
 		CryptoPrice,
 		Button,
 		FormSubmit,
@@ -93,9 +97,8 @@ export default {
 	data () {
 		return {
 			NETWORKS,
-			mintAmount: 1,
-
-			maxMintAmount: 5
+			config,
+			mintAmount: 1
 		};
 	},
 
@@ -130,7 +133,7 @@ export default {
 
 .payment-form {
 	width: 100%;
-	padding: 0 0.75em;
+	padding: 0 1em;
 	text-align: left;
 	position: relative;
 	display: flex;

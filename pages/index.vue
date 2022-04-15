@@ -11,7 +11,7 @@
 		<Wave />
 		<Road />
 		<AboutUs />
-		<Rope />
+		<!-- <Rope /> -->
 
 		<div
 			class="elephant"
@@ -96,7 +96,7 @@
 		</div>
 
 		<template v-slot:footer>
-			<!-- <Footer /> -->
+			<Footer />
 		</template>
 	</Page>
 </template>
@@ -108,7 +108,7 @@ import { Pop } from '~/components/animation';
 import { Page, Header, Footer } from '~/components/PageLayout';
 import { LightTheme } from '~/components/Themes';
 import {
-	Spotlight, AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection, Rope, Wave
+	Spotlight, AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection, Wave
 } from '~/containers/index';
 import { getClientRectInParent } from '~/helpers/dom';
 
@@ -125,7 +125,7 @@ export default {
 		AboutCollection,
 		GetAnimalsBack,
 		NftPreview,
-		Rope,
+		// Rope,
 		Wave,
 		Header,
 		Footer

@@ -28,7 +28,7 @@ export default {
 	async mounted () {
 		await this.connectWallet();
 
-		await this.$store.dispatch('ethereum/fetchCollection');
+		await this.$store.dispatch('ethereum/fetchCollectionContractData');
 	},
 
 	methods: {
