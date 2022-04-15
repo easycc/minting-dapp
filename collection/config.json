@@ -1,8 +1,8 @@
 {
-	"contractAddress": "0x44eaFdAaB2227998966eEdBA20d4304cCF0A46De",
-	"cost": 0.005,
-	"maxSupply": 600,
-	"maxMintAmount": 5,
+	"contractAddress": "0xd8088BAe99092ccFCAeF4642aa65Fe5f205CFbF1",
+	"cost": 0.04,
+	"maxSupply": 1000,
+	"maxMintAmount": 10,
 	"symbol": "CESC",
 	"name": "Circus Escape",
 	"network": {
