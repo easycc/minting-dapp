@@ -196,7 +196,7 @@ export default {
 
 @media screen and (max-width: 576px) {
 	.content {
-		padding-top: 7rem;
+		padding-top: 5rem;
 		padding-bottom: 13rem;
 	}
 }
