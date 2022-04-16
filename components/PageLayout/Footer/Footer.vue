@@ -76,7 +76,12 @@ export default {
 	right: 0;
 
 	animation: move 24s linear infinite;
-	animation-delay: 1s;
+}
+
+@media screen and (max-width: 576px) {
+	.light-wrapper {
+		animation-duration: 12s;
+	}
 }
 
 .light {
@@ -102,7 +107,12 @@ export default {
 	right: 0;
 
 	animation: move 24s linear infinite;
-	animation-delay: 1s;
+}
+
+@media screen and (max-width: 576px) {
+	.shadow-wrapper {
+		animation-duration: 12s;
+	}
 }
 
 .shadow {
@@ -178,10 +188,10 @@ export default {
 
 @keyframes move {
   0% {
-    transform: translateX(500px);
+    transform: translateX(100%);
   }
   100% {
-    transform: translateX(calc(-100vw - 500px));
+    transform: translateX(-100vw);
   }
 }
 
@@ -195,6 +205,12 @@ export default {
 	right: 0;
 	animation: move 24s linear infinite;
 	top: 0;
+}
+
+@media screen and (max-width: 576px) {
+	.animal {
+		animation-duration: 12s;
+	}
 }
 
 .animal img {

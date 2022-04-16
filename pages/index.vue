@@ -11,6 +11,7 @@
 		<Wave />
 		<Road />
 		<AboutUs />
+		<Wallpapers />
 		<!-- <Rope /> -->
 
 		<div
@@ -108,7 +109,7 @@ import { Pop } from '~/components/animation';
 import { Page, Header, Footer } from '~/components/PageLayout';
 import { LightTheme } from '~/components/Themes';
 import {
-	Spotlight, AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection, Wave
+	Spotlight, AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection, Wave, Wallpapers
 } from '~/containers/index';
 import { getClientRectInParent } from '~/helpers/dom';
 
@@ -124,6 +125,7 @@ export default {
 		Road,
 		AboutCollection,
 		GetAnimalsBack,
+		Wallpapers,
 		NftPreview,
 		// Rope,
 		Wave,
