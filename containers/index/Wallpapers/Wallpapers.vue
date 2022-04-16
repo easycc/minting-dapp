@@ -103,10 +103,6 @@ export default {
 	margin-left: calc(-1 * var(--page-horizontal-padding));
 }
 
-.swiper-slide-active .wallpaper-image {
-	border-radius: 0.25em;
-}
-
 .wallpapers-list {
 	padding: 0.5rem 0;
 }
@@ -119,6 +115,8 @@ export default {
 	display: block;
 	width: inherit;
 	height: auto;
+	border-radius: 1.5em;
+	overflow: hidden;
 }
 
 .iphone-frame {

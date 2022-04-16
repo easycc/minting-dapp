@@ -107,6 +107,8 @@ export default {
 	display: block;
 	width: 100%;
 	margin-bottom: 0.5em;
+	border-radius: 1.5em;
+	overflow: hidden;
 }
 
 .download-button {
