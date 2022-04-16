@@ -4,11 +4,10 @@
 			<h2 class="title">
 				Want a wallpaper?
 			</h2>
-			<!-- <p class="subtitle">
-				Download it for free!
-			</p> -->
 
-			<Button class="download-button">Download for free</Button>
+			<Button link="/wallpapers" class="download-button">
+				Download for free
+			</Button>
 
 			<div class="slider-wrapper">
 				<Swiper

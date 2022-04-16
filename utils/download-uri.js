@@ -1,4 +1,4 @@
-export function downloadURI (uri, name) {
+export default function (uri, name) {
 	let link = document.createElement('a');
 
 	link.download = name;

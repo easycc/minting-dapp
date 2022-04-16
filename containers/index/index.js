@@ -6,3 +6,4 @@ export { default as Wave } from './Wave/Wave';
 export { default as NftPreview } from './NftPreview/NftPreview';
 export { default as GetAnimalsBack } from './GetAnimalsBack/GetAnimalsBack';
 export { default as Wallpapers } from './Wallpapers/Wallpapers';
+export { default as FlyingElephant } from './FlyingElephant/FlyingElephant';

@@ -139,8 +139,8 @@ import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper';
 import 'swiper/css/swiper.css';
 
 import layers from './layers';
-import { downloadURI } from './utils';
 
+import downloadURI from '~/utils/download-uri';
 import { ButtonPrev, ButtonNext } from '~/components/Slider';
 import { DefaultModal } from '~/components/modals';
 import { Button } from '~/components/buttons';
