@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import track from './music/track.mp3';
 import PageContent from '../PageContent';
 
 import SocialLinks from '~/containers/SocialLinks/SocialLinks';
@@ -45,12 +44,6 @@ export default {
 	components: {
 		PageContent,
 		SocialLinks
-	},
-
-	data () {
-		return {
-			track
-		};
 	}
 };
 </script>
