@@ -140,6 +140,13 @@ export default {
 	flex-direction: row;
 }
 
+@media screen and (max-width: 650px) {
+	.payment-form {
+		padding: 0;
+	}
+}
+
+
 .mint-amount-field {
 	display: inline-block;
 	vertical-align: middle;
