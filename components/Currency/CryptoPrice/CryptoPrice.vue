@@ -1,11 +1,18 @@
 <template>
 	<span class="crypto-currency">
-		{{ (value * amount).toFixed(2) }} {{ name }}
+		{{ name }}
+		<FormatNumber :value="value * amount" />
 	</span>
 </template>
 
 <script>
+import { FormatNumber } from '~/components/FormatNumber';
+
 export default {
+	components: {
+		FormatNumber
+	},
+
 	props: {
 		name: {
 			required: true,

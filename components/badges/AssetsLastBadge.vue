@@ -4,7 +4,11 @@
 			:length="config.maxSupply"
 			:value="collection.totalSupply"
 		/>
-		<span class="title">{{ collection.totalSupply }} / {{ config.maxSupply }}</span>
+		<span class="title">
+			<FormatNumber :value="collection.totalSupply" />
+			/
+			<FormatNumber :value="config.maxSupply" /></span>
+
 		<span class="subtitle">minted</span>
 	</DefaultBadge>
 </template>
@@ -14,10 +18,12 @@ import DefaultBadge from './DefaultBadge';
 
 import config from '~/collection/config.json';
 import { ProgressBar } from '~/components/progress';
+import { FormatNumber } from '~/components/FormatNumber';
 
 export default {
 	components: {
 		DefaultBadge,
+		FormatNumber,
 		ProgressBar
 	},
 

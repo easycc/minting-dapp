@@ -33,21 +33,25 @@
 
 						<li class="accent-spot-item">
 							<span class="accent-spot-title">
-								600
+								<FormatNumber :value="config.maxSupply" />
 							</span>
 							unique NFT
 						</li>
 
 						<li class="accent-spot-item">
 							<span class="accent-spot-title">
-								500,000
+								<FormatNumber :value="500000" />
 							</span>
 							pixels used
 						</li>
 
 						<li class="accent-spot-item">
 							<span class="accent-spot-title">
-								0,05 ETH
+								<CryptoPrice
+									:name="network.currency.symbol"
+									:network="network.name"
+									:value="config.cost"
+								/>
 							</span>
 							mint price
 						</li>
@@ -90,13 +94,29 @@
 </template>
 
 <script>
+import { FormatNumber } from '~/components/FormatNumber';
 import AccentSpot from '~/components/AccentSpot/AccentSpot';
 import { PageContent } from '~/components/PageLayout';
+import config from '~/collection/config.json';
+import { CryptoPrice } from '~/components/Currency';
 
 export default {
 	components: {
+		FormatNumber,
 		PageContent,
-		AccentSpot
+		AccentSpot,
+		CryptoPrice
+	},
+
+	data () {
+		return {
+			config
+		};
+	},
+	computed: {
+		network () {
+			return this.$store.getters['ethereum/network'];
+		}
 	}
 };
 </script>
