@@ -6,7 +6,7 @@
 			<PageContent v-else-if="accessIsGranted === false && showSplashScreen" class="access-denied-screen">
 				<DefaultCard>
 					<h3>You don’t have permissions.</h3>
-					<p>Please contact administrators to get an access.</p>
+					<p>Please, contact administrators to get an access.</p>
 
 					<LoginForm class="login-form" />
 				</DefaultCard>

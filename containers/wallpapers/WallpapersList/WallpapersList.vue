@@ -1,11 +1,14 @@
 <template>
 	<section class="wallpapers-section">
 		<PageContent>
+			<BackButton link="/" />
 			<h1 class="title">
 				Wallpapers
 			</h1>
 
-			<p class="subtitle">For the biggest fans</p>
+			<p class="subtitle">
+				For the biggest fans <Icon name="heart" class="heart-icon" />
+			</p>
 
 			<ul class="wallpapers-list">
 				<li
@@ -33,13 +36,16 @@
 <script>
 import wallpapers from './wallpapers';
 
-import { Button } from '~/components/buttons';
+import { Button, BackButton } from '~/components/buttons';
+import { Icon } from '~/components/Icon';
 import { PageContent } from '~/components/PageLayout';
 
 export default {
 	components: {
 		PageContent,
-		Button
+		Button,
+		Icon,
+		BackButton
 	},
 
 	data () {
@@ -59,6 +65,12 @@ export default {
 .subtitle {
 	text-align: center;
 	margin-bottom: 3rem;
+}
+
+.heart-icon {
+	display: inline;
+	padding-left: 0.5em;
+	color: #FF80A5;
 }
 
 .wallpapers-list {

@@ -74,7 +74,7 @@ export const actions = {
 		this.$notify({
 			group: 'all',
 			type: 'warning',
-			title: 'Please install Metamask'
+			title: 'Please, install Metamask'
 		});
 	},
 

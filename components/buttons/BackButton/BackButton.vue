@@ -1,7 +1,8 @@
 <template>
 	<Button
 		class="back-button"
-		iconName="back"
+		iconName="chevron-left"
+		iconPosition="before"
 		title="Back"
 		v-bind="$attrs"
 		v-on="$listeners"
