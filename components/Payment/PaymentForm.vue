@@ -1,5 +1,5 @@
 <template>
-	<AccentSpot class="accent-spot" kind="secondary">
+	<div class="accent-spot">
 		<FormSubmit successMessage="Congratulations! Visit OpenSea to sea your asset." class="payment-form">
 			<BaseForm @submit="mintNft">
 				<AssetsLastBadge />
@@ -60,7 +60,7 @@
 				</div>
 			</BaseForm>
 		</FormSubmit>
-	</AccentSpot>
+	</div>
 </template>
 
 <script>
@@ -129,6 +129,11 @@ export default {
 	max-width: 40rem;
 	display: block;
 	margin: 0 auto 2em;
+	background-color: rgba(31, 31, 31, 0.9);
+	padding: 1em 1em 1.5em;
+	border: var(--pixel-size) solid #111;
+	position: relative;
+	z-index: 1;
 }
 
 .payment-form {

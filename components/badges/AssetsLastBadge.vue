@@ -3,6 +3,7 @@
 		<ProgressBar
 			:length="config.maxSupply"
 			:value="collection.totalSupply"
+			class="progress-bar"
 		/>
 		<span class="title">
 			<FormatNumber :value="collection.totalSupply" />
@@ -52,6 +53,10 @@ export default {
 	background: transparent;
 
 	--progress-bar-background-color: var(--color-background-primary)
+}
+
+.progress-bar {
+	max-width: 12em;
 }
 
 .title {
