@@ -43,7 +43,7 @@ export default {
 
 <style scoped>
 .assets-last-badge {
-	padding: 0.375em 0.5em 0;
+	padding: 0.375em 0 0;
 	border-radius: 0;
 	text-align: center;
 	font-size: 1.125rem;
