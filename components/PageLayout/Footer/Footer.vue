@@ -184,7 +184,7 @@ export default {
     transform: translateX(100%);
   }
   100% {
-    transform: translateX(-100vw);
+    transform: translateX(calc(-100vw - 40px));
   }
 }
 
