@@ -52,7 +52,7 @@ export default {
 	position: relative;
 	margin: 0 0.5em 1em;
 	padding: 1.5em 2em;
-	border-radius: 0.8em;
+	border-radius: 0.5em;
 
 	background-color: var(--color-background-secondary);
 	box-shadow: var(--volumetric-shadow);

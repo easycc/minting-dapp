@@ -1,4 +1,4 @@
-const imagesContext = require.context('./images', false, /\.svg$/);
+const imagesContext = require.context('./icons', false, /\.svg$/);
 const icons = imagesContext
   .keys()
   .map(key => ({

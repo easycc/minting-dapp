@@ -5,4 +5,14 @@
 
 	--smooth-animation: 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 	--lazy-animation: 0.18s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+
+
+	--pixel-shadow: 4px 0px 0px #111111, -4px 0px 0px #111111, 0px -4px 0px #111111, 0px 4px 0px #111111, inset 0px -4px 0px rgba(17, 17, 17, 0.3);
+	--pixel-shadow-active:
+		4px 0px 0px #111111,
+		-4px 0px 0px #111111,
+		0px -4px 0px #111111,
+		0px 4px 0px #111111,
+		inset 0px 0px 0px 4px rgba(17, 17, 17, 0.3);
 }

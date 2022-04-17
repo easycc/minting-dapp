@@ -50,13 +50,15 @@ export default {
 
 <style scoped>
 .progress-bar {
-  height: var(--progress-bar-height, 0.287em);
+  height: var(--progress-bar-height, 0.875em);
   background-color: var(--progress-bar-background-color, var(--color-background-secondary));
   width: 100%;
-  border-radius: 1em;
+  /* border-radius: 1em; */
   position: relative;
   overflow: hidden;
 	transition: width 3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	/* box-shadow: var(--pixel-shadow); */
+	border: 4px solid #111;
 }
 
 .progress-bar .progress-line {

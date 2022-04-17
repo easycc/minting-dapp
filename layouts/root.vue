@@ -1,24 +1,44 @@
 <template>
-	<Maintenance>
-		<nuxt />
-	</Maintenance>
+	<div>
+		<Notifications />
+		<Maintenance>
+			<nuxt />
+		</Maintenance>
+
+		<ClientOnly>
+			<PortalTarget multiple name="flyout" />
+		</ClientOnly>
+	</div>
 </template>
 
 <script>
+import { PortalTarget } from 'portal-vue';
+
 import { Maintenance } from '~/components/router';
+import { Notifications } from '~/components/PageLayout';
+import LocaleStorage from '~/services/locale-storage';
 
 export default {
 	components: {
-		Maintenance
-	},
-
-	created () {
-		this.$fireAuthStore.subscribe();
+		Maintenance,
+		PortalTarget,
+		Notifications
 	},
 
 	async mounted () {
-		await this.$store.dispatch('ethereum/connect');
-		this.$store.dispatch('ethereum/fetchCollectionData');
+		await this.connectWallet();
+
+		await this.$store.dispatch('ethereum/fetchCollectionContractData');
+	},
+
+	methods: {
+		async connectWallet () {
+			const storedAccount = LocaleStorage.getItem('account');
+
+			if (storedAccount) {
+				await this.$store.dispatch('ethereum/connect');
+			}
+		}
 	}
 };
 </script>

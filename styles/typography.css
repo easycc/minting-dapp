@@ -4,6 +4,7 @@ html {
 
 body {
 	font-family:
+		"Pixeboy",
 		-apple-system,
 		BlinkMacSystemFont,
 		"Segoe UI",
@@ -12,49 +13,62 @@ body {
 		sans-serif,
 		"Segoe UI Emoji",
 		"Segoe UI Symbol";
-  font-size: 1em; /* 16px */
+  font-size: 1.25em; /* 16px */
   line-height: 1.2;
   color: #111;
   background: #fff;
   cursor: default;
 	letter-spacing: 0.01em;
 	overflow: overlay;
+
+	--pixel-size: 5px;
+}
+
+h1, h2, h3, h4, h5 {
+	color: var(--color-text-primary);
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+	color: var(--color-text-primary);
+	font-weight: 400;
 }
 
 h1 {
-  font-size: calc(2em + 0.25vw);
+  font-size: calc(2.75em + 0.25vw);
   margin: 0 0 0.5em;
-	font-weight: 600;
 }
 
 h2 {
   font-size: calc(1.75em + 0.25vw);
   margin: 0 0 1em;
-	font-weight: 600;
 }
 
 h3 {
-  font-size: calc(1.5em + 0.25vw);
+  font-size: calc(1.25em + 0.25vw);
   margin: 0 0 0.5em;
-	font-weight: 500;
 }
 
 h4 {
-  font-size: calc(1.25em + 0.25vw);
+  font-size: calc(1.125em + 0.25vw);
   margin: 0 0 0.5em;
-	font-weight: 500;
 }
 
 h5 {
   font-size: calc(1em + 0.25vw);
   margin: 0 0 0.5em;
-	font-weight: 500;
 }
 
 h6 {
   font-size: 1em;
   margin: 0 0 0.5em;
-	font-weight: 500;
+}
+
+@media screen and (max-width: 576px) {
+	h1 {
+  	font-size: calc(2.25em + 0.25vw);
+	}
+
+	h2 {
+		font-size: calc(1.5em + 0.25vw);
+	}
 }
 
 a {
@@ -70,10 +84,9 @@ a {
 
 button {
 	box-shadow: none;
-	font-weight: 500;
+	font-weight: 400;
 	display: inline-block;
 	vertical-align: middle;
-	border-radius: 0.5em;
 	font-size: 1em;
   border: none;
 	background: #444;
@@ -81,6 +94,7 @@ button {
   padding: 0.5em 1em;
   touch-action: manipulation;
   transition: opacity var(--smooth-animation), color var(--smooth-animation);
+	box-shadow: var(--pixel-shadow);
 }
 
 a:hover {
@@ -95,11 +109,10 @@ q {
 	position: relative;
 	display: inline-block;
 	vertical-align: middle;
-	font-weight: 500;
+	font-weight: 400;
 	font-size: 1.125em;
 	line-height: 1.5;
 	padding: 0.5em;
-	background: 0em 0.125em / 1.75em 1.75em no-repeat url('~/components/Icon/Icon/images/quote.svg');
 }
 
 @media screen and (max-width: 576px) {
@@ -119,8 +132,8 @@ q {
 }
 
 *:focus {
-  outline: 3px solid rgba(131,192,253,.5);
-  outline-offset: 1px;
+  outline: 4px solid rgba(131,192,253,.5);
+  outline-offset: 3px;
   border-color: transparent;
 }
 
@@ -129,7 +142,7 @@ q {
 }
 
 strong, b {
-  font-weight: 600;
+  font-weight: 400;
 }
 
 img {
@@ -140,7 +153,7 @@ img {
 p {
 	margin-block-start: 0;
 	color: var(--color-text-default);
-	font-size: 1.125em;
+	font-size: 1em;
 	letter-spacing: 0.01rem;
 	line-height: 1.5;
 	font-weight: 400;

@@ -1,141 +1,112 @@
-/* eslint-disable sonarjs/no-duplicate-string */
 export default {
-	ssr: false,
+	'ssr': true,
 
-	env: {
+	'env': {
 		FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
 		FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
 		FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
 		FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
 		FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
 		FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
-		MAINTENANCE_MODE: process.env.MAINTENANCE_MODE
+		MAINTENANCE_MODE: process.env.MAINTENANCE_MODE,
+
+		INFURA_PROJECT_ID: process.env.INFURA_PROJECT_ID
 	},
 
-	head: {
-		title: 'Minting dapp',
+	'head': {
+		title: 'Circus Escape',
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5 shrink-to-fit=no' },
-			{ hid: 'description', name: 'description', content: 'A Dashboard for your life. This framework will help you better understand yourself, set priorities, and make an action plan on how to achieve your goals.' },
+			{ hid: 'description', name: 'description', content: '5000 NFT captured moments of circus animals making their dreams come true' },
 
-			{ name: 'msapplication-TileColor', content: '#ffffff' },
-			{ name: 'msapplication-TileImage', content: './favicon/ms-icon-144x144.png' },
-			{ name: 'theme-color', content: '#ffffff' }
+			{ name: 'msapplication-TileColor', content: '#da532c' },
+			{ name: 'msapplication-TileImage', content: '/ms-icon-144x144.png' },
+			{ name: 'theme-color', content: '#ffffff' },
+
+
+			{ property: 'og:title', content: 'Circus Escape' },
+			{ property: 'og:site_name', content: 'Circus Escape' },
+			{ property: 'og:image', content: 'https://circus-escape.vercel.app/thumbnail.png' },
+			{ property: 'og:description', content: '5000 NFT captured moments of circus animals making their dreams come true' },
+			{ property: 'og:url', content: 'https://circus-escape.vercel.app/' },
+			{ property: 'og:image:width', content: '1200' },
+			{ property: 'og:image:height', content: '627' },
+			{ property: 'og:type', content: 'website' },
+
+
+			{ name: 'twitter:image:alt', content: 'Burning Circus and animals that are escaping' },
+			{ name: 'twitter:card', content: 'summary_large_image' },
+			{ name: 'twitter:site', content: '@CircusEscape' },
+			{ property: 'twitter:creator', content: '@CircusEscape' }
 		],
 		link: [
-			{ rel: 'apple-touch-icon', sizes: '57x57', type: 'image/x-icon', href: './favicon/apple-icon-57x57.png' },
-			{ rel: 'apple-touch-icon', sizes: '60x60', type: 'image/x-icon', href: './favicon/apple-icon-60x60.png' },
-			{ rel: 'apple-touch-icon', sizes: '72x72', type: 'image/x-icon', href: './favicon/apple-icon-72x72.png' },
-			{ rel: 'apple-touch-icon', sizes: '76x76', type: 'image/x-icon', href: './favicon/apple-icon-76x76.png' },
-			{ rel: 'apple-touch-icon', sizes: '114x114', type: 'image/x-icon', href: './favicon/apple-icon-114x114.png' },
-			{ rel: 'apple-touch-icon', sizes: '120x120', type: 'image/x-icon', href: './favicon/apple-icon-120x120.png' },
-			{ rel: 'apple-touch-icon', sizes: '144x144', type: 'image/x-icon', href: './favicon/apple-icon-144x144.png' },
-			{ rel: 'apple-touch-icon', sizes: '152x152', type: 'image/x-icon', href: './favicon/apple-icon-152x152.png' },
-			{ rel: 'apple-touch-icon', sizes: '180x180', type: 'image/x-icon', href: './favicon/apple-icon-180x180.png' },
-			{ rel: 'apple-touch-icon', sizes: '192x192', type: 'image/png', href: './favicon/android-icon-192x192.png' },
-			{ rel: 'apple-touch-icon', sizes: '32x32', type: 'image/png', href: './favicon/android-icon-32x32.png' },
-			{ rel: 'apple-touch-icon', sizes: '96x96', type: 'image/png', href: './favicon/android-icon-96x96.png' },
-			{ rel: 'apple-touch-icon', sizes: '16x16', type: 'image/png', href: './favicon/android-icon-16x16.png' },
-			{ rel: 'manifest', href: './favicon/manifest.json' },
+			{ rel: 'apple-touch-icon', sizes: '180x180', href: '/site.webmanifest' },
+			{ rel: 'icon', sizes: '32x32', type: 'image/png', href: '/favicon-32x32.png' },
+			{ rel: 'icon', sizes: '16x16', type: 'image/png', href: '/favicon-16x16.png' },
+			{ rel: 'manifest', href: '/site.webmanifest' },
 
-			{ rel: 'icon', sizes: '16x16', type: 'image/x-icon', href: './favicon/apple-icon-16x16.png' },
-			{ rel: 'icon', sizes: '24x24', type: 'image/x-icon', href: './favicon/apple-icon-24x24.png' },
-			{ rel: 'icon', sizes: '32x32', type: 'image/x-icon', href: './favicon/apple-icon-32x32.png' },
-			{ rel: 'icon', sizes: '64x64', type: 'image/x-icon', href: './favicon/apple-icon-64x64.png' },
-			{ rel: 'icon', sizes: '128x128', type: 'image/x-icon', href: './favicon/apple-icon-128x128.png' }
+			{ rel: 'mask-icon', color: '#5bbad5', href: '/safari-pinned-tab.svg' }
 		]
 	},
 
-	css: [
+	'css': [
 		'~/styles/variables.css',
 		'normalize.css/normalize.css',
 		'~/styles/typography.css'
 	],
 
-	loading: { color: '#007AFE' },
+	'loading': { color: '#007AFE' },
 
-	plugins: [
-		{ src: '~plugins/theme-context' },
-		'~/plugins/moment',
+	'plugins': [
+		{ src: '~/plugins/theme-context' },
+		{ src: '~/plugins/konva', mode: 'client' },
 		{ ssr: false, src: '~/plugins/notifications' }
 	],
 
-	buildModules: [
+	'buildModules': [
 		'@nuxtjs/dotenv',
 		'@nuxtjs/moment',
 		'@nuxtjs/markdownit'
 	],
-	markdownit: {
+	'markdownit': {
 		typographer: true,
 		linkify: true
 	},
 
-	moment: {
+	'moment': {
 		defaultLocale: 'en',
 		locales: []
 	},
 
-	modules: [
-		['nuxt-i18n', {
-			vueI18nLoader: true
-		}],
+	'modules': [
 		'@nuxtjs/axios',
-		'@nuxtjs/firebase',
-		'@nuxtjs/google-analytics',
-		['vue-scrollto/nuxt', { duration: 0 }]
+		['vue-scrollto/nuxt', { duration: 0 }],
+		'@nuxtjs/google-gtag'
 	],
 
-	firebase: {
-		config: {
-			apiKey: process.env.FIREBASE_API_KEY,
-			authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-			projectId: process.env.FIREBASE_PROJECT_ID,
-			storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-			messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-			appId: process.env.FIREBASE_APP_ID
-		},
-		services: {
-			auth: {
-				initialize: {
-					// onAuthStateChangedAction: 'onAuthStateChangedAction',
-					subscribeManually: true
-				}
-			},
-		  firestore: {
-				settings: {
-					ignoreUndefinedProperties: true
-				}
-			},
-			functions: {
-				location: 'us-central1'
-			},
-			storage: true
-		}
+	'google-gtag': {
+		id: 'G-CKB51MMP1N'
 	},
 
-	render: {
+	'render': {
 		bundleRenderer: {
 			runInNewContext: false
 		}
 	},
 
-	axios: {
+	'axios': {
 		baseURL: 'https://mylife.tech',
 		proxyHeaders: true,
 		credentials: true
 	},
 
-	googleAnalytics: {
-		// id: 'UA-193008827-1'
-	},
-
-	googleOptimize: {
+	'googleOptimize': {
 		experimentsDir: '~/experiments',
 		excludeBots: true
 	},
 
-	build: {
+	'build': {
 		extractCSS: process.env.NODE_ENV === 'production',
 		transpile: ['vee-validate'],
 		extend (config) {
@@ -151,6 +122,14 @@ export default {
 				});
 
 			config.module.rules.push({
+				test: /\.(ogg|mp3|wav|mpe?g)$/i,
+				loader: 'file-loader',
+				options: {
+					name: '[path][name].[ext]'
+				}
+			});
+
+			config.module.rules.push({
 				test: SVG_EXTENTION_EXP,
 				use: [
 					'svg-url-loader', {
@@ -163,32 +142,5 @@ export default {
 			});
 		}
 	},
-
-	i18n: {
-		strategy: 'prefix',
-		locales: [
-			{
-				code: 'en',
-				iso: 'en',
-				name: 'English',
-				file: 'en.json'
-			}
-		],
-		defaultLocale: 'en',
-		seo: true,
-		lazy: true,
-		loadLanguagesAsync: true,
-		langDir: 'locales/',
-		detectBrowserLanguage: {
-			useCookie: true
-		},
-		vuex: {
-			syncLocale: true
-		},
-		vueI18n: {
-			fallbackLocale: 'en'
-		}
-	},
-	layoutTransition: 'layout'
+	'layoutTransition': 'layout'
 };
-/* eslint-enable sonarjs/no-duplicate-string */

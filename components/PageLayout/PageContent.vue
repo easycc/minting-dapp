@@ -18,18 +18,19 @@ export default {
 
 <style scoped>
 .page-content {
-	--page-content-padding: 1.5em;
+	--page-horizontal-padding: 1.5rem;
+	--page-vertical-padding: 6rem;
 
 	display: block;
-	max-width: 60rem;
-	margin: 0 auto 6rem;
-	padding: 0 var(--page-content-padding, 1.5em);
+	max-width: 70rem;
+	margin: 0 auto;
+	padding: var(--page-vertical-padding) var(--page-horizontal-padding, var(--page-vertical-padding));
 }
 
 
 @media screen and (max-width: 576px) {
 	.page-content {
-		margin-bottom: 4rem;
+		--page-vertical-padding: 4rem;
 	}
 }
 </style>

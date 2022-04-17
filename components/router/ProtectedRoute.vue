@@ -6,9 +6,9 @@
 			<PageContent v-else-if="accessIsGranted === false && showSplashScreen" class="access-denied-screen">
 				<DefaultCard>
 					<h3>You don’t have permissions.</h3>
-					<p>Please contact administrators to get an access.</p>
+					<p>Please, contact administrators to get an access.</p>
 
-					<!-- <LoginForm class="login-form" /> -->
+					<LoginForm class="login-form" />
 				</DefaultCard>
 			</PageContent>
 
@@ -19,14 +19,14 @@
 
 <script>
 import { DefaultCard } from '~/components/cards';
-// import { LoginForm } from '~/containers/admin/index/index';
+import { LoginForm } from '~/containers/admin/index/index';
 import { PageContent } from '~/components/PageLayout';
 import { Fragment } from '~/components/ControlFlow';
 
 export default {
 	components: {
 		DefaultCard,
-		// LoginForm,
+		LoginForm,
 		PageContent,
 		Fragment
 	},

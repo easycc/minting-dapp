@@ -1,7 +1,7 @@
 <template>
 	<Button
 		class="connect-wallet-button"
-		title="Connect wallet"
+		title="Connect metamask"
 		kind="primary"
 		@click="connectWallet"
 	/>

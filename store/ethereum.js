@@ -1,77 +1,91 @@
-import CONFIG from '../contracts/config.json';
-import Web3 from '../contracts/Web3';
-import SmartContract from '../contracts/SmartContract';
+import WindowWeb3 from '../services/WindowWeb3';
+import InfuraWeb3 from '../services/InfuraWeb3';
+import abi from '../collection/abi.json';
+import config from '../collection/config.json';
+
+import NETWORKS from '~/constants/networks';
 
 export const state = () => ({
 	collection: {
-		maxMintAmount: 1,
 		totalSupply: 0
 	},
 	account: null
 });
 
 export const actions = {
-	async connect ({ commit }) {
+	async connect ({ commit, dispatch, getters }) {
 		const { ethereum } = window;
+		let { network } = getters;
 
 		const metamaskIsInstalled = ethereum && ethereum.isMetaMask;
 		let account = null;
 
 		if (metamaskIsInstalled) {
-			return Web3.eth.getAccounts()
-			.then(async foundAccounts => {
-				account = foundAccounts[0];
-
-				return ethereum.request({
-					method: 'net_version'
-				});
-			})
-			.then(networkId => {
-				if (networkId === String(CONFIG.NETWORK.ID)) {
-					commit('SET_STATE', ['account', account]);
-
-					ethereum.on('accountsChanged', accounts => {
-						commit('SET_STATE', ['account', accounts[0]]);
-					});
-
-					ethereum.on('chainChanged', () => {
-						window.location.reload();
-					});
-				}
-				else {
-					let message = `Change network to ${CONFIG.NETWORK.NAME}.`;
-
-					throw message;
-				}
-				return null;
-			})
-			.catch(error => {
-				this.$notify({
-					group: 'all',
-					type: 'warning',
-					title: error
-				});
+			await window.ethereum.enable();
+			ethereum.on('accountsChanged', () => {
+				dispatch('connect');
 			});
-		}
+			ethereum.on('chainChanged', () => {
+				dispatch('connect');
+			});
 
-		let message = 'Install Metamask';
+			return WindowWeb3.eth.getAccounts()
+					.then(async foundAccounts => {
+						account = foundAccounts[0];
+
+						if (account) {
+							return ethereum.request({
+								method: 'net_version'
+							});
+						}
+
+						let message = {
+							title: `No active wallet found in MetaMask.`
+						};
+
+						throw message;
+					})
+					.then(networkIdStr => {
+						let networkId = parseInt(networkIdStr, 10);
+
+						if (networkId === config.network.chainId) {
+							commit('SET_STATE', ['account', account]);
+						}
+						else {
+							let message = {
+								title: `Switch to the ${network.chain}`,
+								text: `Your network is ${network.name}`
+							};
+
+							throw message;
+						}
+						return null;
+					})
+					.catch(error => {
+						console.log(error);
+						this.$notify({
+							group: 'all',
+							type: 'warning',
+							...error
+						});
+					});
+		}
 
 		this.$notify({
 			group: 'all',
 			type: 'warning',
-			title: message
+			title: 'Please, install Metamask'
 		});
 	},
 
-	async fetchCollectionData ({ commit }) {
-		let totalSupply = SmartContract.methods.totalSupply().call();
-		let maxMintAmount = SmartContract.methods.maxMintAmount().call();
+	async fetchCollectionContractData ({ commit, getters }) {
+		let { InfuraSmartContract } = getters;
+		let totalSupply = InfuraSmartContract.methods.totalSupply().call();
 
-		return Promise.all([totalSupply, maxMintAmount])
+		return Promise.all([totalSupply])
 		.then(values => {
-			commit('SET_STATE', ['collection', {
-				totalSupply: values[0],
-				maxMintAmount: values[1]
+			commit('UPDATE_STATE', ['collection', {
+				totalSupply: parseInt(values[0], 10)
 			}]);
 
 			return values;
@@ -85,44 +99,54 @@ export const actions = {
 		});
 	},
 
-	async claimNft ({ commit, state, dispatch }, mintAmount) {
-		let account = this.getters['ethereum/account'];
+	async mintNft ({ getters, dispatch }, { mintAmount }) {
+		let { account, SmartContract } = getters;
 
-		let gasLimit = CONFIG.GAS_LIMIT;
-		let totalCostWei = String(CONFIG.WEI_COST * mintAmount);
-		let totalGasLimit = String(gasLimit * mintAmount);
+		let amount = mintAmount * config.cost;
 
-		return SmartContract.methods
-			.mint(mintAmount)
-			.send({
-				gasLimit: String(totalGasLimit),
-				to: CONFIG.CONTRACT_ADDRESS,
-				from: account,
-				value: totalCostWei
-			})
-			.once('error', err => {
-				throw err;
-			})
-			.then(() => {
-				dispatch('fetchCollectionData');
+		let valueInWei = WindowWeb3.utils.toWei(String(amount), 'ether');
 
-				return null;
-			})
-			.catch(err => {
-				console.log(err);
+		let totalCostWei = String(valueInWei);
 
-				this.$notify({
-					group: 'all',
-					type: 'error',
-					title: 'Sorry, something went wrong.'
-				});
-			});
+		return SmartContract.methods.mint(mintAmount)
+		.send({
+			to: config.contractAddress,
+			from: account,
+			value: totalCostWei
+		})
+		.once('error', error => {
+			throw error;
+		})
+		.then(receipt => {
+			dispatch('fetchCollectionContractData');
+
+			return receipt;
+		})
+		.catch(error => {
+			throw error;
+		});
 	}
 };
 
 export const mutations = {
-	SET_STATE (state, value) {
-		state[value[0]] = value[1];
+	SET_STATE (state, data) {
+		let field = data[0];
+		let value = data[1];
+
+		state[field] = value;
+	},
+	UPDATE_STATE (state, data) {
+		let field = data[0];
+		let value = data[1];
+		let isObject = value instanceof Object;
+		let isArray = value instanceof Array;
+
+		if (isObject) {
+			state[field] = { ...state[field], ...value };
+		}
+		else if (isArray) {
+			state[field] = [...state[field], ...value];
+		}
 	}
 };
 
@@ -130,10 +154,38 @@ export const getters = {
 	data (state) {
 		return state.data;
 	},
+
 	account (state) {
 		return state.account;
 	},
+
 	collection (state) {
 		return state.collection;
+	},
+
+	network (state) {
+		let network = {};
+
+		network = NETWORKS[config.network.id];
+		network.chain = network.chains[config.network.chainId];
+		return network;
+	},
+
+	SmartContract () {
+		if (config.contractAddress) {
+			return new WindowWeb3.eth.Contract(
+				abi,
+				config.contractAddress
+			);
+		}
+	},
+
+	InfuraSmartContract () {
+		if (config.contractAddress) {
+			return new InfuraWeb3.eth.Contract(
+				abi,
+				config.contractAddress
+			);
+		}
 	}
 };

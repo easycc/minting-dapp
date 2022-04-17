@@ -5,19 +5,20 @@
 </template>
 
 <script>
+
 import { extend } from 'vee-validate';
 import { digits } from 'vee-validate/dist/rules';
 
 import { FormValidation } from '../FormContext';
 
+
 extend('phone', {
 	...digits,
 	params: [{ name: 'length', default: 9 }],
-	message: 'Validation_Phone_Invalid'
+	message: 'Максимальная довжина - 9 цифр'
 });
 
 export default {
-	name: 'PhoneValidation',
 	components: { FormValidation },
 	data () {
 		return {

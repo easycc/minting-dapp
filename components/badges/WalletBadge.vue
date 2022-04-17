@@ -36,7 +36,6 @@ export default {
 .wallet-badge {
 	padding: 0.5em;
 	border-radius: 0.5em;
-	font-weight: 500;
 	background-color: transparent;
 	background-color: var(--color-background-primary);
 }

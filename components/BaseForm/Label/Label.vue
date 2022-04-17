@@ -1,5 +1,5 @@
 <template>
-	<label class="label" :class="{ 'invalid': invalid }">
+	<label class="label" :class="{ 'invalid': invalid }" @click="handleClick">
 		<template v-if="labelTextPosition === 'before'">
 			<span
 				v-if="labelTextExist"
@@ -25,6 +25,8 @@
 				<slot name="labelText" />
 			</span>
 		</template>
+
+		<span v-if="tip" class="tip">{{ tip }}</span>
 
 		<ul v-if="errors.length" class="errors-list">
 			<li v-for="(error, index) in errors" :key="index" class="error-item">{{ error }}</li>
@@ -64,6 +66,11 @@ export default {
 		smallLabelText: {
 			default: '',
 			type: String
+		},
+
+		tip: {
+			default: undefined,
+			type: String
 		}
 	},
 
@@ -74,6 +81,12 @@ export default {
 
 		invalid () {
 			return this.valid === false;
+		}
+	},
+
+	methods: {
+		handleClick (event) {
+			this.$emit('click', event);
 		}
 	}
 };
@@ -89,7 +102,7 @@ export default {
 .label-text {
 	display: block;
 	font-size: 1rem;
-	font-weight: 500;
+	font-weight: 400;
 	line-height: 1.143;
 	margin-bottom: 0.429em;
 	letter-spacing: -0.005em;
@@ -113,6 +126,14 @@ export default {
 	color: var(--color-text-secondary);
 	letter-spacing: 0;
 	font-weight: 400;
+}
+
+.tip {
+	display: block;
+	font-size: 0.75rem;
+	color: var(--color-text-secondary);
+	font-weight: 400;
+	padding-top: 0.333em;
 }
 
 .errors-list {

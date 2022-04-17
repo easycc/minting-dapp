@@ -70,7 +70,6 @@ export default {
 	text-align: left;
 	padding: 0.5em 1em;
 	font-size: 1rem;
-	font-weight: 400;
 	position: relative;
 }
 

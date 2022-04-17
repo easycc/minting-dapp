@@ -1,0 +1,31 @@
+<svg width="95" height="120" viewBox="0 0 95 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="5" height="5" transform="matrix(-1 0 0 1 80 75)" fill="#24A9B6"/>
+<rect width="5" height="10" transform="matrix(-1 0 0 1 85 65)" fill="#24A9B6"/>
+<rect width="5" height="10" transform="matrix(-1 0 0 1 90 65)" fill="#111111"/>
+<rect width="90" height="5" transform="matrix(-1 0 0 1 90 35)" fill="#111111"/>
+<rect width="5" height="25" transform="matrix(-1 0 0 1 90 40)" fill="#24A9B6"/>
+<rect width="5" height="10" transform="matrix(-1 0 0 1 85 75)" fill="#111111"/>
+<rect width="5" height="10" transform="matrix(-1 0 0 1 80 85)" fill="#111111"/>
+<rect width="5" height="5" transform="matrix(-1 0 0 1 75 95)" fill="#111111"/>
+<rect width="5" height="5" transform="matrix(-1 0 0 1 70 100)" fill="#111111"/>
+<rect width="10" height="5" transform="matrix(-1 0 0 1 65 105)" fill="#111111"/>
+<rect width="10" height="5" transform="matrix(-1 0 0 1 55 110)" fill="#111111"/>
+<rect width="45" height="5" transform="matrix(-1 0 0 1 45 115)" fill="#111111"/>
+<rect width="85" height="20" transform="matrix(-1 0 0 1 85 10)" fill="#FDE200"/>
+<rect width="85" height="5" transform="matrix(-1 0 0 1 85 5)" fill="#111111"/>
+<rect width="5" height="60" transform="matrix(-1 0 0 1 95 10)" fill="#111111"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M85 10H90V30V35H0V30H85V10Z" fill="#F1AF23"/>
+<rect width="15" height="5" transform="matrix(-1 0 0 1 95 15)" fill="white"/>
+<rect x="75" y="5" width="5" height="15" fill="#9F9D9D"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M75 5H70V20V25H95V20H75V5Z" fill="#111111"/>
+<rect x="75" width="5" height="5.00002" fill="#111111"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M85 5H80V10V10V15H95V10H85V5Z" fill="#111111"/>
+<rect width="5" height="5" transform="matrix(-1 0 0 1 80 80)" fill="#24A9B6"/>
+<rect width="5" height="5" transform="matrix(-1 0 0 1 75 85)" fill="#24A9B6"/>
+<rect width="5" height="5" transform="matrix(-1 0 0 1 75 90)" fill="#24A9B6"/>
+<rect width="5" height="5" transform="matrix(-1 0 0 1 70 95)" fill="#24A9B6"/>
+<rect width="10" height="5" transform="matrix(-1 0 0 1 65 100)" fill="#24A9B6"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 40H85V65H80V75H75V85H70V95H65V100H55V105H45V110H0V105V100V95V85V75V65V40Z" fill="#6CEAF6"/>
+<rect width="10" height="5" transform="matrix(-1 0 0 1 55 105)" fill="#24A9B6"/>
+<rect width="45" height="5" transform="matrix(-1 0 0 1 45 110)" fill="#24A9B6"/>
+</svg>

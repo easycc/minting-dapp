@@ -1,66 +1,79 @@
 <template>
-	<div id="start-page-anchor" class="root" :class="{ 'freezed-height-on-mobile': pageHeightFreezed }">
-		<Notifications />
+	<FootnotesContainer>
+		<div id="start-page-anchor" class="root">
+			<ClientOnly>
+				<Window :onResize="handleResize" />
+			</ClientOnly>
+			<Fade>
+				<LockLayer
+					v-if="sidebarOpened && isMobile"
+					:onClick="toggleSidebar"
+					class="lock-layer"
+				/>
+			</Fade>
 
-		<Fade>
-			<div
-				v-if="sidebarOpened && isMobile"
-				class="sidebar-background-backdrop"
-				tabindex="-1"
-				focusable="false"
-				@click="toggleSidebar"
-			/>
-		</Fade>
+			<Fade>
+				<LockLayer
+					v-if="headerOpened && isMobile"
+					:onClick="toggleHeader"
+					class="lock-layer"
+				/>
+			</Fade>
 
-		<Fade>
+			<Fade>
+				<Props
+					:toggleSidebar="toggleSidebar"
+					:sidebarOpened="sidebarOpened"
+					class="sidebar"
+					:class="{ opened: sidebarOpened }"
+				>
+					<slot v-if="sidebarOpened" name="sidebar" />
+				</Props>
+			</Fade>
+
 			<Props
+				:toggleHeader="toggleHeader"
+				:headerOpened="headerOpened"
 				:toggleSidebar="toggleSidebar"
 				:sidebarOpened="sidebarOpened"
-				class="sidebar"
-				:class="{ opened: sidebarOpened }"
+				class="header"
 			>
-				<slot v-if="sidebarOpened" name="sidebar" />
+				<slot name="header" />
 			</Props>
-		</Fade>
 
-		<Props
-			:toggleSidebar="toggleSidebar"
-			:sidebarOpened="sidebarOpened"
-			class="header"
-			@freeze-page-height="freezePageHeight"
-		>
-			<slot name="header" />
-		</Props>
+			<main
+				:class="['main',
+					{
+						'main-with-header': $slots.header,
+						'main-without-header': !$slots.header
+					}, className]"
+			>
+				<slot />
+			</main>
 
-		<main
-			:class="['main',
-				{
-					'main-with-header': $slots.header,
-					'main-without-header': !$slots.header
-				}, className]"
-		>
-			<slot />
-		</main>
-
-		<Props class="footer">
-			<slot name="footer" />
-		</Props>
-	</div>
+			<Props class="footer">
+				<slot name="footer" />
+			</Props>
+		</div>
+	</FootnotesContainer>
 </template>
 
 <script>
 import '~/styles/fonts.css';
 
-import Notifications from './Notifications';
-
 import { Fade } from '~/components/animation';
 import { Props } from '~/components/ControlFlow';
+import { LockLayer } from '~/components/Layer';
+import { Window } from '~/components/EventListener';
+import { FootnotesContainer } from '~/components/Typography';
 
 export default {
 	components: {
-		Notifications,
+		FootnotesContainer,
 		Props,
-		Fade
+		Fade,
+		Window,
+		LockLayer
 	},
 
 	props: {
@@ -79,52 +92,59 @@ export default {
 			TABLET_QUERY,
 
 			sidebarOpened: false,
-
-			pageHeightFreezed: false
+			headerOpened: false
 		};
 	},
 
 	computed: {
 		isMobile () {
+			if (!process.client) return false;
 			return window.innerWidth < this.MOBILE_QUERY;
 		}
 	},
 
 	watch: {
 		$route () {
+			if (!process.client) return;
 			if (window.innerWidth < this.TABLET_QUERY && this.sidebarOpened) {
 				this.toggleSidebar();
 			}
-		},
-
-		sidebarOpened () {
-			let state = this.sidebarOpened;
-
-			this.freezePageHeight(state);
 		}
 	},
 
 	mounted () {
-		this.onResize();
-	},
-
-	destroyed () {
-		window.removeEventListener('resize', this.onResize);
+		this.handleResize();
 	},
 
 	methods: {
-		onResize () {
+		handleResize () {
+			if (!process.client) return;
+
 			if (window.innerWidth > this.TABLET_QUERY && this.$slots.sidebar) {
 				this.sidebarOpened = true;
 			}
-		},
 
-		freezePageHeight (state) {
-			this.pageHeightFreezed = state;
+			if (process.client && window.innerWidth > this.MOBILE_QUERY) {
+				this.toggleHeader(true);
+			}
+			else {
+				this.toggleHeader(false);
+			}
 		},
 
 		toggleSidebar () {
 			this.sidebarOpened = !this.sidebarOpened;
+		},
+
+		toggleHeader (state) {
+			if (!process.client) return;
+
+			if (typeof state === 'boolean') {
+				this.headerOpened = state;
+			}
+			else if (process.client && window.innerWidth < this.MOBILE_QUERY) {
+				this.headerOpened = !this.headerOpened;
+			}
 		}
 	}
 };
@@ -141,14 +161,7 @@ export default {
     "sidebar main"
     "sidebar footer";
 
-	--header-height: 3.75rem;
-}
-
-@media screen and (max-width: 560px) {
-	.root.freezed-height-on-mobile {
-		max-height: 100vh;
-		overflow: hidden;
-	}
+	--header-height: 3.5rem;
 }
 
 .sidebar {
@@ -156,14 +169,14 @@ export default {
 	width: 18rem;
 	height: 100vh;
 	position: sticky;
-	z-index: 5;
+	z-index: 10;
 	top: 0;
 }
 
 .header {
 	grid-area: header;
-  z-index: 4;
-	position: sticky;
+  z-index: 10;
+	position: absolute;
 	top: 0;
 	left: 0;
 }
@@ -173,24 +186,25 @@ export default {
 }
 
 .main-without-header {
-	padding-top: 1rem;
-}
-
-.sidebar-background-backdrop {
-	content: '';
-	display: block;
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	z-index: 5;
-	top: 0;
-	left: 0;
-	opacity: 0.85;
-	background: var(--color-background-default);
+	/* padding-top: 1rem; */
 }
 
 .footer {
 	grid-area: footer;
+}
+
+.lock-layer:after {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: #111;
+	z-index: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0.05;
+	border-radius: inherit;
 }
 
 /*

@@ -1,0 +1,31 @@
+<svg width="95" height="120" viewBox="0 0 95 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="15" y="75" width="5" height="5" fill="#24A9B6"/>
+<rect x="10" y="65" width="5" height="10" fill="#24A9B6"/>
+<rect x="5" y="65" width="5" height="10" fill="#111111"/>
+<rect x="5" y="35" width="90" height="5" fill="#111111"/>
+<rect x="5" y="40" width="5" height="25" fill="#24A9B6"/>
+<rect x="10" y="75" width="5" height="10" fill="#111111"/>
+<rect x="15" y="85" width="5" height="10" fill="#111111"/>
+<rect x="20" y="95" width="5" height="5" fill="#111111"/>
+<rect x="25" y="100" width="5" height="5" fill="#111111"/>
+<rect x="30" y="105" width="10" height="5" fill="#111111"/>
+<rect x="40" y="110" width="10" height="5" fill="#111111"/>
+<rect x="50" y="115" width="45" height="5" fill="#111111"/>
+<rect x="10" y="10" width="85" height="20" fill="#FDE200"/>
+<rect x="10" y="5" width="85" height="5" fill="#111111"/>
+<rect y="10" width="5" height="60" fill="#111111"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 10H5V30V35H95V30H10V10Z" fill="#F1AF23"/>
+<rect y="15" width="15" height="5" fill="white"/>
+<rect width="5" height="15" transform="matrix(-1 0 0 1 20 5)" fill="#9F9D9D"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M20 5H25V20V25H0V20H20V5Z" fill="#111111"/>
+<rect width="5" height="5.00002" transform="matrix(-1 0 0 1 20 0)" fill="#111111"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 5H15V10V10V15H0V10H10V5Z" fill="#111111"/>
+<rect x="15" y="80" width="5" height="5" fill="#24A9B6"/>
+<rect x="20" y="85" width="5" height="5" fill="#24A9B6"/>
+<rect x="20" y="90" width="5" height="5" fill="#24A9B6"/>
+<rect x="25" y="95" width="5" height="5" fill="#24A9B6"/>
+<rect x="30" y="100" width="10" height="5" fill="#24A9B6"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M95 40H10V65H15V75H20V85H25V95H30V100H40V105H50V110H95V105V100V95V85V75V65V40Z" fill="#6CEAF6"/>
+<rect x="40" y="105" width="10" height="5" fill="#24A9B6"/>
+<rect x="50" y="110" width="45" height="5" fill="#24A9B6"/>
+</svg>

@@ -5,7 +5,7 @@
 		:href="href"
 		:type="computedType"
 
-		:to="toLocalePath ? localePath(link) : link"
+		:to="link"
 		:disabled="disabled || showSpinner"
 		:prefetch="prefetch"
 		@click="onClick"
@@ -52,7 +52,7 @@ export default {
 	props: {
 		// default
 		title: {
-			type: String,
+			type: [String, Number],
 			default: ''
 		},
 		iconName: {
@@ -65,7 +65,7 @@ export default {
 		},
 		iconPosition: {
 			type: String,
-			default: 'before',
+			default: 'after',
 			validator: name => ['before', 'after'].includes(name)
 		},
 		kind: {
@@ -90,10 +90,6 @@ export default {
 		prefetch: {
 			type: Boolean,
 			default: undefined
-		},
-		toLocalePath: {
-			type: Boolean,
-			default: false
 		},
 
 		// <a>
@@ -149,8 +145,8 @@ export default {
 	},
 
 	methods: {
-		onClick () {
-			this.$emit('click');
+		onClick (event) {
+			this.$emit('click', event);
 		}
 	}
 };
@@ -161,20 +157,21 @@ export default {
 	font-size: 1em;
 	display: inline-block;
 	vertical-align: baseline;
-	padding: 0.75em 1em;
+  padding: 0.5em 1em;
 	text-align: center;
 	box-sizing: border-box;
 	background: var(--color-background-primary);
 	color: var(--color-text-primary);
-	border-radius: 0.75em;
-	box-shadow: var(--volumetric-inner-shadow);
+	border-radius: 0;
 	border: none;
-	font-weight: 500;
+	font-weight: 400;
 	position: relative;
 	transition:
 		opacity var(--smooth-animation),
 		background-color var(--smooth-animation),
-		transform var(--smooth-animation);
+		transform var(--smooth-animation),
+		background-image var(--smooth-animation);
+	box-shadow: var(--pixel-shadow);
 }
 
 .button-primary.button-primary {
@@ -191,6 +188,10 @@ export default {
 	background-color: var(--color-background-secondary);
 }
 
+.button:active {
+	box-shadow: var(--pixel-shadow-active);
+}
+
 .button-primary:hover {
 	background-color: var(--color-accent-secondary);
 }
@@ -201,17 +202,19 @@ export default {
 
 .button:focus:hover {
 	outline: none;
-	box-shadow: none;
 }
 
+.button-content {
+	white-space: nowrap;
+}
 
 .button-content.hidden {
 	opacity: 0;
 }
 
 .title {
-	margin: 0 0.15em;
 	line-height: 1.45;
+	white-space: initial;
 }
 
 .title.single {
@@ -227,19 +230,32 @@ a[disabled="disabled"] {
 button:disabled {
 	opacity: 0.8;
 	cursor: not-allowed;
+	background-image:
+		repeating-linear-gradient(45deg,
+			rgb(255, 255, 255, 0.2) 0%,
+			rgb(255, 255, 255, 0.2) 10%,
+			rgb(255, 255, 255, 0) 10%,
+			rgb(255, 255, 255, 0) 20%
+		);
 }
 
 .emoji {
-	margin-right: 0.1em;
 	font-size: 1.333em;
 	line-height: 1;
 }
 
 .icon {
 	font-size: 1em;
-	margin-right: 0.1em;
 	line-height: 1;
 	color: inherit;
+}
+
+.title + .icon {
+	margin-left: 0.25em;
+}
+
+.icon + .title {
+	margin-left: 0.25em;
 }
 
 .button-content > * {
@@ -263,7 +279,6 @@ button:disabled {
 	height: 2.75em;
 	padding: 0;
 	position: relative;
-	border-radius: 0.5em;
 	text-align: center;
 	overflow: hidden;
 }
@@ -273,6 +288,7 @@ button:disabled {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+	margin: 0;
 }
 
 .collapsed .emoji {

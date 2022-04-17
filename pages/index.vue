@@ -1,10 +1,21 @@
 <template>
-	<Page>
+	<Page class="page">
 		<template v-slot:header>
 			<Header />
 		</template>
 
 		<Spotlight />
+		<AboutCollection />
+		<GetAnimalsBack />
+		<NftPreview />
+		<Wave />
+		<Road />
+		<AboutUs />
+		<Wallpapers />
+		<!-- <Rope /> -->
+
+		<FlyingElephant />
+
 
 		<template v-slot:footer>
 			<Footer />
@@ -13,23 +24,35 @@
 </template>
 
 <script>
+
+import { Page, Header, Footer } from '~/components/PageLayout';
 import {
-	Spotlight
-} from '~/containers/index/index';
-import { Page, Header, Footer, PageContent } from '~/components/PageLayout';
+	Spotlight, AboutUs, Road, GetAnimalsBack, NftPreview, AboutCollection, Wave, Wallpapers, FlyingElephant
+} from '~/containers/index';
 
 export default {
-	layout: 'light-theme',
+	layout: 'dark-theme',
 
 	components: {
 		Page,
+		AboutUs,
+		Spotlight,
+		Road,
+		AboutCollection,
+		GetAnimalsBack,
+		Wallpapers,
+		NftPreview,
+		Wave,
 		Header,
-		Footer,
-		PageContent,
-		Spotlight
+		FlyingElephant,
+		Footer
 	}
 };
 </script>
 
 <style scoped>
+.page {
+	position: relative;
+	overflow: hidden;
+}
 </style>

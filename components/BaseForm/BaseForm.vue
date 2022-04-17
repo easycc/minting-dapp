@@ -27,6 +27,8 @@ import { ValidationObserver } from 'vee-validate';
 import StatusContext from './FormContext/StatusContext';
 import FormValidation from './FormContext/FormValidation';
 
+const vueScroll = require('vue-scrollto');
+
 export default {
 	name: 'BaseForm',
 	components: {
@@ -69,6 +71,13 @@ export default {
 			return results.length > 1 ? Promise.all(results) : results[0];
 		},
 		onError () {
+			const SCROLL_DURATION = 1000;
+			const SCROLL_DELAY = 100;
+
+			setTimeout(() => {
+				vueScroll.scrollTo('.invalid', SCROLL_DURATION, { offset: -60 });
+			}, SCROLL_DELAY);
+
 			this.$emit('error');
 		},
 		handleSubmit (statusContext) {

@@ -1,0 +1,10 @@
+<svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M60 195H70V200H80V235L80 205H85V215H100L100 220H105V230H100L100 235H95V240H35V235H30V215H45L45 205H50L50 200H60V195ZM30 220H25V230H30V220Z" fill="white"/>
+<rect width="60" height="5" transform="matrix(-1 0 0 1 95 235)" fill="#E3E3E3"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M182 135H192V140H202V175L202 145H207V155H222L222 160H227V170H222L222 175H217V180H157V175H152V155H167L167 145H172L172 140H182V135ZM152 160H147V170H152V160Z" fill="white"/>
+<rect width="60" height="5" transform="matrix(-1 0 0 1 217 175)" fill="#E3E3E3"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M187 15H197V20H207V55L207 25H212V35H227L227 40H232V50H227L227 55H222V60H162V55H157V35H172L172 25H177L177 20H187V15ZM157 40H152V50H157V40Z" fill="white"/>
+<rect width="60" height="5" transform="matrix(-1 0 0 1 222 55)" fill="#E3E3E3"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M60 75H70V80H80V115L80 85H85V95H100L100 100H105V110H100L100 115H95V120H35V115H30V95H45L45 85H50L50 80H60V75ZM30 100H25V110H30V100Z" fill="white"/>
+<rect width="60" height="5" transform="matrix(-1 0 0 1 95 115)" fill="#E3E3E3"/>
+</svg>

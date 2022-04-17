@@ -1,11 +1,12 @@
 <template>
 	<Button
 		class="back-button"
-		iconName="back"
-		:title="$t('components.buttons.backButton.title')"
+		iconName="chevron-left"
+		iconPosition="before"
+		title="Back"
 		v-bind="$attrs"
-		@click="onClick"
 		v-on="$listeners"
+		@click="onClick"
 	/>
 </template>
 

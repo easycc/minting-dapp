@@ -1,11 +1,11 @@
 <template>
 	<FormStatusObserver v-slot="{ pending }">
 		<Button
-			v-bind="$attrs"
 			:kind="kind"
 			type="submit"
 			:class="['submit-button', { pending }]"
 			:showSpinner="pending"
+			v-bind="$attrs"
 			v-on="$listeners"
 		>
 			<slot />

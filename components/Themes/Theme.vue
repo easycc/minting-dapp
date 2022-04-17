@@ -16,8 +16,8 @@ export default {
 
 <style scoped>
 .theme {
-	--color-accent-primary: #FA6400;
-	--color-accent-secondary: #FFAE50;
+	--color-accent-primary: #EE1B24;
+	--color-accent-secondary: #FA6400;
 	--color-compliment-primary: #007AFE;
 	--color-compliment-secondary: #3880D1;
 

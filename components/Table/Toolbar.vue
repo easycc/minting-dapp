@@ -163,7 +163,7 @@ export default {
 
 .table-title {
 	font-size: 1.25em;
-	font-weight: 500;
+	font-weight: 400;
 	margin: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;

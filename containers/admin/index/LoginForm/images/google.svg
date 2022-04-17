@@ -1,0 +1,40 @@
+
+<svg
+	width="20px"
+	height="21px"
+	preserveAspectRatio="xMidYMid meet"
+	viewBox="0 0 20 21"
+	version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+><g id="seed-stage" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		<g id="login" transform="translate(-565.000000, -266.000000)" fill-rule="nonzero">
+			<g id="Group-4" transform="translate(552.000000, 232.500000)">
+				<g id="area-settings-button-copy" transform="translate(0.000000, 25.000000)">
+					<g id="auth_service_google" transform="translate(13.000000, 9.000000)">
+						<path
+							d="M19.6,10.23 C19.6,9.41 19.5,8.81 19.35,8.18 L10,8.18 L10,11.9 L15.5,11.9 C15.35,12.86 14.76,14.21 13.46,15.12 L13.46,17.57 L16.62,17.57 C18.51,15.84 19.6,13.27 19.6,10.23 Z"
+							id="Path"
+							fill="#4285F4"
+						></path>
+						<path
+							d="M13.46,15.13 C12.63,15.72 11.5,16.13 10,16.13 C7.36,16.13 5.12,14.39 4.32,11.98 L1.07,11.98 L1.07,14.5 C2.72,17.75 6.09,20 10,20 C12.7,20 14.96,19.11 16.62,17.58 L13.46,15.13 L13.46,15.13 Z"
+							id="Path"
+							fill="#34A853"
+						></path>
+						<path
+							d="M3.99,10 C3.99,9.31 4.11,8.65 4.31,8.03 L4.31,5.51 L1.07,5.51 C0.367129442,6.90240202 0.000648196738,8.44025323 0,10 C0,11.61 0.39,13.14 1.07,14.49 L4.31,11.97 C4.11,11.35 3.99,10.69 3.99,10 Z"
+							id="Path"
+							fill="#FBBC05"
+						></path>
+						<path
+							d="M10,3.88 C11.88,3.88 13.13,4.69 13.85,5.36 L16.69,2.6 C14.96,0.99 12.7,0 10,0 C6.09,0 2.72,2.25 1.07,5.51 L4.31,8.03 C5.12,5.62 7.36,3.88 10,3.88 Z"
+							id="Path"
+							fill="#EA4335"
+						></path>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

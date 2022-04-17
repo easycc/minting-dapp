@@ -4,7 +4,7 @@
 			group="all"
 			position="top center"
 			class="notification"
-			:duration="3000"
+			:duration="5000"
 		/>
 	</ClientOnly>
 </template>
@@ -13,7 +13,6 @@
 .notification ::v-deep .vue-notification {
 	border: 0;
 	margin-top: 1em;
-	border-radius: 0.5em;
 	font-size: 1em;
 	padding: 0.75em 1em;
 	background-color: transparent;
@@ -29,8 +28,7 @@
 	z-index: 0;
 	top: 0;
 	left: 0;
-	border-radius: inherit;
-	opacity: 0.85;
+	box-shadow: var(--pixel-shadow);
 }
 
 .notification ::v-deep .vue-notification.success:after {

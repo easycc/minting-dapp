@@ -16,4 +16,10 @@ export default {
 .navigation-button-next {
 	right: 1em;
 }
+
+@media screen and (max-width: 576px) {
+	.navigation-button-prev {
+		right: 0.5em;
+	}
+}
 </style>

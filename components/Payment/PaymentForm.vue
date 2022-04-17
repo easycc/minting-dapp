@@ -1,79 +1,106 @@
 <template>
-	<DefaultCard class="payment-card">
+	<div class="accent-spot">
 		<FormSubmit successMessage="Congratulations! Visit OpenSea to sea your asset." class="payment-form">
-			<BaseForm @submit="submitOrder">
-				<div class="price">
-					<h2 class="price-title">
-						Buy now price
-					</h2>
+			<BaseForm @submit="mintNft">
+				<AssetsLastBadge />
 
-					<CryptoPrice
-						:name="CONFIG.NETWORK.SYMBOL"
-						:value="CONFIG.DISPLAY_COST"
-						:amount="amount"
-						class="price-amount"
-					/>
-				</div>
+				<div class="right">
+					<div class="mint-amount-field">
+						<Button
+							:title="`Buy ${mintAmount - 1} NFT`"
+							collapsed
 
-				<div class="actions">
-					<Select
-						v-model.number="amount"
-						name="amount"
-						labelText="Amount"
-						class="amount-select"
-					>
-						<Option
-							v-for="amountOption in collection.maxMintAmount + 1"
-							:key="amountOption"
-							:value="amountOption"
-							:title="amountOption"
-							:amount="amountOption"
+							iconName="minus"
+							class="input-button minus"
+							:disabled="mintAmount <= 1"
+							@click="mintAmount--"
 						/>
-					</Select>
 
-					<SubmitButton
-						v-if="account"
-						class="submit-button"
-						kind="primary"
-						title="Buy with ETH"
-					/>
-					<ConnectWalletButton v-else class="submit-button" />
+						<Input
+							v-model="mintAmount"
+
+							type="number"
+							placeholder="1"
+							name="mintAmount"
+							:max="config.maxMintAmount"
+							:min="0"
+							:required="true"
+							class="mint-amount-input"
+						/>
+
+						<Button
+							:title="`Buy ${mintAmount + 1} NFT`"
+							collapsed
+							iconName="plus"
+							class="input-button plus"
+							:disabled="mintAmount >= config.maxMintAmount"
+							@click="mintAmount++"
+						/>
+					</div>
+
+					<span class="price">
+						<CryptoPrice
+							:name="network.currency.symbol"
+							:network="network.name"
+							:value="config.cost"
+							:amount="mintAmount"
+						/>
+						+ gas
+					</span>
+
+					<Fade>
+						<SubmitButton
+							v-if="account"
+							class="submit-button"
+							kind="primary"
+							title="Buy with ETH"
+							:disabled="mintAmount > config.maxMintAmount || mintAmount < 0 || !mintAmount || mintAmount === '0'"
+						/>
+
+						<ConnectWalletButton v-else class="submit-button" />
+					</Fade>
 				</div>
 			</BaseForm>
 		</FormSubmit>
-	</DefaultCard>
+	</div>
 </template>
 
 <script>
 import ConnectWalletButton from './ConnectWalletButton';
 
+import { Fade } from '~/components/animation';
 import {
 	SubmitButton,
 	BaseForm,
-	FormSubmit,
-	Select,
-	Option
+	Input,
+	FormSubmit
 } from '~/components/BaseForm';
-import CONFIG from '~/contracts/config.json';
 import { CryptoPrice } from '~/components/Currency';
-import { DefaultCard } from '~/components/cards';
+import { Button } from '~/components/buttons';
+import NETWORKS from '~/constants/networks';
+import { AssetsLastBadge } from '~/components/badges';
+import AccentSpot from '~/components/AccentSpot/AccentSpot';
+import config from '~/collection/config.json';
 
 export default {
 	components: {
 		ConnectWalletButton,
+		Fade,
 		CryptoPrice,
-		DefaultCard,
-		Select,
-		Option,
+		Button,
 		FormSubmit,
 		BaseForm,
-		SubmitButton
+		Input,
+		SubmitButton,
+		AccentSpot,
+		AssetsLastBadge
 	},
 
 	data () {
 		return {
-			CONFIG,
-			amount: 1
+			NETWORKS,
+			config,
+			mintAmount: 1
 		};
 	},
 
@@ -81,81 +108,127 @@ export default {
 		account () {
 			return this.$store.getters['ethereum/account'];
 		},
+		network () {
+			return this.$store.getters['ethereum/network'];
+		},
 		collection () {
 			return this.$store.getters['ethereum/collection'];
 		}
 	},
 
 	methods: {
-		async submitOrder () {
-			await this.$store.dispatch('ethereum/claimNft', this.amount);
+		async mintNft () {
+			let { mintAmount } = this;
+
+			return this.$store.dispatch('ethereum/mintNft', { mintAmount });
 		}
 	}
 };
 </script>
 
 <style scoped>
-.payment-card {
-	margin: 0 auto;
+.accent-spot {
+	max-width: 40rem;
 	display: block;
-	padding: 1.5em 1.5em 2em;
+	margin: 0 auto 2em;
+	background-color: rgba(31, 31, 31, 0.9);
+	padding: 1em 1em 1.5em;
+	border: var(--pixel-size) solid #111;
+	position: relative;
+	z-index: 1;
 }
 
 .payment-form {
 	width: 100%;
+	padding: 0 1em;
+	text-align: left;
+	position: relative;
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: row;
+}
+
+@media screen and (max-width: 650px) {
+	.payment-form {
+		padding: 0;
+	}
+}
+
+
+.mint-amount-field {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.mint-amount-field {
+	display: block;
+}
+
+::v-deep .accent-spot-content {
+	padding-bottom: 1em;
+}
+
+.mint-amount-field ::v-deep .input {
+	padding: 0;
+	font-size: 3em;
+	background: transparent;
 }
 
 .price {
+	margin-right: 0.5em;
+}
+
+.mint-amount-input {
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 0;
+	width: auto;
+	max-width: 5em;
+}
+
+
+.input-button {
 	display: inline-block;
 	vertical-align: top;
-}
-
-.price-title {
-	font-size: 1em;
-	color: var(--color-text-default);
-	font-weight: 500;
-	margin-bottom: 0.333em;
-}
-
-.price-amount {
-	font-size: 1.25em;
-	font-weight: 600;
-}
-
-.amount-select {
-	margin-right: 0.5em;
-	margin-bottom: 0;
-	width: 6em;
-	display: inline-block;
-	vertical-align: bottom;
+	background: #555;
+	font-size: 0.75em;
+	margin-top: 0.75em;
 }
 
 .submit-button {
-	width: auto;
 	display: inline-block;
-	vertical-align: bottom;
+	width: auto;
 }
 
-@media screen and (max-width: 576px) {
+.right {
+	text-align: center;
+	margin-left: auto;
+}
+
+.price {
+	display: block;
+	padding-bottom: 0.5em;
+	margin-right: 0;
+}
+
+
+@media screen and (max-width: 650px) {
 	.payment-form {
-		display: block;
+		text-align: center;
+		flex-direction: column;
 	}
 
-	.price {
-		display: block;
-		margin-bottom: 2em;
+	.right {
+		margin-right: auto;
+		padding-top: 2em;
 	}
 
-	.amount-select {
-		margin-bottom: 1em;
+	.mint-amount-field {
+		margin-bottom: 0.25em;
 	}
 
-	.amount-select, .submit-button {
-		display: block;
-		width: 100%;
+	::v-deep .accent-spot-content {
+		padding-bottom: 2em;
 	}
 }
 </style>

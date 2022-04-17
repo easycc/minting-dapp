@@ -1,23 +1,36 @@
 <template>
 	<DefaultBadge v-if="collection" class="assets-last-badge">
-		{{ collection.totalSupply }} / {{ CONFIG.MAX_SUPPLY }}
-		<span class="title">Items already minted</span>
+		<ProgressBar
+			:length="config.maxSupply"
+			:value="collection.totalSupply"
+			class="progress-bar"
+		/>
+		<span class="title">
+			<FormatNumber :value="collection.totalSupply" />
+			/
+			<FormatNumber :value="config.maxSupply" /></span>
+
+		<span class="subtitle">minted</span>
 	</DefaultBadge>
 </template>
 
 <script>
 import DefaultBadge from './DefaultBadge';
 
-import CONFIG from '~/contracts/config.json';
+import config from '~/collection/config.json';
+import { ProgressBar } from '~/components/progress';
+import { FormatNumber } from '~/components/FormatNumber';
 
 export default {
 	components: {
-		DefaultBadge
+		DefaultBadge,
+		FormatNumber,
+		ProgressBar
 	},
 
 	data () {
 		return {
-			CONFIG
+			config
 		};
 	},
 
@@ -31,28 +44,29 @@ export default {
 
 <style scoped>
 .assets-last-badge {
-	padding: 0.666em 1em 0.666em;
-	border-radius: 0.5em;
+	padding: 0.375em 0 0;
+	border-radius: 0;
 	text-align: center;
-	font-size: 1rem;
-	font-weight: 500;
-	background-color: transparent;
-	color: var(--color-accent);
-	margin-bottom: 1em;
+	font-size: 1.125rem;
+	color: var(--color-text-primary);
 	position: relative;
+	background: transparent;
+
+	--progress-bar-background-color: var(--color-background-primary)
 }
 
-.assets-last-badge:after {
-	background-color: var(--color-accent-secondary);
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
+.progress-bar {
+	max-width: 12em;
+}
+
+.title {
 	display: block;
-	content: '';
-	z-index: -1;
-	border-radius: inherit;
-	opacity: 0.3;
+	font-size: 3em;
+	margin-bottom: 0rem;
+}
+
+.subtitle {
+	display: block;
+	width: 100%;
 }
 </style>
