@@ -27,9 +27,9 @@ export default {
 
 			{ property: 'og:title', content: 'Circus Escape' },
 			{ property: 'og:site_name', content: 'Circus Escape' },
-			{ property: 'og:image', content: 'https://circus-escape.vercel.app/thumbnail.png' },
+			{ property: 'og:image', content: 'https://circus-escape.com/thumbnail.png' },
 			{ property: 'og:description', content: '5000 NFT captured moments of circus animals making their dreams come true' },
-			{ property: 'og:url', content: 'https://circus-escape.vercel.app/' },
+			{ property: 'og:url', content: 'https://circus-escape.com/' },
 			{ property: 'og:image:width', content: '1200' },
 			{ property: 'og:image:height', content: '627' },
 			{ property: 'og:type', content: 'website' },
