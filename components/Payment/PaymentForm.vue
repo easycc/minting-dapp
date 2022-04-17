@@ -54,6 +54,7 @@
 							class="submit-button"
 							kind="primary"
 							title="Buy with ETH"
+							:disabled="mintAmount > config.maxMintAmount || mintAmount < 0 || !mintAmount || mintAmount === '0'"
 						/>
 						<ConnectWalletButton v-else class="submit-button" />
 					</Fade>
