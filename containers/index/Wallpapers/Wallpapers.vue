@@ -1,7 +1,6 @@
 <template>
 	<section class="wallpapers-section">
 		<PageContent class="content">
-			<span class="accent-badge">New</span>
 			<h2 class="title">
 				Want a wallpaper?
 			</h2>
@@ -94,13 +93,6 @@ export default {
 	display: block;
 	width: 100%;
 	margin-bottom: 0.5em;
-}
-
-.accent-badge {
-	color: var(--color-accent-secondary);
-	margin-bottom: 0.25em;
-	display: inline-block;
-	letter-spacing: 0.05em;
 }
 
 .slider-wrapper {
