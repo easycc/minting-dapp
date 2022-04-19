@@ -39,7 +39,6 @@
 					Will they catch them?
 				</h3>
 
-
 				<Tooltip class="vote-positive">
 					<template v-slot:trigger>
 						<Button

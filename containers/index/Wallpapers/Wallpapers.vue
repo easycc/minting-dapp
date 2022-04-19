@@ -1,6 +1,7 @@
 <template>
 	<section class="wallpapers-section">
 		<PageContent class="content">
+			<span class="accent-badge">New</span>
 			<h2 class="title">
 				Want a wallpaper?
 			</h2>
@@ -43,7 +44,6 @@ import wallpapers from './wallpapers';
 import { Button } from '~/components/buttons';
 import { PageContent } from '~/components/PageLayout';
 
-
 import 'swiper/css/swiper.css';
 
 export default {
@@ -59,13 +59,13 @@ export default {
 			wallpapers,
 
 			swiperOptions: {
+				effect: 'slide',
+
+				slidesPerView: 'auto',
 				autoplay: {
 					delay: 1500,
 					disableOnInteraction: true
 				},
-				effect: 'slide',
-
-				slidesPerView: 'auto',
 				spaceBetween: 40,
 				direction: 'horizontal',
 				centeredSlides: true,
@@ -81,20 +81,26 @@ export default {
 <style scoped>
 .wallpapers-section {
 	text-align: center;
+	border-bottom: calc(var(--pixel-size) * 2) solid var(--color-background-secondary);
+	background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 0, #111 1000px, #111 100%);
 }
 
 .content {
 	max-width: 100%;
 }
 
-.title, .subtitle {
+.title {
 	text-align: center;
 	display: block;
 	width: 100%;
+	margin-bottom: 0.5em;
 }
 
-.title {
-	margin-bottom: 0.5em;
+.accent-badge {
+	color: var(--color-accent-secondary);
+	margin-bottom: 0.25em;
+	display: inline-block;
+	letter-spacing: 0.05em;
 }
 
 .slider-wrapper {

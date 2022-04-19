@@ -52,5 +52,8 @@
 .notification ::v-deep .notification-content {
 	font-size: 1em;
 	padding-top: 0.25em;
+	z-index: 1;
+	position: relative;
+	opacity: 0.7;
 }
 </style>

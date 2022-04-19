@@ -8,7 +8,7 @@
 
 <script>
 
-import { VisibilityObserver } from '~/components/ControlFlow';
+import { VisibilityObserver } from '~/components/EventListener';
 
 export default {
 	components: {

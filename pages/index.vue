@@ -5,13 +5,13 @@
 		</template>
 
 		<Spotlight />
+		<Wallpapers />
 		<AboutCollection />
 		<GetAnimalsBack />
 		<NftPreview />
 		<Wave />
 		<Road />
 		<AboutUs />
-		<Wallpapers />
 		<!-- <Rope /> -->
 
 		<FlyingElephant />
