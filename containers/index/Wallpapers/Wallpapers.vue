@@ -81,8 +81,8 @@ export default {
 <style scoped>
 .wallpapers-section {
 	text-align: center;
-	border-bottom: calc(var(--pixel-size) * 2) solid var(--color-background-secondary);
-	background-color: #252525;
+	/* border-bottom: calc(var(--pixel-size) * 2) solid var(--color-background-secondary); */
+	background-color: #222222;
 }
 
 .content {
