@@ -131,7 +131,7 @@ export default {
 	max-width: 40rem;
 	display: block;
 	margin: 0 auto 2em;
-	background-color: rgba(31, 31, 31, 0.9);
+	background-color: rgba(31, 31, 31, 0.95);
 	padding: 1em 1em 1.5em;
 	border: var(--pixel-size) solid #111;
 	position: relative;
