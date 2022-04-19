@@ -18,7 +18,7 @@ export default {
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5 shrink-to-fit=no' },
-			{ hid: 'description', name: 'description', content: 'They made their dreams come true' },
+			{ hid: 'description', name: 'description', content: '9 Circus Escapers made their dreams come true!' },
 
 			{ name: 'msapplication-TileColor', content: '#da532c' },
 			{ name: 'msapplication-TileImage', content: '/ms-icon-144x144.png' },
@@ -28,7 +28,7 @@ export default {
 			{ property: 'og:title', content: 'Circus Escape' },
 			{ property: 'og:site_name', content: 'Circus Escape' },
 			{ property: 'og:image', content: 'https://circus-escape.com/thumbnail.png' },
-			{ property: 'og:description', content: 'They made their dreams come true' },
+			{ property: 'og:description', content: '9 Circus Escapers made their dreams come true!' },
 			{ property: 'og:url', content: 'https://circus-escape.com/' },
 			{ property: 'og:image:width', content: '1200' },
 			{ property: 'og:image:height', content: '627' },
