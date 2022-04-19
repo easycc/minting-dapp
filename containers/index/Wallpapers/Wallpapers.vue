@@ -82,7 +82,7 @@ export default {
 .wallpapers-section {
 	text-align: center;
 	border-bottom: calc(var(--pixel-size) * 2) solid var(--color-background-secondary);
-	background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 0, #111 1000px, #111 100%);
+	background-color: #252525;
 }
 
 .content {
